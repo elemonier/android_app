@@ -93,9 +93,8 @@ public class ContactList extends Activity
 	    }  //address.moveToNext()   
 	  
 	   Contact newContact = new Contact(contactId, name, phoneNumber, emailAddress);
-	   Log.v("Testing", newContact.toString());
-	   contacts.add(newContact);
-	    
+	   Log.v("Testing", newContact.toString());	
+	   newContact.postToDatabase();
 	   }  //while (cursor.moveToNext())        
 	  cursor.close();
 	}//getContactInfo
