@@ -1,6 +1,15 @@
 package io.linger;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
 public class Contact {
+	
+	public static final String KEY_UPLOAD_CONTACT = "post_contact"; 
 	// KEYS FOR DATABASE USAGE TODO
 	public static final String USER_ID = "user_id";
 	public static final String USER_NAME = "user_name";
@@ -69,9 +78,18 @@ public class Contact {
 	}
 	
 	// TODO
-	public void postToDatabase()
+	public JSONObject postToDatabase()
 	{
-		
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair(JSONParser.KEY_TAG, KEY_UPLOAD_CONTACT));
+        params.add(new BasicNameValuePair(USER_ID, contactId));
+        params.add(new BasicNameValuePair(USER_NAME, name));
+        params.add(new BasicNameValuePair(USER_PHONE, phoneNumber));
+        params.add(new BasicNameValuePair(USER_EMAIL, emailAddress));
+        
+        JSONParser jsonParser = new JSONParser();
+        JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
+        return json;
 	}
 	
 	public String toString()
