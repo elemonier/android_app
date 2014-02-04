@@ -1,7 +1,5 @@
 package io.linger;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,8 +16,6 @@ import android.util.Log;
 
 public class ShowContactsActivity extends Activity
 {
-	private static final int PICK_CONTACT = 0;
-	
 	private String contactId;
 	
 	private String name;
@@ -45,6 +41,9 @@ public class ShowContactsActivity extends Activity
 	  Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI); 
 	  getContactInfo(intentContact);
 	  retrievePhoneMessage();
+	  // TODO why isn't this working!!??
+//	  DataAggregator aggregator = new DataAggregator(contactList, messageList);
+//	  aggregator.postToDatabase();
 	  contactList.postToDatabase();
 	  messageList.postToDatabase();
 	  Log.v("Testing", "finished onCreate method");
@@ -187,7 +186,7 @@ public class ShowContactsActivity extends Activity
 			   messageList.add(message);
 			   
 			   Log.w("OUTBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
-			   cursor.moveToNext();
+			   cursor.moveToNext();	
 		   }
 	}
 	
