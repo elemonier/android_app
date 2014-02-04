@@ -19,6 +19,7 @@ import android.util.Log;
 public class ShowContactsActivity extends Activity
 {
 	private static final int PICK_CONTACT = 0;
+	private ContactList contactList;
 	
 	private String contactId;
 	
@@ -36,16 +37,17 @@ public class ShowContactsActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 	  super.onCreate(savedInstanceState);       
+	  contactList = new ContactList();
+	  
 	  Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI); 
 	  getContactInfo(intentContact);
 	  retrievePhoneMessage();
+	  contactList.postToDatabase();
 	  Log.v("Testing", "finished onCreate method");
 	}//onCreate
 
 	protected void getContactInfo(Intent intent)
-	{		
-	   ArrayList<Contact> contacts = new ArrayList<Contact>();
-		
+	{
 	   Cursor cursor =  managedQuery(intent.getData(), null, null, null, null);      
 	   while (cursor.moveToNext()) 
 	   {           
@@ -96,31 +98,30 @@ public class ShowContactsActivity extends Activity
 	  
 	   Contact newContact = new Contact(contactId, name, phoneNumber, emailAddress);
 	   Log.v("Testing", newContact.toString());	
-	   newContact.postToDatabase();
-	   }  //while (cursor.moveToNext())        
+	   contactList.add(newContact);
+	   }  // while (cursor.moveToNext())        
 	  cursor.close();
-	}//getContactInfo
+	} // getContactInfo
 	
 	/**
 	 * Helper function that retrieve inbox msg
 	 */
-	private void retrieveInbox() {
-		
+	private void retrieveInbox()
+	{	
 		Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, null, null, null);
 		cursor.moveToFirst();
 
-		   String msgData = "";
+		String msgData = "";
 		   
-		   for (int out_idx = 0; out_idx < 2;out_idx++) {
-			   for(int idx=0;idx<cursor.getColumnCount();idx++)
-			   {
-			       Log.w("sms", "index is " + idx + "  " + cursor.getColumnName(idx) + " ::: " + cursor.getString(idx) );
-			       
-			   }
-			   
-			   Log.w("INBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
-			   cursor.moveToNext();
-		   }
+		for (int out_idx = 0; out_idx < 2;out_idx++)
+		{
+			for(int idx=0;idx<cursor.getColumnCount();idx++)
+			{	
+				Log.w("sms", "index is " + idx + "  " + cursor.getColumnName(idx) + " ::: " + cursor.getString(idx) );
+			}
+			Log.w("INBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
+			cursor.moveToNext();
+		}
 	}
 	
 	/**

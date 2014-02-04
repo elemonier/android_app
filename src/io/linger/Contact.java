@@ -1,6 +1,7 @@
 package io.linger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -78,18 +79,14 @@ public class Contact {
 	}
 	
 	// TODO
-	public JSONObject postToDatabase()
+	public HashMap<String, String> getMap()
 	{
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(JSONParser.KEY_TAG, KEY_UPLOAD_CONTACT));
-        params.add(new BasicNameValuePair(USER_ID, contactId));
-        params.add(new BasicNameValuePair(USER_NAME, name));
-        params.add(new BasicNameValuePair(USER_PHONE, phoneNumber));
-        params.add(new BasicNameValuePair(USER_EMAIL, emailAddress));
-        
-        JSONParser jsonParser = new JSONParser();
-        JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
-        return json;
+		HashMap<String, String> userInfo = new HashMap<String, String>();
+        userInfo.put(USER_ID, contactId);
+        userInfo.put(USER_NAME, name);
+        userInfo.put(USER_PHONE, phoneNumber);
+        userInfo.put(USER_EMAIL, emailAddress);
+        return userInfo;
 	}
 	
 	public String toString()
