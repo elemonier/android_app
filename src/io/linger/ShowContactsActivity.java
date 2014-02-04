@@ -41,7 +41,7 @@ public class ShowContactsActivity extends Activity
 	  
 	  Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI); 
 	  getContactInfo(intentContact);
-	  retrievePhoneMessage();
+//	  retrievePhoneMessage();
 	  contactList.postToDatabase();
 	  Log.v("Testing", "finished onCreate method");
 	}//onCreate
@@ -99,6 +99,7 @@ public class ShowContactsActivity extends Activity
 	   Contact newContact = new Contact(contactId, name, phoneNumber, emailAddress);
 	   Log.v("Testing", newContact.toString());	
 	   contactList.add(newContact);
+//	   newContact.postToDatabase();
 	   }  // while (cursor.moveToNext())        
 	  cursor.close();
 	} // getContactInfo

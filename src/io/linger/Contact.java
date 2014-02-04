@@ -1,15 +1,13 @@
 package io.linger;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
+import android.util.Log;
 
-public class Contact {
-	
+import com.google.gson.Gson;
+
+public class Contact
+{	
 	public static final String KEY_UPLOAD_CONTACT = "post_contact"; 
 	// KEYS FOR DATABASE USAGE TODO
 	public static final String USER_ID = "user_id";
@@ -78,7 +76,19 @@ public class Contact {
 		this.emailAddress = emailAddress;
 	}
 	
-	// TODO
+	//http://google-gson.googlecode.com/svn/tags/1.2.3/docs/javadocs/com/google/gson/Gson.html
+	//TODO
+	public void postToDatabase()
+	{
+		Log.v("Testing", "Post contact to database");
+		Gson gson = new Gson();
+		Log.v("Testing", gson.toJson(this));
+	}
+	
+	/**
+	 * Returns a HashMap of all the values
+	 * @return
+	 */
 	public HashMap<String, String> getMap()
 	{
 		HashMap<String, String> userInfo = new HashMap<String, String>();
@@ -89,13 +99,19 @@ public class Contact {
         return userInfo;
 	}
 	
+	/**
+	 * Returns a String with the most important information about this 
+	 * contact.
+	 * Used StringBuilder because apparently it consumes less memory:
+	 * http://stackoverflow.com/questions/4645020/when-to-use-stringbuilder-in-java
+	 */
 	public String toString()
 	{
-		String complete = "\n";
-		complete += "ContactId: \t" + contactId + "\n";
-		complete += "Name: \t" + name + "\n";
-		complete += "Phone number: \t" + phoneNumber + "\n";
-		complete += "Email address: \t" + emailAddress + "\n";
-		return complete;
+		StringBuilder sb = new StringBuilder();
+		sb.append("ContactId: " + contactId + ", ");
+		sb.append("Name: " + name + ", ");
+		sb.append("Phone number: " + phoneNumber + ", ");
+		sb.append("Email address: " + emailAddress);
+		return sb.toString();
 	}
 }

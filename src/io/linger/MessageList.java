@@ -8,29 +8,38 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 /**
- * Important to aggregate contacts to be able to make a single http request.
+ * Important to aggregate messages to be able to make a single http request.
  * @author Emily Pakulski
  * http://stackoverflow.com/questions/3138371/very-large-http-request-vs-many-small-requests
  */
 
-public class ContactList {
-
-	private ArrayList<HashMap<String, String>> contacts;
+public class MessageList implements Aggregatable
+{
+	private ArrayList<HashMap<String, String>> messages;
 	
 	/**
 	 * Default constructor.
 	 */
-	public ContactList()
+	public MessageList()
 	{
-		this.contacts = new ArrayList<HashMap<String, String>>();
+		this.messages = new ArrayList<HashMap<String, String>>();
 	}
 
 	/**
-	 * Adds a contact to the list of contacts.
+	 * Casts the object passed as a message and adds it to the list of 
+	 * messages.
 	 */
-	public void add(Contact newContact)
+	@Override
+	public void add(Aggregatable aggregatable) {
+		this.add((Message) aggregatable);
+	}	
+	
+	/**
+	 * Adds the newMessage to the list.
+	 */
+	public void add(Message newMessage)
 	{
-		contacts.add(newContact.getMap());
+		messages.add(newMessage.getMap());
 	}
 	
 	/**
@@ -40,7 +49,7 @@ public class ContactList {
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		for (HashMap<String, String> each : contacts)
+		for (HashMap<String, String> each : messages)
 		{
 			for (HashMap.Entry<String, String> entry : each.entrySet())
 			{
@@ -54,10 +63,9 @@ public class ContactList {
 	}
 	
 	//http://google-gson.googlecode.com/svn/tags/1.2.3/docs/javadocs/com/google/gson/Gson.html
-	//TODO
 	public void postToDatabase()
 	{
 		Gson gson = new Gson();
-		Log.v("Testing", gson.toJson(contacts));
+		Log.v("Testing", gson.toJson(messages));
 	}
 }
