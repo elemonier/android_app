@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class ShowContactsActivity extends Activity
 	  super.onCreate(savedInstanceState);       
 	  Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI); 
 	  getContactInfo(intentContact);
+	  retrievePhoneMessage();
 	  Log.v("Testing", "finished onCreate method");
 	}//onCreate
 
@@ -98,4 +100,56 @@ public class ShowContactsActivity extends Activity
 	   }  //while (cursor.moveToNext())        
 	  cursor.close();
 	}//getContactInfo
+	
+	/**
+	 * Helper function that retrieve inbox msg
+	 */
+	private void retrieveInbox() {
+		
+		Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, null, null, null);
+		cursor.moveToFirst();
+
+		   String msgData = "";
+		   
+		   for (int out_idx = 0; out_idx < 2;out_idx++) {
+			   for(int idx=0;idx<cursor.getColumnCount();idx++)
+			   {
+			       Log.w("sms", "index is " + idx + "  " + cursor.getColumnName(idx) + " ::: " + cursor.getString(idx) );
+			       
+			   }
+			   
+			   Log.w("INBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
+			   cursor.moveToNext();
+		   }
+	}
+	
+	/**
+	 * Helper function that retrieve outbox msg
+	 */
+	private void retrieveOutbox() {
+		Cursor cursor = getContentResolver().query(Uri.parse("content://sms/sent"), null, null, null, null);
+		cursor.moveToFirst();
+
+		   String msgData = "";
+		   
+		   for (int out_idx = 0; out_idx < 2;out_idx++) {
+			   for(int idx=0;idx<cursor.getColumnCount();idx++)
+			   {
+			       Log.w("sms", "index is " + idx + "  " + cursor.getColumnName(idx) + " ::: " + cursor.getString(idx) );
+			       
+			   }
+			   
+			   Log.w("OUTBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
+			   cursor.moveToNext();
+		   }
+	}
+	
+	
+	/**
+	 * Retrieve phone text conversation
+	 */
+	private void retrievePhoneMessage() {
+		retrieveInbox();
+		retrieveOutbox();
+	}
 }
