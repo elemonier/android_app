@@ -3,13 +3,13 @@ package io.linger;
 import java.util.HashMap;
 
 public class Message {
-	private static final String THREAD_ID = "thread_id";
-	private static final String PHONE_NUMBER_ADDRESS = "address";
-	private static final String CONTENT = "body";
-	private static final String NAME = "person";
-	private static final String DATE = "date";
-	private static final String DATE_SENT = "date_sent";
-	private static final String READ = "read"; // 0 or 1; 1 is read, 0 is unread
+	public static final String THREAD_ID = "thread_id";
+	public static final String PHONE_NUMBER_ADDRESS = "address";
+	public static final String CONTENT = "body";
+	public static final String NAME = "person";
+	public static final String DATE = "date";
+	public static final String DATE_SENT = "date_sent";
+	public static final String READ = "read"; // 0 or 1; 1 is read, 0 is unread
 	
 	private String threadId;
 	private String phoneNumberAddress;
@@ -27,8 +27,8 @@ public class Message {
 	 * @param phoneNumber
 	 * @param dateSent
 	 */
-	public Message(String threadId, String name, String content, 
-			String phoneNumber, String dateSent)
+	public Message(String threadId, String phoneNumber, String content, 
+			String name, String dateSent)
 	{
 		this.threadId = threadId;
 		this.senderName = name;

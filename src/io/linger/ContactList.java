@@ -13,8 +13,8 @@ import com.google.gson.Gson;
  * http://stackoverflow.com/questions/3138371/very-large-http-request-vs-many-small-requests
  */
 
-public class ContactList {
-
+public class ContactList
+{
 	private ArrayList<HashMap<String, String>> contacts;
 	
 	/**

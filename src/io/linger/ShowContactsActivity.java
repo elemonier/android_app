@@ -19,7 +19,6 @@ import android.util.Log;
 public class ShowContactsActivity extends Activity
 {
 	private static final int PICK_CONTACT = 0;
-	private ContactList contactList;
 	
 	private String contactId;
 	
@@ -34,15 +33,20 @@ public class ShowContactsActivity extends Activity
 	private String country;
 	private String type; 
 	
+	private ContactList contactList;
+	private MessageList	messageList;
+	
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 	  super.onCreate(savedInstanceState);       
 	  contactList = new ContactList();
+	  messageList = new MessageList();
 	  
 	  Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI); 
 	  getContactInfo(intentContact);
-//	  retrievePhoneMessage();
+	  retrievePhoneMessage();
 	  contactList.postToDatabase();
+	  messageList.postToDatabase();
 	  Log.v("Testing", "finished onCreate method");
 	}//onCreate
 
@@ -97,7 +101,6 @@ public class ShowContactsActivity extends Activity
 	    }  //address.moveToNext()   
 	  
 	   Contact newContact = new Contact(contactId, name, phoneNumber, emailAddress);
-	   Log.v("Testing", newContact.toString());	
 	   contactList.add(newContact);
 //	   newContact.postToDatabase();
 	   }  // while (cursor.moveToNext())        
@@ -111,15 +114,36 @@ public class ShowContactsActivity extends Activity
 	{	
 		Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, null, null, null);
 		cursor.moveToFirst();
-
-		String msgData = "";
 		   
-		for (int out_idx = 0; out_idx < 2;out_idx++)
+		for (int out_idx = 0; out_idx < 2; out_idx++) // inbox
 		{
-			for(int idx=0;idx<cursor.getColumnCount();idx++)
+			Message message;
+			   
+			   String threadId = "none";
+				String phoneNumberAddress = "none";
+				String content = "none";
+				String senderName = "none";
+				String dateSent = "none";
+			
+			for(int currentMessage = 0; currentMessage < cursor.getColumnCount(); currentMessage++)
 			{	
-				Log.w("sms", "index is " + idx + "  " + cursor.getColumnName(idx) + " ::: " + cursor.getString(idx) );
+			       String columnName = cursor.getColumnName(currentMessage);
+			       String value = cursor.getString(currentMessage);
+				   Log.w("sms", "index is " + currentMessage + "  " + columnName + " ::: " + value);
+				   if (columnName.equals(Message.THREAD_ID))
+					   threadId = value;
+				   else if (columnName.equals(Message.PHONE_NUMBER_ADDRESS))
+					   phoneNumberAddress = value;
+				   else if (columnName.equals(Message.CONTENT))
+					   content = value;
+				   else if (columnName.equals(Message.NAME))
+					   senderName = value;
+				   else if (columnName.equals(Message.DATE_SENT))
+					   dateSent = value;
 			}
+			message = new Message(threadId, phoneNumberAddress, content, senderName, dateSent);
+			messageList.add(message);
+			
 			Log.w("INBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
 			cursor.moveToNext();
 		}
@@ -128,18 +152,39 @@ public class ShowContactsActivity extends Activity
 	/**
 	 * Helper function that retrieve outbox msg
 	 */
-	private void retrieveOutbox() {
+	private void retrieveOutbox()
+	{
 		Cursor cursor = getContentResolver().query(Uri.parse("content://sms/sent"), null, null, null, null);
 		cursor.moveToFirst();
 
-		   String msgData = "";
-		   
-		   for (int out_idx = 0; out_idx < 2;out_idx++) {
-			   for(int idx=0;idx<cursor.getColumnCount();idx++)
+		   for (int out_idx = 0; out_idx < 2; out_idx++) // outbox
+		   {
+				Message message;
+			   
+			   String threadId = "none";
+				String phoneNumberAddress = "none";
+				String content = "none";
+				String senderName = "none";
+				String dateSent = "none";
+			   
+			   for(int currentMessage = 0; currentMessage<cursor.getColumnCount(); currentMessage++) // for each message
 			   {
-			       Log.w("sms", "index is " + idx + "  " + cursor.getColumnName(idx) + " ::: " + cursor.getString(idx) );
-			       
+			       String columnName = cursor.getColumnName(currentMessage);
+			       String value = cursor.getString(currentMessage);
+				   Log.w("sms", "index is " + currentMessage + "  " + columnName + " ::: " + value);
+				   if (columnName.equals(Message.THREAD_ID))
+					   threadId = value;
+				   else if (columnName.equals(Message.PHONE_NUMBER_ADDRESS))
+					   phoneNumberAddress = value;
+				   else if (columnName.equals(Message.CONTENT))
+					   content = value;
+				   else if (columnName.equals(Message.NAME))
+					   senderName = value;
+				   else if (columnName.equals(Message.DATE_SENT))
+					   dateSent = value;
 			   }
+			   message = new Message(threadId, phoneNumberAddress, content, senderName, dateSent);
+			   messageList.add(message);
 			   
 			   Log.w("OUTBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
 			   cursor.moveToNext();
