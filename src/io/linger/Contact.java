@@ -48,7 +48,7 @@ public class Contact
 	private String state;
 	private String postalCode;
 	private String country;
-	private String type; 
+	private String type;
 	
 	public Contact(String contactId, String name, String phoneNumber,
 			String emailAddress, String poBox, String street, 

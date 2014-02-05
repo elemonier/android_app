@@ -15,14 +15,14 @@ import com.google.gson.Gson;
 
 public class DataAggregator 
 {
-	Object[] aggregatableObjects;
+	Aggregatable[] aggregatableObjects;
 	
 	public DataAggregator()
 	{}
 	
 	public DataAggregator(Aggregatable ... aggregatables)
 	{
-		aggregatableObjects = new Object[aggregatables.length];
+		aggregatableObjects = new Aggregatable[aggregatables.length];
 		for (int i = 0; i < aggregatableObjects.length; i++)
 		{
 			aggregatableObjects[i] = aggregatables[i];

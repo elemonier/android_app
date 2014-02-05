@@ -13,7 +13,7 @@ import com.google.gson.Gson;
  * http://stackoverflow.com/questions/3138371/very-large-http-request-vs-many-small-requests
  */
 
-public class ContactList
+public class ContactList implements Aggregatable
 {
 	private ArrayList<HashMap<String, String>> contacts;
 	
@@ -25,6 +25,13 @@ public class ContactList
 		this.contacts = new ArrayList<HashMap<String, String>>();
 	}
 
+
+	@Override
+	public void add(Aggregatable aggregatable) {
+		this.add((Aggregatable) aggregatable);
+		
+	}
+	
 	/**
 	 * Adds a contact to the list of contacts.
 	 */
