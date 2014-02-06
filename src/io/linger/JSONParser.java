@@ -28,7 +28,7 @@ import android.util.Log;
 public class JSONParser 
 { 
 	// location of the API for the whole application
-	public static final String API_URL = "http://209.2.222.136/SOMETHING/";
+	public static final String API_URL = "http://209.2.222.136/linger_api/";
 	
 	public static final String KEY_TAG = "tag";
 	
