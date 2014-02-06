@@ -8,20 +8,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LandingActivity$DummySectionFragment" >
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-    />
-
 	<LinearLayout
 	    android:id="@+id/button_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
-		android:layout_marginTop="20dp"
+		android:gravity="center"
 		android:layout_centerVertical="true"
 	>
+	
+		<TextView
+	        android:id="@+id/section_label"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="35sp"
+	    />
 		<!-- Input email address field -->
 		<EditText
 		    android:id="@+id/emailEditTextLogin"

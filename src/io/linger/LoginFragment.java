@@ -1,5 +1,6 @@
 package io.linger;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,10 +28,12 @@ public class LoginFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_login,
 				container, false);
-		TextView dummyTextView = (TextView) rootView
-				.findViewById(R.id.section_label);
-		dummyTextView.setText(Integer.toString(getArguments().getInt(
-				ARG_SECTION_NUMBER)));
+		
+		TextView myTextView = (TextView) rootView.findViewById(R.id.section_label);
+		Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/grandhotel_regular.ttf");
+		myTextView.setTypeface(typeFace);
+		
+		myTextView.setText("Login");
 		return rootView;
 	}
 }
