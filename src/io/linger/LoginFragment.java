@@ -18,13 +18,14 @@ public class LoginFragment extends Fragment {
 	 */
 	public static final String ARG_SECTION_NUMBER = "section_number";
 
-	public LoginFragment() {
+	public LoginFragment() 
+	{
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_first,
+		View rootView = inflater.inflate(R.layout.fragment_login,
 				container, false);
 		TextView dummyTextView = (TextView) rootView
 				.findViewById(R.id.section_label);

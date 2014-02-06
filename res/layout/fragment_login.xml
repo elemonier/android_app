@@ -11,6 +11,37 @@
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" 
+    />
 
+	<LinearLayout
+	    android:id="@+id/button_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_marginTop="20dp"
+		android:layout_centerVertical="true"
+	>
+		<!-- Input email address field -->
+		<EditText
+		    android:id="@+id/emailEditTextLogin"
+			android:layout_marginTop="5dp"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:inputType="textEmailAddress" 
+	        android:hint="@string/email_address_field"
+	    >
+		<requestFocus />
+		</EditText>
+	
+		    <!--  Password field -->
+		<EditText
+			android:id="@+id/passEditTextLogin"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:inputType="textPassword" 
+		    android:hint="@string/password_field"
+		/>
+	</LinearLayout>
+    
 </RelativeLayout>
