@@ -23,14 +23,14 @@
 	        android:layout_height="wrap_content"
 	        android:textSize="35sp"
 	    />
-		<!-- Input email address field -->
+		<!-- Input phone number field -->
 		<EditText
-		    android:id="@+id/emailEditTextLogin"
+		    android:id="@+id/phoneTextLogin"
 			android:layout_marginTop="5dp"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:inputType="textEmailAddress" 
-	        android:hint="@string/email_address_field"
+		    android:inputType="phone" 
+	        android:hint="@string/phone_number_field"
 	    >
 		<requestFocus />
 		</EditText>
@@ -43,6 +43,13 @@
 		    android:inputType="textPassword" 
 		    android:hint="@string/password_field"
 		/>
+		
+		<Button
+     		android:layout_height="wrap_content"
+     		android:layout_width="wrap_content"
+     		android:text="@string/submit_fields"
+     		android:onClick="submitFields"
+     	/>
 	</LinearLayout>
     
 </RelativeLayout>

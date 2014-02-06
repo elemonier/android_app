@@ -14,6 +14,7 @@
     <string name="title_activity_second">SecondActivity</string>
 
     <!-- Login page -->
-    <string name="email_address_field">email</string>
+    <string name="phone_number_field">phone number ### ### ####</string>
     <string name="password_field">password</string>
+    <string name="submit_fields">submit</string>
 </resources>
