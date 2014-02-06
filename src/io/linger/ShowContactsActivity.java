@@ -41,7 +41,7 @@ public class ShowContactsActivity extends Activity
 		  messageList = new MessageList();
 		  
 		  Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI); 
-//		  getContactInfo(intentContact);
+		  getContactInfo(intentContact);
 		  retrievePhoneMessage();
 		  // TODO why isn't this working!!??
 		  DataAggregator aggregator = new DataAggregator(contactList, messageList);
