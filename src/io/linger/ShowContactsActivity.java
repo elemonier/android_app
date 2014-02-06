@@ -51,72 +51,60 @@ public class ShowContactsActivity extends Activity
 		  Log.v("Testing", "finished onCreate method");
 	}//onCreate
 	
-	protected void getContactInfo(Intent intent)
+	protected void getContactInfo(Intent intent) 
 	{
-		Cursor cursor = getContentResolver().query(intent.getData(), null, null, null, null);
-		while (cursor.moveToNext()) 
-		{           
-			contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-			name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME)); 
-			Log.v("Testing", "Name: " + name);
-			String hasPhone = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-					if ( hasPhone.equalsIgnoreCase("1"))
-				hasPhone = "true";
-			else
-				hasPhone = "false" ;
-			if (Boolean.parseBoolean(hasPhone)) 
-			{
-				Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, 
-						null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ contactId,null, null);
-			    while (phones.moveToNext()) 
-			    {
-			    	phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-			    }
-			    phones.close();
+
+		String[] projection    = new String[] { ContactsContract.Contacts._ID,
+				ContactsContract.Contacts.LOOKUP_KEY,
+				ContactsContract.Contacts.DISPLAY_NAME,
+				ContactsContract.Contacts.HAS_PHONE_NUMBER
+		};
+
+		// return a cursor that points to the first row of a table 
+
+		Cursor contact_cursor = getContentResolver().query(intent.getData(),   
+				projection, // tells query which columns to return
+				null, // tells query which rows to return 
+				null, // give check_phn its parameter 
+				null);	 // sort [optional] ~ not used
+
+		// iterates through the returned table
+		// table structure - [ contactid - col1, lookup_key ,contactname - col3, contact_phn - col4 ]
+
+		while (contact_cursor.moveToNext()) {
+			String con_id = contact_cursor.getString(0);
+			String con_look_up_key = contact_cursor.getString(1);
+			String con_name = contact_cursor.getString(2);
+			String con_has_phone = contact_cursor.getString(3);
+			// debugging
+			//		 Log.v("con_id", con_id);
+			//		 Log.v("con_key", con_look_up_key);
+			//		 Log.v("con_name", con_name);
+
+			// FIX!!! 
+			Cursor phones_cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, 
+					null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ con_id,null, null);
+
+			// iterate through the whole phone table to grab the person with 'contactid'
+
+			// FIX!!!
+
+			while(phones_cursor.moveToNext()){
+				String phone_num = phones_cursor.getString(phones_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 			}
-			// Find Email Addresses
-			Cursor emails = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, 
-					ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId, null,  null);
-			Log.v("Testing", "line 83");
-			while (emails.moveToNext()) 
-			{
-				try {
-					emailAddress = emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-					Log.v("Testing", "set email, try");
-				} catch (Exception e)
-				{
-					emailAddress = "none";
-					Log.v("Testing", "Catch statement");
-				}
-			}
-			Log.v("Testing", "Line 88");
-			emails.close();
-			Cursor address = getContentResolver().query(
-	                ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI,
-	                null,
-	                ContactsContract.CommonDataKinds.StructuredPostal.CONTACT_ID + " = " + contactId,
-	                null, null);
-			
-			while (address.moveToNext()) 
-			{ 
-		    	// These are all private class variables, don't forget to create them.
-		    	poBox      = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.POBOX));
-		    	street     = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.STREET));
-		    	city       = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.CITY));
-		    	state      = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.REGION));
-			    postalCode = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.POSTCODE));
-		    	country    = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY));
-		    	type       = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.TYPE));
-			}  //address.moveToNext()   
-			
-			Contact newContact = new Contact(contactId, name, phoneNumber, emailAddress);
-			contactList.add(newContact);
-	   		newContact.postToDatabase();
-		}  // while (cursor.moveToNext())  
-		Log.v("Testing", "Line 110");
-		cursor.close();
-	} // getContactInfo
-	
+
+			// Find Email Addresses 
+
+			// FIX!!! (another computational sucky call)
+			Cursor emails_cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, 
+					ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + con_id, null,  null);
+
+			// retrieve email
+			while (emails_cursor.moveToNext()) 
+				emailAddress = emails_cursor.getString(emails_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)); 
+		} // while
+
+	} // end method
 		
 	/**
 	 * Retrieve phone text conversation
