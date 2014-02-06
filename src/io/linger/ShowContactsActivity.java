@@ -17,40 +17,26 @@ import android.util.Log;
 public class ShowContactsActivity extends Activity
 {
 	private static final int NUMBER_OF_MESSAGES = 20;
-	
-	private String contactId;
-	
-	private String name;
-	private String phoneNumber;
-	private String emailAddress;
-	private String poBox;
-	private String street;
-	private String city;
-	private String state;
-	private String postalCode;
-	private String country;
-	private String type; 
-	
+
 	private ContactList contactList;
 	private MessageList	messageList;
-	
+
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-		  super.onCreate(savedInstanceState);       
-		  contactList = new ContactList();
-		  messageList = new MessageList();
-		  
-		  Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI); 
-//		  getContactInfo(intentContact);
-		  retrievePhoneMessage();
-		  // TODO why isn't this working!!??
-		  DataAggregator aggregator = new DataAggregator(contactList, messageList);
-		  aggregator.postToDatabase();
-//		  contactList.postToDatabase();
-//		  messageList.postToDatabase();
-		  Log.v("Testing", "finished onCreate method");
+		super.onCreate(savedInstanceState);       
+		contactList = new ContactList();
+		messageList = new MessageList();
+
+		Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI); 
+		getContactInfo(intentContact);
+		retrievePhoneMessage();
+		// TODO why isn't this working!!??
+		DataAggregator aggregator = new DataAggregator(contactList, messageList);
+		aggregator.postToDatabase();
+		Log.v("Testing", "finished onCreate method");
 	}//onCreate
-	
+
+	//TODO Right now only grabs last contact email/phone, needs to grab list of them and pass them somehow
 	protected void getContactInfo(Intent intent) 
 	{
 
@@ -77,9 +63,9 @@ public class ShowContactsActivity extends Activity
 			String con_name = contact_cursor.getString(2);
 			String con_has_phone = contact_cursor.getString(3);
 			// debugging
-			//		 Log.v("con_id", con_id);
-			//		 Log.v("con_key", con_look_up_key);
-			//		 Log.v("con_name", con_name);
+					 Log.v("con_id", con_id);
+					 Log.v("con_key", con_look_up_key);
+					 Log.v("con_name", con_name);
 
 			// FIX!!! 
 			Cursor phones_cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, 
@@ -88,11 +74,12 @@ public class ShowContactsActivity extends Activity
 			// iterate through the whole phone table to grab the person with 'contactid'
 
 			// FIX!!!
-
+			String phone_num = "";
 			while(phones_cursor.moveToNext()){
-				String phone_num = phones_cursor.getString(phones_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+				phone_num = phones_cursor.getString(phones_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+				 Log.v("phone num: ", phone_num);
 			}
-
+			phones_cursor.close();
 			// Find Email Addresses 
 
 			// FIX!!! (another computational sucky call)
@@ -100,12 +87,20 @@ public class ShowContactsActivity extends Activity
 					ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + con_id, null,  null);
 
 			// retrieve email
-			while (emails_cursor.moveToNext()) 
+			String emailAddress = "";
+			while (emails_cursor.moveToNext()){
 				emailAddress = emails_cursor.getString(emails_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)); 
+			 Log.v("email : ", emailAddress);
+			}
+			emails_cursor.close();
+			
+			Contact newContact = new Contact(con_look_up_key, con_name, phone_num, emailAddress);
+			contactList.add(newContact);
+			
 		} // while
-
+		contact_cursor.close();
 	} // end method
-		
+
 	/**
 	 * Retrieve phone text conversation
 	 */
@@ -114,7 +109,7 @@ public class ShowContactsActivity extends Activity
 		retrieveInbox();
 		retrieveOutbox();
 	}
-		
+
 	/**
 	 * Helper function that retrieve inbox msg
 	 */
@@ -122,41 +117,41 @@ public class ShowContactsActivity extends Activity
 	{	
 		Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, null, null, null);
 		cursor.moveToFirst();
-		   
+
 		for (int out_idx = 0; out_idx < NUMBER_OF_MESSAGES; out_idx++) // inbox
 		{
 			Message message;
-			   
-			   String threadId = "none";
-				String phoneNumberAddress = "none";
-				String content = "none";
-				String senderName = "none";
-				String dateSent = "none";
-			
+
+			String threadId = "none";
+			String phoneNumberAddress = "none";
+			String content = "none";
+			String senderName = "none";
+			String dateSent = "none";
+
 			for(int currentMessage = 0; currentMessage < cursor.getColumnCount(); currentMessage++)
 			{	
-			       String columnName = cursor.getColumnName(currentMessage);
-			       String value = cursor.getString(currentMessage);
-//				   Log.w("sms", "index is " + currentMessage + "  " + columnName + " ::: " + value);
-				   if (columnName.equals(Message.THREAD_ID))
-					   threadId = value;
-				   else if (columnName.equals(Message.PHONE_NUMBER_ADDRESS))
-					   phoneNumberAddress = value;
-				   else if (columnName.equals(Message.CONTENT))
-					   content = value;
-				   else if (columnName.equals(Message.NAME))
-					   senderName = value;
-				   else if (columnName.equals(Message.DATE_SENT))
-					   dateSent = value;
+				String columnName = cursor.getColumnName(currentMessage);
+				String value = cursor.getString(currentMessage);
+				//				   Log.w("sms", "index is " + currentMessage + "  " + columnName + " ::: " + value);
+				if (columnName.equals(Message.THREAD_ID))
+					threadId = value;
+				else if (columnName.equals(Message.PHONE_NUMBER_ADDRESS))
+					phoneNumberAddress = value;
+				else if (columnName.equals(Message.CONTENT))
+					content = value;
+				else if (columnName.equals(Message.NAME))
+					senderName = value;
+				else if (columnName.equals(Message.DATE_SENT))
+					dateSent = value;
 			}
 			message = new Message(threadId, phoneNumberAddress, content, senderName, dateSent);
 			messageList.add(message);
-			
-//			Log.w("INBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
+
+			//			Log.w("INBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
 			cursor.moveToNext();
 		}
 	}
-	
+
 	/**
 	 * Helper function that retrieve outbox msg
 	 */
@@ -166,37 +161,37 @@ public class ShowContactsActivity extends Activity
 				null, null, null, null);
 		cursor.moveToFirst();
 
-		   for (int out_idx = 0; out_idx < NUMBER_OF_MESSAGES; out_idx++) // outbox
-		   {
-				Message message;
-			   
-			   String threadId = "none";
-				String phoneNumberAddress = "none";
-				String content = "none";
-				String senderName = "none";
-				String dateSent = "none";
-			   
-			   for(int currentMessage = 0; currentMessage<cursor.getColumnCount(); currentMessage++) // for each message
-			   {
-			       String columnName = cursor.getColumnName(currentMessage);
-			       String value = cursor.getString(currentMessage);
-//				   Log.w("sms", "index is " + currentMessage + "  " + columnName + " ::: " + value);
-				   if (columnName.equals(Message.THREAD_ID))
-					   threadId = value;
-				   else if (columnName.equals(Message.PHONE_NUMBER_ADDRESS))
-					   phoneNumberAddress = value;
-				   else if (columnName.equals(Message.CONTENT))
-					   content = value;
-				   else if (columnName.equals(Message.NAME))
-					   senderName = value;
-				   else if (columnName.equals(Message.DATE_SENT))
-					   dateSent = value;
-			   }
-			   message = new Message(threadId, phoneNumberAddress, content, senderName, dateSent);
-			   messageList.add(message);
-			   
-//			   Log.w("OUTBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
-			   cursor.moveToNext();
-		   }
+		for (int out_idx = 0; out_idx < NUMBER_OF_MESSAGES; out_idx++) // outbox
+		{
+			Message message;
+
+			String threadId = "none";
+			String phoneNumberAddress = "none";
+			String content = "none";
+			String senderName = "none";
+			String dateSent = "none";
+
+			for(int currentMessage = 0; currentMessage<cursor.getColumnCount(); currentMessage++) // for each message
+			{
+				String columnName = cursor.getColumnName(currentMessage);
+				String value = cursor.getString(currentMessage);
+				//				   Log.w("sms", "index is " + currentMessage + "  " + columnName + " ::: " + value);
+				if (columnName.equals(Message.THREAD_ID))
+					threadId = value;
+				else if (columnName.equals(Message.PHONE_NUMBER_ADDRESS))
+					phoneNumberAddress = value;
+				else if (columnName.equals(Message.CONTENT))
+					content = value;
+				else if (columnName.equals(Message.NAME))
+					senderName = value;
+				else if (columnName.equals(Message.DATE_SENT))
+					dateSent = value;
+			}
+			message = new Message(threadId, phoneNumberAddress, content, senderName, dateSent);
+			messageList.add(message);
+
+			//			   Log.w("OUTBOX", "XXXXXXXXXXXXXXXXXXXXXXX");
+			cursor.moveToNext();
+		}
 	}
 }
