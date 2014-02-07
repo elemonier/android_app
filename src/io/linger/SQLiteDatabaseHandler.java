@@ -31,11 +31,16 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper
     /* Login table specific constants */
     private static final String TABLE_LOGIN = "login";
     
+    // php tags
+    public static final String TAG_POST = "post_data";
+    public static final String TAG_GET = "get_data";
+    
     // Login table column names
 	public static final String USER_ID = "user_id";
 	public static final String USER_NAME = "user_name";
 	public static final String USER_PHONE = "user_phone";
 	public static final String USER_ENCRYPTED_PASS = "user_encrypted_pass";
+	public static final String USER_PASS = "password";
 	public static final String USER_SALT = "user_salt";
 	public static final String USER_EMAIL = "user_email";
 	public static final String USER_CREATED_AT = "user_created_at";

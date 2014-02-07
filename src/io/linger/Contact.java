@@ -9,15 +9,7 @@ import com.google.gson.Gson;
 public class Contact
 {	
 	public static final String KEY_UPLOAD_CONTACT = "post_contact"; 
-	
-	public static final String USER_ID = "user_id";
-	public static final String USER_NAME = "user_name";
-	public static final String USER_PHONE = "user_phone";
-	public static final String USER_ENCRYPTED_PASS = "user_encrypted_pass";
-	public static final String USER_SALT = "user_salt";
-	public static final String USER_EMAIL = "user_email";
-	public static final String USER_CREATED_AT = "user_created_at";
-	public static final String USER_UPDATED_AT = "user_updated_at";
+
 
 	// KEYS FOR DATABASE USAGE TODO
 	public static final String CONTACT_ID = "contact_id";
@@ -95,10 +87,10 @@ public class Contact
 	public HashMap<String, String> getMap()
 	{
 		HashMap<String, String> userInfo = new HashMap<String, String>();
-        userInfo.put(USER_ID, contactId);
-        userInfo.put(USER_NAME, name);
-        userInfo.put(USER_PHONE, phoneNumber);
-        userInfo.put(USER_EMAIL, emailAddress);
+        userInfo.put(SQLiteDatabaseHandler.USER_ID, contactId);
+        userInfo.put(SQLiteDatabaseHandler.USER_NAME, name);
+        userInfo.put(SQLiteDatabaseHandler.USER_PHONE, phoneNumber);
+        userInfo.put(SQLiteDatabaseHandler.USER_EMAIL, emailAddress);
         return userInfo;
 	}
 	

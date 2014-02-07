@@ -28,19 +28,21 @@ import android.util.Log;
 public class JSONParser 
 { 
 	// location of the API for the whole application
-	public static final String API_URL = "http://209.2.222.136/linger_api/";
+//	public static final String API_URL = "http://160.39.142.43/linger_api/";
+	public static final String API_URL = "http://127.0.0.1/linger_api/";
 	
 	public static final String KEY_TAG = "tag";
 	
 	static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
-    
-    /** Default constructor */
-    public JSONParser() {}
  
-    public JSONObject getJSONFromUrl(String url, 
-    		List<NameValuePair> params)
+    public static JSONObject getJSONFromUrl(List<NameValuePair> params)
+    {
+    	return getJSONFromUrl(API_URL, params);
+    }
+    
+    public static JSONObject getJSONFromUrl(String url, List<NameValuePair> params)
     {
     	// Making HTTP request
         try {
