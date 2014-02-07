@@ -41,7 +41,8 @@ public class LoginFragment extends Fragment
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState)
+	{
 		final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 		
 		// set title text font
@@ -73,7 +74,7 @@ public class LoginFragment extends Fragment
 	
 	/** 
 	 * AsyncTask to connect to database in order to check login information and
-	 * set user and network values in SQLite Database.
+	 * scheck user values in SQLite Database.
 	 */
 	private class LoginTask extends AsyncTask<String, Void, String>
 	{  

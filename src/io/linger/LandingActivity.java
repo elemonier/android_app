@@ -130,9 +130,9 @@ public class LandingActivity extends FragmentActivity implements
 				firstFragment.setArguments(firstArgs);
 				return firstFragment;
 			case 1:
-				Fragment secondFragment = new SecondFragment();
+				Fragment secondFragment = new RegistrationFragment();
 				Bundle secondArgs = new Bundle();
-				secondArgs.putInt(SecondFragment.ARG_SECTION_NUMBER, position + 1);
+				secondArgs.putInt(RegistrationFragment.ARG_SECTION_NUMBER, position + 1);
 				secondFragment.setArguments(secondArgs);
 				return secondFragment;
 			case 2:
