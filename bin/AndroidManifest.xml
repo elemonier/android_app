@@ -21,7 +21,6 @@
             android:label="@string/title_activity_landing" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,6 +28,11 @@
             android:name="io.linger.ShowContactsActivity"
             android:label="@string/app_name" >
         </activity>
+        <receiver android:name=".BatteryLevelReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_BATTERY_LOW" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

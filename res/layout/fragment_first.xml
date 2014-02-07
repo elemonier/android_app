@@ -14,4 +14,13 @@
         android:layout_height="wrap_content"
         android:text="first" />
 
+    <Button
+        android:id="@+id/button_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/section_label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="138dp"
+        android:text="Sync" />
+
 </RelativeLayout>

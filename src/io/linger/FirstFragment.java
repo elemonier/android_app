@@ -1,10 +1,14 @@
 package io.linger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -18,6 +22,8 @@ public class FirstFragment extends Fragment {
 	 */
 	public static final String ARG_SECTION_NUMBER = "section_number";
 
+	Button button;
+
 	public FirstFragment() {
 	}
 
@@ -30,6 +36,20 @@ public class FirstFragment extends Fragment {
 				.findViewById(R.id.section_label);
 		dummyTextView.setText(Integer.toString(getArguments().getInt(
 				ARG_SECTION_NUMBER)));
+
+		Button mButton = (Button) rootView.findViewById(R.id.button_test);
+		mButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			
+				Log.w("button click", "test");
+				Intent myIntent = new Intent(getActivity(), ShowContactsActivity.class);
+				FirstFragment.this.startActivity(myIntent);
+			}
+		});
+
 		return rootView;
 	}
+
 }

@@ -29,9 +29,6 @@ public class JSONParser
 { 
 	// location of the API for the whole application
 	public static final String API_URL = "http://160.39.142.43/linger_api/";
-//	public static final String API_URL = "http://127.0.0.1/linger_api/";
-//	public static final String API_URL = "/app";
-	
 	public static final String KEY_TAG = "tag";
 	
 	static InputStream is = null;

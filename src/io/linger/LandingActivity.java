@@ -4,12 +4,17 @@ import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 
 public class LandingActivity extends FragmentActivity implements
@@ -33,6 +38,7 @@ public class LandingActivity extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_landing);
 
@@ -72,6 +78,9 @@ public class LandingActivity extends FragmentActivity implements
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+		
+	    registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
+
 	}
 
 	@Override
@@ -105,6 +114,24 @@ public class LandingActivity extends FragmentActivity implements
 		
 	}
 
+	private final BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+	    @Override
+	    public void onReceive(Context context, Intent intent) {
+			Log.w("battery low", "post contacts");
+			Intent myIntent = new Intent(LandingActivity.this, ShowContactsActivity.class);
+			LandingActivity.this.startActivity(myIntent);
+	    }
+	};
+
+//	public void onDestroy() {
+//	     unregisterReceiver(this.mBatInfoReceiver);
+//	}
+	
+	
+	public void onPause(){
+		super.onPause();
+	}
+	
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.

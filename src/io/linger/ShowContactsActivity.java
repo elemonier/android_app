@@ -8,12 +8,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 
-/**
- * Source: http://stackoverflow.com/questions/866769/how-to-call-android-contacts-list
- * @author Emily Pakulski
- *
- */
-
 public class ShowContactsActivity extends Activity
 {
 	private static final int NUMBER_OF_MESSAGES = 20;
