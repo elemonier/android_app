@@ -45,13 +45,11 @@ public class LoginFragment extends Fragment
 	{
 		final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 		
-		// set title text font
-		TextView myTextView = (TextView) rootView.findViewById(R.id.section_label);
+		// set title text font to our custom imported font
+		TextView titleText = (TextView) rootView.findViewById(R.id.section_label);
 		Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),
 				"fonts/grandhotel_regular.ttf");
-		myTextView.setTypeface(typeFace);
-		myTextView.setText("Login");
-		
+		titleText.setTypeface(typeFace);
 		// set listener for button
 		Button submitButton = (Button) rootView.findViewById(R.id.button_submit_login);
 		submitButton.setOnClickListener(new OnClickListener() 

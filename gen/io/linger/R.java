@@ -56,7 +56,7 @@ public final class R {
         public static final int landing=0x7f080001;
         public static final int login=0x7f080002;
         public static final int main=0x7f080003;
-        public static final int second=0x7f080004;
+        public static final int registration=0x7f080004;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
@@ -67,17 +67,20 @@ public final class R {
         public static final int hello_world=0x7f060002;
         /**  Login page 
          */
+        public static final int login_prompt=0x7f060009;
         public static final int name_field=0x7f06000a;
         public static final int password_field=0x7f06000d;
         public static final int phone_number_field=0x7f06000c;
+        /**  Registration page 
+         */
+        public static final int registration_prompt=0x7f06000f;
         public static final int submit_fields=0x7f06000e;
-        public static final int title_activity_home=0x7f060004;
-        public static final int title_activity_landing=0x7f060005;
+        public static final int title_activity_landing=0x7f060004;
         public static final int title_activity_main=0x7f060003;
-        public static final int title_activity_second=0x7f060009;
-        public static final int title_section1=0x7f060006;
-        public static final int title_section2=0x7f060007;
-        public static final int title_section3=0x7f060008;
+        public static final int title_activity_second=0x7f060008;
+        public static final int title_section1=0x7f060005;
+        public static final int title_section2=0x7f060006;
+        public static final int title_section3=0x7f060007;
     }
     public static final class style {
         /** 

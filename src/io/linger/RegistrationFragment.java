@@ -47,11 +47,10 @@ public class RegistrationFragment extends Fragment
 		final View rootView = inflater.inflate(R.layout.fragment_registration, container, false);
 		
 		// set title text font
-		TextView myTextView = (TextView) rootView.findViewById(R.id.section_label);
+		TextView titleText = (TextView) rootView.findViewById(R.id.section_label);
 		Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),
 				"fonts/grandhotel_regular.ttf");
-		myTextView.setTypeface(typeFace);
-		myTextView.setText("Registration");
+		titleText.setTypeface(typeFace);
 		
 		// set listener for button
 		Button submitButton = (Button) rootView.findViewById(R.id.button_submit_login);

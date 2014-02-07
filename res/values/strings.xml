@@ -6,17 +6,20 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_landing">LandingActivity</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="title_activity_second">SecondActivity</string>
+    <string name="title_activity_landing">Linger</string>
+    <string name="title_section1">Home</string>
+    <string name="title_section2">Registration</string>
+    <string name="title_section3">Login</string>
+    <string name="title_activity_second">Registration</string>
 
     <!-- Login page -->
+    <string name="login_prompt">Login</string>
     <string name="name_field">your name</string>
     <string name="email_field">email address</string>
     <string name="phone_number_field">phone number ### ### ####</string>
     <string name="password_field">password</string>
     <string name="submit_fields">submit</string>
+    
+    <!-- Registration page -->
+    <string name="registration_prompt">Registration</string>
 </resources>
