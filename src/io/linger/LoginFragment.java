@@ -34,6 +34,8 @@ public class LoginFragment extends Fragment
 	 */
 	public static final String ARG_SECTION_NUMBER = "section_number";
 
+	public static final String TAG_LOGIN = "user_login";
+	
 	private String userPhoneNumber;
 	private String userPassword;
 
@@ -77,8 +79,8 @@ public class LoginFragment extends Fragment
 	{  
 		 protected String doInBackground(String... inputs)
 		 {
-			 List<NameValuePair> params = new ArrayList<NameValuePair>();
-			 params.add(new BasicNameValuePair(JSONParser.KEY_TAG, SQLiteDatabaseHandler.TAG_POST));
+			 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
+			 params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_LOGIN));
 			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
 		     params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS, inputs[1]));
 		     JSONParser.getJSONFromUrl(params);

@@ -28,8 +28,9 @@ import android.util.Log;
 public class JSONParser 
 { 
 	// location of the API for the whole application
-//	public static final String API_URL = "http://160.39.142.43/linger_api/";
-	public static final String API_URL = "http://127.0.0.1/linger_api/";
+	public static final String API_URL = "http://160.39.142.43/linger_api/";
+//	public static final String API_URL = "http://127.0.0.1/linger_api/";
+//	public static final String API_URL = "/app";
 	
 	public static final String KEY_TAG = "tag";
 	
@@ -46,11 +47,14 @@ public class JSONParser
     {
     	// Making HTTP request
         try {
+        	Log.v("Testing", "Line 49 JSONParser");
         	DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(new UrlEncodedFormEntity(params));
             HttpResponse httpResponse = httpClient.execute(httpPost);
+        	Log.v("Testing", "Line 53 JSONParser");
             HttpEntity httpEntity = httpResponse.getEntity();
+        	Log.v("Testing", "Line 55 JSONParser");
             is = httpEntity.getContent();
             
         } catch (UnsupportedEncodingException e) {
@@ -63,10 +67,12 @@ public class JSONParser
  
         try 
         {
-            BufferedReader reader = new BufferedReader(new 
+        	Log.v("Testing", "Line 69 JSONParser");
+        	BufferedReader reader = new BufferedReader(new 
             		InputStreamReader(is, "iso-8859-1"), 8);
             StringBuilder sb = new StringBuilder();
             String line = null;
+        	Log.v("Testing", "Line 74 JSONParser");
             while ((line = reader.readLine()) != null) 
             {
                 sb.append(line + "n");
