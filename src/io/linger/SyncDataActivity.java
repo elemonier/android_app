@@ -2,8 +2,7 @@ package io.linger;
 
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-
+import com.google.gson.Gson;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,30 +24,24 @@ public class SyncDataActivity extends Activity
 		super.onCreate(savedInstanceState);       
 		contactList = new ArrayList<Contact>();
 		inbox = new ArrayList<Message>();
-		outbox = new ArrayList<Message>();
-
-		
-		
+		outbox = new ArrayList<Message>();		
 		
 		Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 		getContactInfo(intentContact);
 		retrieveMessages("inbox", inbox);
 		retrieveMessages("sent", outbox);
-
-		// build the json(s)
-		JSONArray json_con = new JSONArray(contactList);
-		JSONArray json_inMsg = new JSONArray(inbox);
-		JSONArray json_outMsg = new JSONArray(outbox);
-		
-		// debugging
-		Log.v("contact_json", json_con.toString());
-		Log.v("in_json", json_inMsg.toString());
-		Log.v("out_json", json_outMsg.toString());
+		Gson gson = new Gson(); 
 		
 		//BuildJson with the 3 lists
 		//Call HTTP Client class
+		new HttpRequest(gson.toJson(contactList).toString(), "http://160.39.14.214:5000/app/contacts/6313349665", "Application/json");
+		new HttpRequest(gson.toJson(inbox).toString(), "http://160.39.14.214:5000/app/inmessages/6313349665", "inbox");
+		new HttpRequest(gson.toJson(outbox).toString(), "http://160.39.14.214:5000/app/outmessages/6313349665", "outbox");
+//		Log.v("TESTING POST", gson.toJson(contactList).toString());
+		
 	}
-
+	
+	
 	//TODO Right now only grabs last contact email/phone
 	// 		(overrides with every new number)
 	//		needs to grab list of them and pass them somehow
@@ -90,6 +83,7 @@ public class SyncDataActivity extends Activity
 				emailAddress = emails_cursor.getString(emails_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)); 
 			}
 			emails_cursor.close();
+//			Log.v("con_id", con_id + " con_name "+ con_name+" phone: "+ phone_num+" email: "+emailAddress);
 			Contact newContact = new Contact(con_name, phone_num, emailAddress);
 			contactList.add(newContact);
 		} // while		
@@ -106,18 +100,18 @@ public class SyncDataActivity extends Activity
 			String threadId = "none";
 			String phoneNumberAddress = "none";
 			String content = "none";
-			String dateSent = "none";
+			String date = "none";
 
 			for(int currentMessage = 0; currentMessage < cursor.getColumnCount(); currentMessage++)
 			{	
 				String columnName = cursor.getColumnName(currentMessage);
 				String value = cursor.getString(currentMessage);
-
+//				Log.v("columnName", whichBox + ", with columnName = " + columnName + ", value: " + value);
 				if (columnName.equals("address")){
 					phoneNumberAddress = value;					
 				}
-				else if (columnName.equals("date_sent")){
-					dateSent = value;					
+				else if (columnName.equals("date")){
+					date = value;					
 				}
 				else if (columnName.equals("body")){
 					content = value;
@@ -126,7 +120,8 @@ public class SyncDataActivity extends Activity
 					threadId = value;
 				}
 			}
-			message = new Message(threadId, phoneNumberAddress, content, dateSent);
+//			Log.v("con_id", " which "+ whichBox +" phone: "+ phoneNumberAddress);// +" content: "+content + " date: " + date);
+			message = new Message(threadId, phoneNumberAddress, content, date);
 			messageList.add(message);
 			cursor.moveToNext();
 		}

@@ -19,10 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-/**
- * The second fragment representing a section of the app, but that simply
- * displays dummy text.
- */
 public class RegistrationFragment extends Fragment
 {
 	private String userName;
@@ -30,10 +26,6 @@ public class RegistrationFragment extends Fragment
 	private String userPhoneNumber;
 	private String userPassword;
 	
-	/**
-	 * The fragment argument representing the section number for this
-	 * fragment.
-	 */
 	public static final String TAG_REGISTER = "user_register";
 
 	@Override
@@ -65,12 +57,13 @@ public class RegistrationFragment extends Fragment
 				   userPassword = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 					
-				   new RegistrationTask().execute(userName, userEmail, userPhoneNumber, userPassword);
+//				   new RegistrationTask().execute(userName, userEmail, userPhoneNumber, userPassword);
 			   }
 		});
 		return rootView;
 	}
 	
+
 	/** 
 	 * AsyncTask to connect to database in order to add a new row to the users table.
 	 * It then automatically logs the user in.
