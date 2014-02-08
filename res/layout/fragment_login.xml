@@ -14,7 +14,6 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
 		android:gravity="center"
-		android:background="@drawable/tinted_background"
 		android:layout_centerVertical="true"
 	>
 	
@@ -48,15 +47,16 @@
 		    style="@style/Hint"
 		    android:hint="@string/password_field"
 		/>
-		
-		<Button
-		    android:id="@+id/button_submit_login"
-		    android:layout_marginTop="8dp"
-     		android:layout_height="wrap_content"
-     		android:layout_width="wrap_content"
-     		android:text="@string/submit_fields"
-     		style="@style/BlueButton"
-     	/>
 	</LinearLayout>
     
+			
+	<Button
+		android:id="@+id/button_submit_login"
+		android:layout_marginTop="8dp"
+     	android:layout_height="wrap_content"
+     	android:layout_width="match_parent"
+     	android:layout_alignParentBottom="true"
+     	android:text="@string/submit_fields"
+     	style="@style/BlueButton"
+    />
 </RelativeLayout>

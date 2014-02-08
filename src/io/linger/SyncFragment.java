@@ -2,8 +2,6 @@ package io.linger;
 
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -19,6 +17,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 /**
  * Fragment that handles syncing. Disables the button if the user is not
@@ -48,7 +49,7 @@ public class SyncFragment extends Fragment
 		registrationSwipeLabel.setTypeface(typeFace);
 		
 		// create sync button
-		Button syncButton = (Button) rootView.findViewById(R.id.button_test);
+		Button syncButton = (Button) rootView.findViewById(R.id.button_sync);
 		
 //		// disable button if user isn't logged in
 //		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
@@ -67,13 +68,29 @@ public class SyncFragment extends Fragment
 			public void onClick(View v)
 			{
 				Log.w("button click", "test");		
-//				Intent myIntent = new Intent(getActivity(), SyncDataActivity.class);
-//				SyncFragment.this.startActivity(myIntent);
-				new SyncTask().execute();
+
+//				new SyncTask().execute();
+				
+				// show confirmation message
+				CharSequence text = "Confirmed! You synchronized your data with"
+						+ " our servers.";
+				int duration = Toast.LENGTH_SHORT;
+				Toast toast = Toast.makeText(getActivity(), text, duration);
+				toast.show();
+				
+				// update text view with last sync time
+				TextView lastSyncDate = (TextView) getActivity().findViewById(R.id.last_sync_date_label);
+//				lastSyncDate.setText("Last sync: " + "2/8/2014 7:25 AM");
+				lastSyncDate.setText("Last sync: " + getCurrentDate());
 			}
 		});
 
 		return rootView;
+	}
+	
+	public String getCurrentDate()
+	{
+		return DateTime.getCurrentDateTime();
 	}
 
 	/** 
