@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#474647</color>
-    <color name="text">#76c6b9</color>
+    <color name="main">#76c6b9</color>
     <color name="tint">#5B9A8F</color>
+    <color name="secondary">#e7e88a</color> <!-- faaacb -->
     <color name="textBoxBackground">#FFFFFF</color>
-    <color name="myGreen">#7FD23A</color>
-    <color name="myRed">#BE010C</color>
     <color name="myBlue">#486196</color>
-    <color name="myDarkerBlue">#010873</color>
+    <color name="myDarkerBackground">#393939</color>
     <color name="myWhite">#FFFFFF</color>
     <color name="lightGray">#CCCCCC</color>
     <color name="offWhite">#66CCCCCC</color>

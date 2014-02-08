@@ -12,15 +12,16 @@ public final class R {
     }
     public static final class color {
         public static final int background=0x7f040000;
-        public static final int lightGray=0x7f040009;
-        public static final int myBlue=0x7f040006;
-        public static final int myDarkerBlue=0x7f040007;
-        public static final int myGreen=0x7f040004;
-        public static final int myRed=0x7f040005;
-        public static final int myWhite=0x7f040008;
-        public static final int offWhite=0x7f04000a;
-        public static final int text=0x7f040001;
-        public static final int textBoxBackground=0x7f040003;
+        public static final int lightGray=0x7f040008;
+        public static final int main=0x7f040001;
+        public static final int myBlue=0x7f040005;
+        public static final int myDarkerBackground=0x7f040006;
+        public static final int myWhite=0x7f040007;
+        public static final int offWhite=0x7f040009;
+        public static final int secondary=0x7f040003;
+        /**  faaacb 
+         */
+        public static final int textBoxBackground=0x7f040004;
         public static final int tint=0x7f040002;
     }
     public static final class dimen {
@@ -36,17 +37,15 @@ public final class R {
     public static final class drawable {
         public static final int bird=0x7f020000;
         public static final int cursor=0x7f020001;
-        public static final int down=0x7f020002;
-        public static final int edittext_background=0x7f020003;
-        public static final int ic_action_about=0x7f020004;
-        public static final int ic_action_help=0x7f020005;
-        public static final int ic_action_settings=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int left_facing_arrows=0x7f020008;
-        public static final int right_facing_arrows=0x7f020009;
-        public static final int standard_button=0x7f02000a;
-        public static final int tinted_background=0x7f02000b;
-        public static final int up=0x7f02000c;
+        public static final int edittext_background=0x7f020002;
+        public static final int ic_action_about=0x7f020003;
+        public static final int ic_action_help=0x7f020004;
+        public static final int ic_action_settings=0x7f020005;
+        public static final int left_facing_arrows=0x7f020006;
+        public static final int logo=0x7f020007;
+        public static final int right_facing_arrows=0x7f020008;
+        public static final int standard_button=0x7f020009;
+        public static final int tinted_background=0x7f02000a;
     }
     public static final class id {
         public static final int action_about=0x7f090014;
