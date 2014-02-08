@@ -1,12 +1,9 @@
 package io.linger;
 
-//import io.linger.LoginFragment.LoginTask;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-
 import com.google.gson.Gson;
 
 import android.graphics.Typeface;
@@ -66,36 +63,43 @@ public class RegistrationFragment extends Fragment
 		return rootView;
 	}
 	
-//	/** 
-//	 * AsyncTask to connect to database in order to add a new row to the users table.
-//	 * It then automatically logs the user in.
-//	 */
-//	private class RegistrationTask extends AsyncTask<String, Void, String>
-//	{  
-//		 protected String doInBackground(String... inputs)
-//		 {
-//			 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
-////			 params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_REGISTER));
-//			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_NAME, inputs[0]));
-//			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_EMAIL, inputs[1]));
-//			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PHONE, inputs[2]));
-//		     params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS, inputs[3]));
-////		     JSONParser.getJSONFromUrl(params);
-//		     Gson gson = new Gson();
-//		     Log.v("Testing", gson.toJson(params));
-//		     return gson.toJson(params);
-//		 }
-//		
-		protected void onPostExecute(String json)
-		{
-//            SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
-            // FILLER
-//            db.addUser("1", userPhoneNumber, userPassword, "2/6/2014 18:08");
-//			db.addUser(jsonUser.getString(DatabaseHandler.KEY_NAME), 
-//            		jsonUser.getString(DatabaseHandler.KEY_EMAIL), 
-//            		jsonUser.getString(DatabaseHandler.KEY_NETWORK),
-//	                jsonUser.getString(DatabaseHandler.KEY_UNIQUE_ID), 
-//	                jsonUser.getString(DatabaseHandler.KEY_CREATED_AT)); 
+
+	/** 
+	 * AsyncTask to connect to database in order to add a new row to the users table.
+	 * It then automatically logs the user in.
+	 */
+	private class RegistrationTask extends AsyncTask<String, Void, HttpRequest>
+	{  
+		/**
+		 *  Send a request in Json form to the server with the user's name, 
+		 *  email, phone number, and password.
+		 */
+		protected HttpRequest doInBackground(String... inputs)
+	    {
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_NAME,
+					inputs[0]));
+			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_EMAIL,
+					inputs[1]));
+			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PHONE,
+					inputs[2]));
+			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS,
+					inputs[3]));
+			// turn the params into Json
+		    Gson gson = new Gson();
+		    Log.v("Testing", gson.toJson(params));
+		    return new HttpRequest("http://160.39.167.249:5000/app/register", 
+		    		gson.toJson(params), "POST");
 		}
+		
+//		/**
+//		 * After sending the request, try to log in.
+//		 * @param json
+//		 */
+//		protected void onPostExecute(String json)
+//		{
+//			LoginFragment.LoginTask().execute(userPhoneNumber, userPassword);
+//			// TODO may have to separate LoginTask into its own class for this to work
+//		}
 	}
-//}
+}

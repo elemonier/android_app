@@ -1,25 +1,26 @@
 package io.linger;
 
-import java.util.Locale;
+//// monitoring battery life
+//import java.util.Locale;
+//import android.app.FragmentTransaction;
+//import android.content.BroadcastReceiver;
+//import android.content.Context;
+//import android.content.Intent;
+//import android.content.IntentFilter;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
-public class LandingActivity extends FragmentActivity implements
-		ActionBar.TabListener {
-
+public class LandingActivity extends FragmentActivity 
+{
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -42,10 +43,6 @@ public class LandingActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_landing);
 
-		// Set up the action bar.
-		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -60,27 +57,15 @@ public class LandingActivity extends FragmentActivity implements
 		// a reference to the Tab.
 		mViewPager
 				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener()
-				{
+				{					
 					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
+					public void onPageSelected(int position)
+					{
+						getFragment(position);
 					}
 				});
-
-		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++)
-		{
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
-			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					.setTabListener(this));
-		}
-		
+		mViewPager.setCurrentItem(1);
 //	    registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
-
 	}
 
 	@Override
@@ -91,30 +76,58 @@ public class LandingActivity extends FragmentActivity implements
 		return true;
 	}
 
-	@Override
-	public void onTabSelected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction)
+    /**
+     * On selecting action bar icons
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
+        switch (item.getItemId()) {
+        case R.id.action_about:
+            startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+	
+	/**
+	 * Returns the fragment corresponding with whichever position on the
+	 * scroll you're at.
+	 * @param position (0 [login], 1 [landing], or 2 [registration])
+	 * @return the correct fragment
+	 */
+	public Fragment getFragment(int position)
 	{
-		// When the given tab is selected, switch to the corresponding page in
-		// the ViewPager.
-		mViewPager.setCurrentItem(tab.getPosition());
+		switch (position)
+		{
+		case 0:
+			Fragment loginFragment = new LoginFragment();
+			return loginFragment;
+		case 1:
+			Fragment landingFragment = new SyncFragment();
+			return landingFragment;
+		case 2:
+			Fragment registrationFragment = new RegistrationFragment();
+			return registrationFragment;
+		default:
+			Fragment defaultFragment = new LoginFragment();
+			return defaultFragment;
+		}
 	}
+	
+//	public void toLogin(View view)
+//	{
+//		getFragment(0);
+//	}
+//	
+//	public void toRegistration(View view)
+//	{
+//		getFragment(2);
+//	}
 
-	@Override
-	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction)
-	{
-		
-	}
-
-	@Override
-	public void onTabReselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) 
-	{
-		
-	}
-
-//	private final BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+//	private final BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver()
+//	{
 //	    @Override
 //	    public void onReceive(Context context, Intent intent) {
 //			Log.w("battery low", "post contacts");
@@ -123,12 +136,15 @@ public class LandingActivity extends FragmentActivity implements
 //	    }
 //	};
 //
-////	public void onDestroy() {
+////	public void onDestroy() 
+////	{
 ////	     unregisterReceiver(this.mBatInfoReceiver);
 ////	}
-//	public void onPause(){
+//	
+//		public void onPause()
+//		{
 //		super.onPause();
-//	}
+//		}
 	
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -149,14 +165,14 @@ public class LandingActivity extends FragmentActivity implements
 			switch (position)
 			{
 			case 0:
-				Fragment firstFragment = new FirstFragment();
-				return firstFragment;
-			case 1:
-				Fragment secondFragment = new RegistrationFragment();
-				return secondFragment;
-			case 2:
 				Fragment loginFragment = new LoginFragment();
 				return loginFragment;
+			case 1:
+				Fragment landingFragment = new SyncFragment();
+				return landingFragment;
+			case 2:
+				Fragment registrationFragment = new RegistrationFragment();
+				return registrationFragment;
 			default:
 				Fragment defaultFragment = new LoginFragment();
 				return defaultFragment;
@@ -171,25 +187,6 @@ public class LandingActivity extends FragmentActivity implements
 		{
 			// Show 3 total pages.
 			return 3;
-		}
-		
-		/**
-		 * Select the page title.
-		 */
-		@Override
-		public CharSequence getPageTitle(int position)
-		{
-			Locale l = Locale.getDefault();
-			switch (position) 
-			{
-			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
-			}
-			return null;
 		}
 	}
 }

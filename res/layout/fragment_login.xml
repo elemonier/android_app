@@ -14,6 +14,7 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
 		android:gravity="center"
+		android:background="@drawable/tinted_background"
 		android:layout_centerVertical="true"
 	>
 	
@@ -21,16 +22,17 @@
 	        android:id="@+id/section_label"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:textSize="35sp"
+	        style="@style/Headings"
 	        android:text="@string/login_prompt"
 	    />
 		<!-- Input phone number field -->
 		<EditText
 		    android:id="@+id/phoneTextLogin"
-			android:layout_marginTop="5dp"
+			android:layout_marginTop="10dp"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="phone" 
+		    style="@style/Hint"
 	        android:hint="@string/phone_number_field"
 	    >
 		<requestFocus />
@@ -39,17 +41,21 @@
 		    <!--  Password field -->
 		<EditText
 			android:id="@+id/passEditTextLogin"
+			android:layout_marginTop="10dp"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="textPassword" 
+		    style="@style/Hint"
 		    android:hint="@string/password_field"
 		/>
 		
 		<Button
 		    android:id="@+id/button_submit_login"
+		    android:layout_marginTop="8dp"
      		android:layout_height="wrap_content"
      		android:layout_width="wrap_content"
      		android:text="@string/submit_fields"
+     		style="@style/BlueButton"
      	/>
 	</LinearLayout>
     

@@ -13,10 +13,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * A dummy fragment representing a section of the app, but that simply
- * displays dummy text.
+ * Fragment that handles syncing. Disables the button if the user is not
+ * logged in; allows syncing with the database if the user is logged in.
  */
-public class FirstFragment extends Fragment
+public class SyncFragment extends Fragment
 {
 	/**
 	 * The fragment argument representing the section number for this
@@ -26,7 +26,7 @@ public class FirstFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) 
 	{
-		View rootView = inflater.inflate(R.layout.fragment_first,
+		View rootView = inflater.inflate(R.layout.fragment_sync,
 				container, false);
 
 		// set title text font to our custom imported font
@@ -38,16 +38,23 @@ public class FirstFragment extends Fragment
 		titleText.setTypeface(typeFace);
 		loginText.setTypeface(typeFace);
 		registrationText.setTypeface(typeFace);
+		
 		// set listener for sync button
 		Button syncButton = (Button) rootView.findViewById(R.id.button_test);
+		
+//		// TODO disable button if user isn't logged in
+//		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
+//		if (db.getLoginRowCount() < 1)
+//			syncButton.setEnabled(false);
+		
 		syncButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v)
 			{
-				Log.w("button click", "test");
+				Log.w("button click", "test");		
 				Intent myIntent = new Intent(getActivity(), SyncDataActivity.class);
-				FirstFragment.this.startActivity(myIntent);
+				SyncFragment.this.startActivity(myIntent);
 			}
 		});
 

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#76c6b9</color>
-    <color name="myBlue">#eaeaea</color>
-    <color name="myYellow">#f6eb2d</color>
-    <color name="myLightGray">#525252</color>
-    <color name="myBlack">#151515</color>
+    <color name="myGreen">#7FD23A</color>
+    <color name="tint">#5B9A8F</color>
+    <color name="myRed">#BE010C</color>
+    <color name="myBlue">#495F9D</color>
+    <color name="myDarkerBlue">#010873</color>
+    <color name="white">#FFFFFF</color>
+    <color name="lightGray">#CCCCCC</color>
+    <color name="offWhite">#66CCCCCC</color>
 </resources>

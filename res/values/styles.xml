@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -17,4 +17,34 @@
         <item name="android:windowBackground">@color/background</item>
     </style>
 
+    <style name="BlueButton">
+        <item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_gravity">center</item>
+		<item name="android:textColor">#FFFFFF</item>
+		<item name="android:background">@drawable/standard_button</item>
+	</style>
+	
+   	<style name="Title" parent="@android:style/TextAppearance.Medium">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">60sp</item>
+    </style>
+    
+   	<style name="Headings" parent="@android:style/TextAppearance.Medium">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+    
+   	<style name="SwipeIndicators" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+    
+   	<style name="Hint">
+   	    <item name="android:textColorHint">@color/lightGray</item>
+   	    <item name="android:background">@drawable/white_background</item>
+   	    <item name="android:textCursorDrawable">@drawable/cursor</item>
+   	</style>
 </resources>
