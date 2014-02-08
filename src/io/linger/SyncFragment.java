@@ -56,10 +56,10 @@ public class SyncFragment extends Fragment
 
 		Button syncButton = (Button) rootView.findViewById(R.id.button_sync);
 		
-//		// disable button if user isn't logged in
-//		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
-//		if (db.getLoginRowCount() < 1) // if user is logged in
-//			syncButton.setVisibility(View.INVISIBLE);
+		// disable button if user isn't logged in
+		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
+		if (db.getLoginRowCount() < 1) // if user is logged in
+			syncButton.setVisibility(View.INVISIBLE);
 //		else // user is logged in
 //		{
 //			loginSwipeLabel.setVisibility(View.INVISIBLE);

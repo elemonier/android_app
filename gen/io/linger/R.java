@@ -91,10 +91,10 @@ public final class R {
         public static final int second=0x7f080005;
     }
     public static final class string {
-        public static final int about_a=0x7f06000f;
-        public static final int about_b=0x7f060010;
-        public static final int about_c=0x7f060011;
-        public static final int about_d=0x7f060012;
+        public static final int about_a=0x7f060011;
+        public static final int about_b=0x7f060012;
+        public static final int about_c=0x7f060013;
+        public static final int about_d=0x7f060014;
         public static final int action_about=0x7f060001;
         /**  Action Bar 
          */
@@ -103,25 +103,27 @@ public final class R {
         /**  General 
          */
         public static final int app_name=0x7f060003;
-        public static final int email_field=0x7f060009;
-        public static final int founders=0x7f060013;
+        public static final int email_field=0x7f06000b;
+        public static final int founders=0x7f060015;
         public static final int hello_world=0x7f060004;
+        public static final int login_indicator=0x7f060008;
         /**  Login fragment 
          */
         public static final int login_prompt=0x7f060007;
-        public static final int name_field=0x7f060008;
-        public static final int password_field=0x7f06000b;
-        public static final int phone_number_field=0x7f06000a;
+        public static final int name_field=0x7f06000a;
+        public static final int password_field=0x7f06000d;
+        public static final int phone_number_field=0x7f06000c;
+        public static final int registration_indicator=0x7f060009;
         /**  Registration fragment 
          */
-        public static final int registration_prompt=0x7f06000d;
-        public static final int submit_fields=0x7f06000c;
+        public static final int registration_prompt=0x7f06000f;
+        public static final int submit_fields=0x7f06000e;
         /**  Landing fragment 
          */
         public static final int sync=0x7f060006;
         /**  About page 
          */
-        public static final int title_activity_about=0x7f06000e;
+        public static final int title_activity_about=0x7f060010;
         public static final int title_activity_landing=0x7f060005;
     }
     public static final class style {

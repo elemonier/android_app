@@ -16,6 +16,8 @@
     
     <!-- Login fragment -->
     <string name="login_prompt">Login</string>
+    <string name="login_indicator">&#60; login</string>
+    <string name="registration_indicator">registration &#62;</string>
     <string name="name_field">your name</string>
     <string name="email_field">email address</string>
     <string name="phone_number_field">phone number</string>

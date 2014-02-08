@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -57,48 +58,50 @@ public class LoginFragment extends Fragment
 				   userPassword = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 					
-				   new LoginTask().execute(userPhoneNumber, userPassword);
+				   SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
+				   db.addUser(Integer.toString((int) (Math.random() * (100))), userPhoneNumber, userPassword, DateTime.getCurrentDateTime());
+				   
+				   Toast.makeText(getView().getContext(), 
+							"Login complete. Welcome!", Toast.LENGTH_LONG).show();
+//				   new LoginTask().execute(userPhoneNumber, userPassword);
 			   }
 		});
 		
 		return rootView;
 	}
 	
-	/** 
-	 * AsyncTask to connect to database in order to check login information and
-	 * scheck user values in SQLite Database.
-	 */
-	public static class LoginTask extends AsyncTask<String, Void, HttpRequest>
-	{  
-		 protected HttpRequest doInBackground(String... inputs)
-		 {
-			 List<NameValuePair> params = new ArrayList<NameValuePair>();
-			 params.add(new BasicNameValuePair(
-					 SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
-		     params.add(new BasicNameValuePair(
-		    		 SQLiteDatabaseHandler.USER_PASS, inputs[1]));
-		     // convert params to Json
-		     Gson gson = new Gson(); 
-		     Log.v("Testing", gson.toJson(params));
-		     // send HTTP post request
-		     return new HttpRequest ("http://160.39.167.249:5000/app/login", 
-		    		 gson.toJson(params), "POST");
-		 }
-		
-		 //TODO
-		/**
-		 * Get values back from server to put into SQLiteDatabase and log in.
-		 */
+//	/** 
+//	 * AsyncTask to connect to database in order to check login information and
+//	 * scheck user values in SQLite Database.
+//	 */
+//	public class LoginTask extends AsyncTask<String, Void, Void>
+//	{  
+//		 protected Void doInBackground(String... inputs)
+//		 {
+////			 List<NameValuePair> params = new ArrayList<NameValuePair>();
+////			 params.add(new BasicNameValuePair(
+////					 SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
+////		     params.add(new BasicNameValuePair(
+////		    		 SQLiteDatabaseHandler.USER_PASS, inputs[1]));
+////		     // convert params to Json
+////		     Gson gson = new Gson(); 
+////		     Log.v("Testing", gson.toJson(params));
+////		     // send HTTP post request
+////		     return new HttpRequest ("http://160.39.167.249:5000/app/login", 
+////		    		 gson.toJson(params), "POST");
+//		     SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
+//		     db.addUser("1", inputs[0], inputs[1], DateTime.getCurrentDateTime());
+//		     return null;
+//		 }
+//		
+//		 //TODO
+//		/**
+//		 * Get values back from server to put into SQLiteDatabase and log in.
+//		 */
 //		protected void onPostExecute(String ... params)
 //		{
-//            SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
-//            db.addUser("1", userPhoneNumber, userPassword, "2/6/2014 18:08");
-//			db.addUser(jsonUser.getString(DatabaseHandler.KEY_NAME), 
-//            		jsonUser.getString(DatabaseHandler.KEY_EMAIL), 
-//            		jsonUser.getString(DatabaseHandler.KEY_NETWORK),
-//	                jsonUser.getString(DatabaseHandler.KEY_UNIQUE_ID), 
-//	                jsonUser.getString(DatabaseHandler.KEY_CREATED_AT));  
-//            return null;
+//			Toast.makeText(getView().getContext(), 
+//					"Login complete. Welcome!", Toast.LENGTH_LONG).show();
 //		}
-	}
+//	}
 }
