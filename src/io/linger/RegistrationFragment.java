@@ -68,37 +68,37 @@ public class RegistrationFragment extends Fragment
 				   userPassword = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 					
-				   new RegistrationTask().execute(userName, userEmail, userPhoneNumber, userPassword);
+//				   new RegistrationTask().execute(userName, userEmail, userPhoneNumber, userPassword);
 			   }
 		});
 		return rootView;
 	}
 	
-	/** 
-	 * AsyncTask to connect to database in order to add a new row to the users table.
-	 * It then automatically logs the user in.
-	 */
-	private class RegistrationTask extends AsyncTask<String, Void, String>
-	{  
-		 protected String doInBackground(String... inputs)
-		 {
-			 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
-//			 params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_REGISTER));
-			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_NAME, inputs[0]));
-			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_EMAIL, inputs[1]));
-			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PHONE, inputs[2]));
-		     params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS, inputs[3]));
-//		     JSONParser.getJSONFromUrl(params);
-		     Gson gson = new Gson();
-		     Log.v("Testing", gson.toJson(params));
-		     return gson.toJson(params);
-		 }
-		
+//	/** 
+//	 * AsyncTask to connect to database in order to add a new row to the users table.
+//	 * It then automatically logs the user in.
+//	 */
+//	private class RegistrationTask extends AsyncTask<String, Void, String>
+//	{  
+//		 protected String doInBackground(String... inputs)
+//		 {
+//			 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
+////			 params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_REGISTER));
+//			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_NAME, inputs[0]));
+//			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_EMAIL, inputs[1]));
+//			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PHONE, inputs[2]));
+//		     params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS, inputs[3]));
+////		     JSONParser.getJSONFromUrl(params);
+//		     Gson gson = new Gson();
+//		     Log.v("Testing", gson.toJson(params));
+//		     return gson.toJson(params);
+//		 }
+//		
 		protected void onPostExecute(String json)
 		{
-            SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
+//            SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
             // FILLER
-            db.addUser("1", userPhoneNumber, userPassword, "2/6/2014 18:08");
+//            db.addUser("1", userPhoneNumber, userPassword, "2/6/2014 18:08");
 //			db.addUser(jsonUser.getString(DatabaseHandler.KEY_NAME), 
 //            		jsonUser.getString(DatabaseHandler.KEY_EMAIL), 
 //            		jsonUser.getString(DatabaseHandler.KEY_NETWORK),
@@ -106,4 +106,4 @@ public class RegistrationFragment extends Fragment
 //	                jsonUser.getString(DatabaseHandler.KEY_CREATED_AT)); 
 		}
 	}
-}
+//}

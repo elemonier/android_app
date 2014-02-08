@@ -1,20 +1,11 @@
 package io.linger;
 
-import java.util.HashMap;
-
 public class Message {
-	public static final String THREAD_ID = "thread_id";
-	public static final String PHONE_NUMBER_ADDRESS = "address";
-	public static final String CONTENT = "body";
-	public static final String NAME = "person";
-	public static final String DATE = "date";
-	public static final String DATE_SENT = "date_sent";
-	public static final String READ = "read"; // 0 or 1; 1 is read, 0 is unread
 	
-	private String threadId;
-	private String phoneNumberAddress;
-	private String content;
-	private String dateSent;
+	private String threadId = "none";
+	private String phoneNumberAddress = "none";
+	private String content = "none";
+	private String dateSent = "none";
 	
 	public Message()
 	{}
@@ -28,25 +19,42 @@ public class Message {
 	 */
 	public Message(String threadId, String phoneNumber, String content, String dateSent)
 	{
+		this.setThreadId(threadId);
+		this.setContent(content);
+		this.setPhoneNumberAddress(phoneNumber);
+		this.setDateSent(dateSent);
+	}
+
+	public String getThreadId() {
+		return threadId;
+	}
+
+	public void setThreadId(String threadId) {
 		this.threadId = threadId;
+	}
+
+	public String getPhoneNumberAddress() {
+		return phoneNumberAddress;
+	}
+
+	public void setPhoneNumberAddress(String phoneNumberAddress) {
+		this.phoneNumberAddress = phoneNumberAddress;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
 		this.content = content;
-		this.phoneNumberAddress = phoneNumber;
+	}
+
+	public String getDateSent() {
+		return dateSent;
+	}
+
+	public void setDateSent(String dateSent) {
 		this.dateSent = dateSent;
 	}
-	
-	public String toString()
-	{
-		StringBuilder sb = new StringBuilder();
-		sb.append("phone: " + phoneNumberAddress + ", ");
-		sb.append("when_receive: " + dateSent + ", ");
-		sb.append("content: " + content + ", ");
-		sb.append("thread_id: " + threadId + ", ");
-		return sb.toString();
-	}
-	
-	
-	public String getPhone() { return phoneNumberAddress; }
-	public String getDateSent() { return dateSent; }
-	public String getContent() { return content; }
-	public String getThreadId() { return threadId; }
+
 }
