@@ -1,19 +1,19 @@
 package io.linger;
 
-import java.util.Locale;
+//// monitoring battery life
+//import java.util.Locale;
+//import android.app.FragmentTransaction;
+//import android.content.BroadcastReceiver;
+//import android.content.Context;
+//import android.content.Intent;
+//import android.content.IntentFilter;
 
-import android.app.FragmentTransaction;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 
 public class LandingActivity extends FragmentActivity 
@@ -62,9 +62,7 @@ public class LandingActivity extends FragmentActivity
 						getFragment(position);
 					}
 				});
-
 		mViewPager.setCurrentItem(1);
-
 //	    registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
 	}
 
@@ -76,6 +74,12 @@ public class LandingActivity extends FragmentActivity
 		return true;
 	}
 
+	/**
+	 * Returns the fragment corresponding with whichever position on the
+	 * scroll you're at.
+	 * @param position (0 [login], 1 [landing], or 2 [registration])
+	 * @return the correct fragment
+	 */
 	public Fragment getFragment(int position)
 	{
 		switch (position)

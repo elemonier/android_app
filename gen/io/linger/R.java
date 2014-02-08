@@ -34,15 +34,19 @@ public final class R {
         public static final int bird=0x7f020000;
         public static final int cursor=0x7f020001;
         public static final int down=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int left_facing_arrows=0x7f020004;
-        public static final int right_facing_arrows=0x7f020005;
-        public static final int standard_button=0x7f020006;
-        public static final int tinted_background=0x7f020007;
-        public static final int up=0x7f020008;
-        public static final int white_background=0x7f020009;
+        public static final int ic_action_about=0x7f020003;
+        public static final int ic_action_help=0x7f020004;
+        public static final int ic_action_settings=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int left_facing_arrows=0x7f020007;
+        public static final int right_facing_arrows=0x7f020008;
+        public static final int standard_button=0x7f020009;
+        public static final int tinted_background=0x7f02000a;
+        public static final int up=0x7f02000b;
+        public static final int white_background=0x7f02000c;
     }
     public static final class id {
+        public static final int action_about=0x7f09000e;
         public static final int action_settings=0x7f09000d;
         public static final int button_layout=0x7f090004;
         public static final int button_submit_login=0x7f09000a;
@@ -69,34 +73,34 @@ public final class R {
         public static final int home=0x7f080000;
         public static final int landing=0x7f080001;
         public static final int login=0x7f080002;
-        public static final int main=0x7f080003;
-        public static final int registration=0x7f080004;
-        public static final int second=0x7f080005;
+        public static final int registration=0x7f080003;
+        public static final int second=0x7f080004;
     }
     public static final class string {
+        public static final int action_about=0x7f060002;
         public static final int action_settings=0x7f060001;
         /**  General 
          */
         public static final int app_name=0x7f060000;
-        public static final int email_field=0x7f06000b;
-        public static final int hello_world=0x7f060002;
+        public static final int email_field=0x7f06000c;
+        public static final int hello_world=0x7f060003;
         /**  Login page 
          */
-        public static final int login_prompt=0x7f060009;
-        public static final int name_field=0x7f06000a;
-        public static final int password_field=0x7f06000d;
-        public static final int phone_number_field=0x7f06000c;
+        public static final int login_prompt=0x7f06000a;
+        public static final int name_field=0x7f06000b;
+        public static final int password_field=0x7f06000e;
+        public static final int phone_number_field=0x7f06000d;
         /**  Registration page 
          */
-        public static final int registration_prompt=0x7f06000f;
-        public static final int submit_fields=0x7f06000e;
-        public static final int sync=0x7f060010;
-        public static final int title_activity_landing=0x7f060004;
-        public static final int title_activity_main=0x7f060003;
-        public static final int title_activity_second=0x7f060008;
-        public static final int title_section1=0x7f060005;
-        public static final int title_section2=0x7f060006;
-        public static final int title_section3=0x7f060007;
+        public static final int registration_prompt=0x7f060010;
+        public static final int submit_fields=0x7f06000f;
+        public static final int sync=0x7f060011;
+        public static final int title_activity_landing=0x7f060005;
+        public static final int title_activity_main=0x7f060004;
+        public static final int title_activity_second=0x7f060009;
+        public static final int title_section1=0x7f060006;
+        public static final int title_section2=0x7f060007;
+        public static final int title_section3=0x7f060008;
     }
     public static final class style {
         /** 
