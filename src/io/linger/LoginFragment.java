@@ -1,16 +1,7 @@
 package io.linger;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
-
-import com.google.gson.Gson;
-
+import android.app.ActionBar;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -28,12 +19,6 @@ import android.widget.TextView;
  */
 public class LoginFragment extends Fragment
 {	
-	/**
-	 * The fragment argument representing the section number for this
-	 * fragment.
-	 */
-	public static final String ARG_SECTION_NUMBER = "section_number";
-
 	public static final String TAG_LOGIN = "user_login";
 	
 	private String userPhoneNumber;
@@ -50,6 +35,7 @@ public class LoginFragment extends Fragment
 		Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),
 				"fonts/grandhotel_regular.ttf");
 		titleText.setTypeface(typeFace);
+		
 		// set listener for button
 		Button submitButton = (Button) rootView.findViewById(R.id.button_submit_login);
 		submitButton.setOnClickListener(new OnClickListener() 

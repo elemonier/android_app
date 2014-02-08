@@ -13,6 +13,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
+		android:paddingLeft="20dp"
+		android:paddingRight="20dp"
 		android:gravity="center"
 		android:background="@drawable/tinted_background"
 		android:layout_centerVertical="true"
@@ -42,7 +44,7 @@
 		<!-- Input phone number field -->
 		<EditText
 		    android:id="@+id/phoneTextLogin"
-			android:layout_marginTop="5dp"
+			android:layout_marginTop="10dp"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="phone" 
@@ -55,7 +57,7 @@
 		<!-- Input email field -->
 		<EditText
 		    android:id="@+id/emailTextLogin"
-			android:layout_marginTop="5dp"
+			android:layout_marginTop="10dp"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="textEmailAddress" 
@@ -68,6 +70,7 @@
 		    <!--  Password field -->
 		<EditText
 			android:id="@+id/passEditTextLogin"
+			android:layout_marginTop="10dp"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="textPassword" 
@@ -79,6 +82,7 @@
 		
 		<Button
 		    android:id="@+id/button_submit_login"
+		    android:layout_marginTop="10dp"
      		android:layout_height="wrap_content"
      		android:layout_width="wrap_content"
      		android:text="@string/submit_fields"

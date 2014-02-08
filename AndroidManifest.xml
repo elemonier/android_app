@@ -18,7 +18,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="io.linger.LandingActivity"
-            android:label="@string/title_activity_landing" >
+            android:label="@string/title_activity_landing" 
+            android:windowSoftInputMode="adjustPan"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
