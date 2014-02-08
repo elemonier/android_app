@@ -8,6 +8,7 @@ package io.linger;
 //import android.content.Intent;
 //import android.content.IntentFilter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class LandingActivity extends FragmentActivity 
 {
@@ -74,6 +76,21 @@ public class LandingActivity extends FragmentActivity
 		return true;
 	}
 
+    /**
+     * On selecting action bar icons
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
+        switch (item.getItemId()) {
+        case R.id.action_about:
+            startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+	
 	/**
 	 * Returns the fragment corresponding with whichever position on the
 	 * scroll you're at.

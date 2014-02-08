@@ -20,9 +20,20 @@
     <string name="phone_number_field">phone number</string>
     <string name="password_field">password</string>
     <string name="submit_fields">submit</string>
-    
+
     <!-- Registration page -->
     <string name="registration_prompt">Registration</string>
-    
     <string name="sync">Sync</string>
+    <string name="title_activity_about">AboutActivity</string>
+    
+    <!-- About page -->
+	<string name="about_a">Linger backs up your contact list 
+	    and messages so you can view them on any device.</string>
+	<string name="about_b">Contacts and messages are backed up
+	    when your phone battery drops to a critically low level.</string>
+	<string name="about_c">Access <a href="http://linger.io">linger.io</a> 
+	    from any phone or computer.</string>
+	<string name="about_d">Access your contacts and messages from 
+	    anyone\'s phone.</string>
+	<string name="founders"></string>
 </resources>
