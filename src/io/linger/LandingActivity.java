@@ -17,7 +17,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 public class LandingActivity extends FragmentActivity 
 {
@@ -53,8 +52,7 @@ public class LandingActivity extends FragmentActivity
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
 		// When swiping between different sections, select the corresponding
-		// tab. We can also use ActionBar.Tab#select() to do this if we have
-		// a reference to the Tab.
+		// tab.
 		mViewPager
 				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener()
 				{					
@@ -65,6 +63,8 @@ public class LandingActivity extends FragmentActivity
 					}
 				});
 		mViewPager.setCurrentItem(1);
+		
+		// set up checking for battery changes for when to upload
 //	    registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
 	}
 
@@ -80,7 +80,8 @@ public class LandingActivity extends FragmentActivity
      * On selecting action bar icons
      * */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Take appropriate action for each action item click
         switch (item.getItemId()) {
         case R.id.action_about:
@@ -162,6 +163,7 @@ public class LandingActivity extends FragmentActivity
 		@Override
 		public Fragment getItem(int position)
 		{
+			// TODO only call if the user isn't logged in
 			switch (position)
 			{
 			case 0:
