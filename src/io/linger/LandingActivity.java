@@ -79,7 +79,7 @@ public class LandingActivity extends FragmentActivity implements
 					.setTabListener(this));
 		}
 		
-	    registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
+//	    registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
 
 	}
 
@@ -114,23 +114,21 @@ public class LandingActivity extends FragmentActivity implements
 		
 	}
 
-	private final BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
-	    @Override
-	    public void onReceive(Context context, Intent intent) {
-			Log.w("battery low", "post contacts");
-			Intent myIntent = new Intent(LandingActivity.this, ShowContactsActivity.class);
-			LandingActivity.this.startActivity(myIntent);
-	    }
-	};
-
-//	public void onDestroy() {
-//	     unregisterReceiver(this.mBatInfoReceiver);
+//	private final BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+//	    @Override
+//	    public void onReceive(Context context, Intent intent) {
+//			Log.w("battery low", "post contacts");
+//			Intent myIntent = new Intent(LandingActivity.this, ShowContactsActivity.class);
+//			LandingActivity.this.startActivity(myIntent);
+//	    }
+//	};
+//
+////	public void onDestroy() {
+////	     unregisterReceiver(this.mBatInfoReceiver);
+////	}
+//	public void onPause(){
+//		super.onPause();
 //	}
-	
-	
-	public void onPause(){
-		super.onPause();
-	}
 	
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

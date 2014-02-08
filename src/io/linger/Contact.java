@@ -33,14 +33,12 @@ public class Contact
 	public static final String OUTMESSAGE_WHEN_RECEIVED = "inmessage_when_received";
 
 	
-	private String contactId;
 	private String name;
 	private String phoneNumber;
 	private String emailAddress;
 	
-	public Contact(String contactId, String name, String phoneNumber, String emailAddress)
+	public Contact( String name, String phoneNumber, String emailAddress)
 	{
-		this.contactId = contactId;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
@@ -62,7 +60,6 @@ public class Contact
 	public HashMap<String, String> getMap()
 	{
 		HashMap<String, String> userInfo = new HashMap<String, String>();
-        userInfo.put(SQLiteDatabaseHandler.USER_ID, contactId);
         userInfo.put(SQLiteDatabaseHandler.USER_NAME, name);
         userInfo.put(SQLiteDatabaseHandler.USER_PHONE, phoneNumber);
         userInfo.put(SQLiteDatabaseHandler.USER_EMAIL, emailAddress);
@@ -78,7 +75,6 @@ public class Contact
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("ContactId: " + contactId + ", ");
 		sb.append("Name: " + name + ", ");
 		sb.append("Phone number: " + phoneNumber + ", ");
 		sb.append("Email address: " + emailAddress);

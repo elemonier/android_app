@@ -14,7 +14,6 @@ public class Message {
 	private String threadId;
 	private String phoneNumberAddress;
 	private String content;
-	private String senderName;
 	private String dateSent;
 	
 	public Message()
@@ -27,11 +26,9 @@ public class Message {
 	 * @param phoneNumber
 	 * @param dateSent
 	 */
-	public Message(String threadId, String phoneNumber, String content, 
-			String name, String dateSent)
+	public Message(String threadId, String phoneNumber, String content, String dateSent)
 	{
 		this.threadId = threadId;
-		this.senderName = name;
 		this.content = content;
 		this.phoneNumberAddress = phoneNumber;
 		this.dateSent = dateSent;
@@ -45,7 +42,6 @@ public class Message {
 	{
 		HashMap<String, String> messageInfo = new HashMap<String, String>();
         messageInfo.put(THREAD_ID, threadId);
-        messageInfo.put(NAME, senderName);
         messageInfo.put(CONTENT, content);
         messageInfo.put(PHONE_NUMBER_ADDRESS, phoneNumberAddress);
         return messageInfo;
@@ -54,7 +50,6 @@ public class Message {
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("Sender name: " + senderName + ", ");
 		sb.append("Message content: " + content + ", ");
 		sb.append("Phone number or address: " + phoneNumberAddress + ", ");
 		sb.append("Date sent: " + dateSent);

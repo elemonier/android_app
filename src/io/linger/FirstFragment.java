@@ -44,7 +44,7 @@ public class FirstFragment extends Fragment {
 			public void onClick(View v) {
 			
 				Log.w("button click", "test");
-				Intent myIntent = new Intent(getActivity(), ShowContactsActivity.class);
+				Intent myIntent = new Intent(getActivity(), SyncDataActivity.class);
 				FirstFragment.this.startActivity(myIntent);
 			}
 		});
