@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 
 import android.content.Context;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -21,7 +22,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,17 +53,20 @@ public class SyncFragment extends Fragment
 		registrationSwipeLabel.setTypeface(typeFace);
 
 		// create sync button
-		Button syncButton = (Button) rootView.findViewById(R.id.button_test);
 
-		//		// disable button if user isn't logged in
-		//		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
-		//		if (db.getLoginRowCount() < 1) // if user is logged in
-		//			syncButton.setVisibility(View.INVISIBLE);
-		//		else // user is logged in
-		//		{
-		//			loginSwipeLabel.setVisibility(View.INVISIBLE);
-		//			registrationSwipeLabel.setVisibility(View.INVISIBLE);
-		//		}
+		Button syncButton = (Button) rootView.findViewById(R.id.button_sync);
+		
+//		// disable button if user isn't logged in
+//		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
+//		if (db.getLoginRowCount() < 1) // if user is logged in
+//			syncButton.setVisibility(View.INVISIBLE);
+//		else // user is logged in
+//		{
+//			loginSwipeLabel.setVisibility(View.INVISIBLE);
+//			registrationSwipeLabel.setVisibility(View.INVISIBLE);
+//		}
+			
+		// set sync button listener
 		syncButton.setOnClickListener(new OnClickListener() 
 		{	
 			@Override
@@ -73,10 +76,19 @@ public class SyncFragment extends Fragment
 				for(int i = 0; i < 20; i++){
 					Toast.makeText(getView().getContext(), "Syncing", Toast.LENGTH_SHORT).show();
 				}
+				
+				// update text view with last sync time
+				TextView lastSyncDate = (TextView) getActivity().findViewById(R.id.last_sync_date_label);
+				lastSyncDate.setText("Last sync: " + getCurrentDate());
 			}
 		});
 
 		return rootView;
+	}
+	
+	public String getCurrentDate()
+	{
+		return DateTime.getCurrentDateTime();
 	}
 
 	/** 

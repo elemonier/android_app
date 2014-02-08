@@ -35,21 +35,14 @@
 	    android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		style="@style/Title"
+		android:layout_marginBottom="30dp"
 		android:layout_centerHorizontal="true"
 		android:layout_centerVertical="true"
 	    android:text="@string/app_name"
 	/>
 
-<!-- 	  <ProgressBar
-        android:id="@+id/progressBar1"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" /> -->
-    		    
 	<Button
-		android:id="@+id/button_test"
+		android:id="@+id/button_sync"
 		android:layout_marginTop="10dp"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -58,5 +51,14 @@
 		android:layout_alignParentBottom="true"
 		android:text="@string/sync"
 	/>
-
+	
+	<TextView
+	    android:id="@+id/last_sync_date_label"
+	    android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		style="@style/BodyText"
+		android:layout_above="@id/button_sync"
+		android:layout_centerHorizontal="true"
+	/>
+	
 </RelativeLayout>
