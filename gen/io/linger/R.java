@@ -12,10 +12,13 @@ public final class R {
     }
     public static final class color {
         public static final int background=0x7f040000;
-        public static final int myBlack=0x7f040004;
-        public static final int myBlue=0x7f040001;
-        public static final int myLightGray=0x7f040003;
-        public static final int myYellow=0x7f040002;
+        public static final int myBlue=0x7f040004;
+        public static final int myDarkerBlue=0x7f040005;
+        public static final int myGreen=0x7f040001;
+        public static final int myRed=0x7f040003;
+        public static final int offWhite=0x7f040007;
+        public static final int tint=0x7f040002;
+        public static final int white=0x7f040006;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -29,22 +32,25 @@ public final class R {
     }
     public static final class drawable {
         public static final int bird=0x7f020000;
-        public static final int down=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int up=0x7f020003;
+        public static final int cursor=0x7f020001;
+        public static final int down=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int standard_button=0x7f020004;
+        public static final int tinted_background=0x7f020005;
+        public static final int up=0x7f020006;
     }
     public static final class id {
         public static final int action_settings=0x7f09000a;
-        public static final int button_layout=0x7f090004;
+        public static final int button_layout=0x7f090003;
         public static final int button_submit_login=0x7f090007;
-        public static final int button_test=0x7f090003;
+        public static final int button_test=0x7f090002;
         public static final int emailTextLogin=0x7f090009;
         public static final int list=0x7f090000;
         public static final int nameTextLogin=0x7f090008;
         public static final int pager=0x7f090001;
         public static final int passEditTextLogin=0x7f090006;
         public static final int phoneTextLogin=0x7f090005;
-        public static final int section_label=0x7f090002;
+        public static final int section_label=0x7f090004;
     }
     public static final class layout {
         public static final int activity_contact_list=0x7f030000;
@@ -78,6 +84,7 @@ public final class R {
          */
         public static final int registration_prompt=0x7f06000f;
         public static final int submit_fields=0x7f06000e;
+        public static final int sync=0x7f060010;
         public static final int title_activity_landing=0x7f060004;
         public static final int title_activity_main=0x7f060003;
         public static final int title_activity_second=0x7f060008;
@@ -111,5 +118,8 @@ public final class R {
         /**  Application theme. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int BlueButton=0x7f070002;
+        public static final int Headings=0x7f070003;
+        public static final int Hint=0x7f070004;
     }
 }

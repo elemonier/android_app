@@ -16,10 +16,12 @@
     <string name="login_prompt">Login</string>
     <string name="name_field">your name</string>
     <string name="email_field">email address</string>
-    <string name="phone_number_field">phone number ### ### ####</string>
+    <string name="phone_number_field">phone number</string>
     <string name="password_field">password</string>
     <string name="submit_fields">submit</string>
     
     <!-- Registration page -->
     <string name="registration_prompt">Registration</string>
+    
+    <string name="sync">Sync</string>
 </resources>

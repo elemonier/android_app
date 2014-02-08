@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 /**
  * A dummy fragment representing a section of the app, but that simply
  * displays dummy text.
  */
-public class FirstFragment extends Fragment {
+public class FirstFragment extends Fragment
+{
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -29,16 +29,17 @@ public class FirstFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState) 
+	{
 		View rootView = inflater.inflate(R.layout.fragment_first,
 				container, false);
-
-		Button mButton = (Button) rootView.findViewById(R.id.button_test);
-		mButton.setOnClickListener(new OnClickListener() {
+		
+		Button syncButton = (Button) rootView.findViewById(R.id.button_test);
+		syncButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-			
+			public void onClick(View v)
+			{
 				Log.w("button click", "test");
 				Intent myIntent = new Intent(getActivity(), SyncDataActivity.class);
 				FirstFragment.this.startActivity(myIntent);
