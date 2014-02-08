@@ -150,21 +150,12 @@ public class LandingActivity extends FragmentActivity implements
 			{
 			case 0:
 				Fragment firstFragment = new FirstFragment();
-				Bundle firstArgs = new Bundle();
-				firstArgs.putInt(FirstFragment.ARG_SECTION_NUMBER, position + 1);
-				firstFragment.setArguments(firstArgs);
 				return firstFragment;
 			case 1:
 				Fragment secondFragment = new RegistrationFragment();
-				Bundle secondArgs = new Bundle();
-				secondArgs.putInt(RegistrationFragment.ARG_SECTION_NUMBER, position + 1);
-				secondFragment.setArguments(secondArgs);
 				return secondFragment;
 			case 2:
 				Fragment loginFragment = new LoginFragment();
-				Bundle loginArgs = new Bundle();
-				loginArgs.putInt(LoginFragment.ARG_SECTION_NUMBER, position + 1);
-				loginFragment.setArguments(loginArgs);
 				return loginFragment;
 			default:
 				Fragment defaultFragment = new LoginFragment();
