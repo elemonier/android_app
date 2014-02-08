@@ -15,8 +15,7 @@ import android.util.Log;
 
 public class SyncDataActivity extends Activity
 {
-	//TODO NUMBER_OF_MESSAGES HAS to be by date, 20 in != 20 out in conversation
-	private static final int NUMBER_OF_MESSAGES = 25; 
+
 	private ArrayList<Contact> contactList;
 	private ArrayList<Message>	inbox;
 	private ArrayList<Message>	outbox;	
@@ -95,12 +94,13 @@ public class SyncDataActivity extends Activity
 	private void retrieveMessages(String whichBox, ArrayList<Message> messageList)
 	{	
 		
+		Uri uriSMSURISent = Uri.parse("content://sms/" + whichBox);
 		long last_day = new Date(System.currentTimeMillis() - 1L * 24 * 3600 * 1000).getTime();
 		
-		Cursor cursor = getContentResolver().query(Uri.parse("content://sms/"+ whichBox), null,
+		Cursor cursor = getContentResolver().query(uriSMSURISent, null,
 				"date" + ">?",new String[]{""+last_day},"date DESC");
 		cursor.moveToFirst();
-		for (int out_idx = 0; out_idx < NUMBER_OF_MESSAGES; out_idx++) // inbox stream
+		while (cursor.moveToNext())
 		{
 			Message message;
 			String threadId = "none";
@@ -129,7 +129,6 @@ public class SyncDataActivity extends Activity
 //			Log.v("con_id", " which "+ whichBox +" phone: "+ phoneNumberAddress);// +" content: "+content + " date: " + date);
 			message = new Message(threadId, phoneNumberAddress, content, date);
 			messageList.add(message);
-			cursor.moveToNext();
 		}
 	}
 }
