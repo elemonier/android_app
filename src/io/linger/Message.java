@@ -34,25 +34,19 @@ public class Message {
 		this.dateSent = dateSent;
 	}
 	
-	/**
-	 * Returns a HashMap of all the values
-	 * @return
-	 */
-	public HashMap<String, String> getMap()
-	{
-		HashMap<String, String> messageInfo = new HashMap<String, String>();
-        messageInfo.put(THREAD_ID, threadId);
-        messageInfo.put(CONTENT, content);
-        messageInfo.put(PHONE_NUMBER_ADDRESS, phoneNumberAddress);
-        return messageInfo;
-	}
-	
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("Message content: " + content + ", ");
-		sb.append("Phone number or address: " + phoneNumberAddress + ", ");
-		sb.append("Date sent: " + dateSent);
+		sb.append("phone: " + phoneNumberAddress + ", ");
+		sb.append("when_receive: " + dateSent + ", ");
+		sb.append("content: " + content + ", ");
+		sb.append("thread_id: " + threadId + ", ");
 		return sb.toString();
 	}
+	
+	
+	public String getPhone() { return phoneNumberAddress; }
+	public String getDateSent() { return dateSent; }
+	public String getContent() { return content; }
+	public String getThreadId() { return threadId; }
 }
