@@ -32,10 +32,6 @@ public class FirstFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_first,
 				container, false);
-		TextView dummyTextView = (TextView) rootView
-				.findViewById(R.id.section_label);
-		dummyTextView.setText(Integer.toString(getArguments().getInt(
-				ARG_SECTION_NUMBER)));
 
 		Button mButton = (Button) rootView.findViewById(R.id.button_test);
 		mButton.setOnClickListener(new OnClickListener() {
