@@ -1,5 +1,6 @@
 package io.linger;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
@@ -9,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.Telephony;
 import android.util.Log;
 
 public class SyncDataActivity extends Activity
@@ -92,7 +94,11 @@ public class SyncDataActivity extends Activity
 
 	private void retrieveMessages(String whichBox, ArrayList<Message> messageList)
 	{	
-		Cursor cursor = getContentResolver().query(Uri.parse("content://sms/"+ whichBox), null, null, null, null);
+		
+		long last_day = new Date(System.currentTimeMillis() - 1L * 24 * 3600 * 1000).getTime();
+		
+		Cursor cursor = getContentResolver().query(Uri.parse("content://sms/"+ whichBox), null,
+				"date" + ">?",new String[]{""+last_day},"date DESC");
 		cursor.moveToFirst();
 		for (int out_idx = 0; out_idx < NUMBER_OF_MESSAGES; out_idx++) // inbox stream
 		{
