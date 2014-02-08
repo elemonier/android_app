@@ -31,7 +31,7 @@ import android.widget.Toast;
  */
 public class SyncFragment extends Fragment
 {
-	public static final String URL = "http://160.39.14.214:5000";
+	public static final String URL = "http://160.39.167.249:5000";
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.

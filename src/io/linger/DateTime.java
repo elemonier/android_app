@@ -23,7 +23,7 @@ public class DateTime
 		// create date string
 		String stringDate;
 		int todaysYear = calendar.get(Calendar.YEAR);
-		int todaysMonth = calendar.get(Calendar.MONTH) + 1;
+		int todaysMonth = calendar.get(Calendar.MONTH);
 		int todaysDay = calendar.get(Calendar.DAY_OF_MONTH);
 		stringDate = parseMonth(todaysMonth) + " " + todaysDay + ", " + todaysYear;
 		
