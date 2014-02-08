@@ -17,10 +17,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class LandingActivity extends FragmentActivity 
 {
-
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -105,7 +105,7 @@ public class LandingActivity extends FragmentActivity
 			Fragment loginFragment = new LoginFragment();
 			return loginFragment;
 		case 1:
-			Fragment landingFragment = new FirstFragment();
+			Fragment landingFragment = new SyncFragment();
 			return landingFragment;
 		case 2:
 			Fragment registrationFragment = new RegistrationFragment();
@@ -115,6 +115,16 @@ public class LandingActivity extends FragmentActivity
 			return defaultFragment;
 		}
 	}
+	
+//	public void toLogin(View view)
+//	{
+//		getFragment(0);
+//	}
+//	
+//	public void toRegistration(View view)
+//	{
+//		getFragment(2);
+//	}
 
 //	private final BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver()
 //	{
@@ -158,7 +168,7 @@ public class LandingActivity extends FragmentActivity
 				Fragment loginFragment = new LoginFragment();
 				return loginFragment;
 			case 1:
-				Fragment landingFragment = new FirstFragment();
+				Fragment landingFragment = new SyncFragment();
 				return landingFragment;
 			case 2:
 				Fragment registrationFragment = new RegistrationFragment();
