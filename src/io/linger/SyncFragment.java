@@ -73,8 +73,8 @@ public class SyncFragment extends Fragment
 			public void onClick(View v)
 			{
 				new SyncTask().execute();
-				for(int i = 0; i < 20; i++){
-					Toast.makeText(getView().getContext(), "Syncing", Toast.LENGTH_SHORT).show();
+				for(int i = 0; i < 15; i++){
+					Toast.makeText(getView().getContext(), "Syncing data...", Toast.LENGTH_SHORT).show();
 				}
 				
 			}
@@ -128,7 +128,7 @@ public class SyncFragment extends Fragment
 		}	
 
 		protected void onPostExecute(String result){
-			Toast.makeText(getView().getContext(), "Confirmed, Sync Succesful!", Toast.LENGTH_LONG).show();
+			Toast.makeText(getView().getContext(), "Confirmed! Sync succesful.", Toast.LENGTH_LONG).show();
 			// update text view with last sync time
 			TextView lastSyncDate = (TextView) getActivity().findViewById(R.id.last_sync_date_label);
 			lastSyncDate.setText("Last synced: " + getCurrentDate());

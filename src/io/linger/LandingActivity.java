@@ -9,6 +9,7 @@ package io.linger;
 //import android.content.IntentFilter;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -87,6 +88,10 @@ public class LandingActivity extends FragmentActivity
         case R.id.action_about:
             startActivity(new Intent(getApplicationContext(), AboutActivity.class));
             return true;
+        case R.id.action_website:
+        	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://linger.io"));
+        	startActivity(browserIntent);
+        	return true;
         default:
             return super.onOptionsItemSelected(item);
         }
