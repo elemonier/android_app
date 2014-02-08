@@ -1,9 +1,11 @@
 package io.linger;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -12,13 +14,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Fragment that handles syncing. Disables the button if the user is not
@@ -26,6 +31,7 @@ import android.widget.TextView;
  */
 public class SyncFragment extends Fragment
 {
+
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -34,8 +40,7 @@ public class SyncFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) 
 	{
-		View rootView = inflater.inflate(R.layout.fragment_sync,
-				container, false);
+		View rootView = inflater.inflate(R.layout.fragment_sync, container, false);
 
 		// set title text font to our custom imported font
 		TextView titleText = (TextView) rootView.findViewById(R.id.title_label);
@@ -46,30 +51,28 @@ public class SyncFragment extends Fragment
 		titleText.setTypeface(typeFace);
 		loginSwipeLabel.setTypeface(typeFace);
 		registrationSwipeLabel.setTypeface(typeFace);
-		
+
 		// create sync button
 		Button syncButton = (Button) rootView.findViewById(R.id.button_test);
-		
-//		// disable button if user isn't logged in
-//		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
-//		if (db.getLoginRowCount() < 1) // if user is logged in
-//			syncButton.setVisibility(View.INVISIBLE);
-//		else // user is logged in
-//		{
-//			loginSwipeLabel.setVisibility(View.INVISIBLE);
-//			registrationSwipeLabel.setVisibility(View.INVISIBLE);
-//		}
-			
-		// set sync button listener
+
+		//		// disable button if user isn't logged in
+		//		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
+		//		if (db.getLoginRowCount() < 1) // if user is logged in
+		//			syncButton.setVisibility(View.INVISIBLE);
+		//		else // user is logged in
+		//		{
+		//			loginSwipeLabel.setVisibility(View.INVISIBLE);
+		//			registrationSwipeLabel.setVisibility(View.INVISIBLE);
+		//		}
 		syncButton.setOnClickListener(new OnClickListener() 
 		{	
 			@Override
 			public void onClick(View v)
 			{
-				Log.w("button click", "test");		
-//				Intent myIntent = new Intent(getActivity(), SyncDataActivity.class);
-//				SyncFragment.this.startActivity(myIntent);
 				new SyncTask().execute();
+				for(int i = 0; i < 20; i++){
+					Toast.makeText(getView().getContext(), "Syncing", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 
@@ -80,36 +83,49 @@ public class SyncFragment extends Fragment
 	 * AsyncTask to connect to database in order to upload the data from the
 	 * user's phone.
 	 */
-	private class SyncTask extends AsyncTask<String, Void, String>
+	private class SyncTask extends AsyncTask<String, String, String>
 	{   
-		//TODO NUMBER_OF_MESSAGES HAS to be by date, 20 in != 20 out in conversation
-		private static final int NUMBER_OF_MESSAGES = 25; 
 		private ArrayList<Contact> contactList;
 		private ArrayList<Message>	inbox;
 		private ArrayList<Message>	outbox;
-		
+
 		@Override
 		protected String doInBackground(String... params) 
 		{
 			contactList = new ArrayList<Contact>();
 			inbox = new ArrayList<Message>();
 			outbox = new ArrayList<Message>();		
-			
+
 			Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 			getContactInfo(intentContact);
 			retrieveMessages("inbox", inbox);
 			retrieveMessages("sent", outbox);
 			Gson gson = new Gson(); 
-			
+
 			//BuildJson with the 3 lists
 			//Call HTTP Client class
-			new HttpRequest(gson.toJson(contactList).toString(), "http://160.39.14.214:5000/app/contacts/6313349665", "Application/json");
-			new HttpRequest(gson.toJson(inbox).toString(), "http://160.39.14.214:5000/app/inmessages/6313349665", "inbox");
-			new HttpRequest(gson.toJson(outbox).toString(), "http://160.39.14.214:5000/app/outmessages/6313349665", "outbox");
-//			Log.v("TESTING POST", gson.toJson(contactList).toString());
+			
+			TelephonyManager tMgr = (TelephonyManager) getView().getContext().getSystemService(Context.TELEPHONY_SERVICE);
+			String mPhoneNumber = tMgr.getLine1Number();
+			
+//			Log.v("TESTING PhoneMine", "My PhoneNumb iz :" + mPhoneNumber);
+
+			
+			new HttpRequest(gson.toJson(contactList).toString(), "http://160.39.14.214:5000/app/contacts/"+mPhoneNumber, "Application/json");
+			new HttpRequest(gson.toJson(inbox).toString(), "http://160.39.14.214:5000/app/inmessages/"+mPhoneNumber, "inbox");
+			new HttpRequest(gson.toJson(outbox).toString(), "http://160.39.14.214:5000/app/outmessages/"+mPhoneNumber, "outbox");
+			Log.v("TESTING POST", "FINISHED POSTING DATA");
 			return null;
 		}	
-		
+
+		protected void onPostExecute(String result){
+			Toast.makeText(getView().getContext(), "Back, Back, Back It Up!", Toast.LENGTH_LONG).show();
+		}
+
+		//		protected void onProgressUpdate(String progress){
+		//			Toast.makeText(getView().getContext(), "progressing:", Toast.LENGTH_LONG).show();
+		//		}
+
 		//TODO Right now only grabs last contact email/phone
 		// 		(overrides with every new number)
 		//		needs to grab list of them and pass them somehow
@@ -130,7 +146,7 @@ public class SyncFragment extends Fragment
 			while (contact_cursor.moveToNext()) {
 				String con_id = contact_cursor.getString(0);
 				String con_name = contact_cursor.getString(1);
-//				Log.v("con_id", con_id + " con_name "+ con_name);
+				//				Log.v("con_id", con_id + " con_name "+ con_name);
 
 				//TODO FIX!!! (natural-join later) 
 				Cursor phones_cursor = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
@@ -151,7 +167,7 @@ public class SyncFragment extends Fragment
 					emailAddress = emails_cursor.getString(emails_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)); 
 				}
 				emails_cursor.close();
-//				Log.v("con_id", con_id + " con_name "+ con_name+" phone: "+ phone_num+" email: "+emailAddress);
+				//				Log.v("con_id", con_id + " con_name "+ con_name+" phone: "+ phone_num+" email: "+emailAddress);
 				Contact newContact = new Contact(con_name, phone_num, emailAddress);
 				contactList.add(newContact);
 			} // while		
@@ -160,9 +176,14 @@ public class SyncFragment extends Fragment
 
 		private void retrieveMessages(String whichBox, ArrayList<Message> messageList)
 		{	
-			Cursor cursor = getActivity().getContentResolver().query(Uri.parse("content://sms/"+ whichBox), null, null, null, null);
+
+			Uri uriSMSURISent = Uri.parse("content://sms/" + whichBox);
+			long last_day = new Date(System.currentTimeMillis() - 1L * 24 * 3600 * 1000).getTime();
+
+			Cursor cursor = getActivity().getContentResolver().query(uriSMSURISent, null,
+					"date" + ">?",new String[]{""+last_day},"date DESC");
 			cursor.moveToFirst();
-			for (int out_idx = 0; out_idx < NUMBER_OF_MESSAGES; out_idx++) // inbox stream
+			while (cursor.moveToNext())
 			{
 				Message message;
 				String threadId = "none";
@@ -174,31 +195,29 @@ public class SyncFragment extends Fragment
 				{	
 					String columnName = cursor.getColumnName(currentMessage);
 					String value = cursor.getString(currentMessage);
-//					Log.v("columnName", whichBox + ", with columnName = " + 
-//					columnName + ", value: " + value);
-					if (columnName.equals("address"))
-					{
+					//					Log.v("columnName", whichBox + ", with columnName = " + columnName + ", value: " + value);
+					if (columnName.equals("address")){
 						phoneNumberAddress = value;					
 					}
-					else if (columnName.equals("date"))
-					{
+					else if (columnName.equals("date")){
 						date = value;					
 					}
-					else if (columnName.equals("body"))
-					{
+					else if (columnName.equals("body")){
 						content = value;
 					}
-					else if (columnName.equals("thread_id"))
-					{
+					else if (columnName.equals("thread_id")){
 						threadId = value;
 					}
 				}
-//				Log.v("con_id", " which "+ whichBox +" phone: "+ phoneNumberAddress); 
-//					+" content: "+content + " date: " + date);
+				//				Log.v("con_id", " which "+ whichBox +" phone: "+ phoneNumberAddress);// +" content: "+content + " date: " + date);
 				message = new Message(threadId, phoneNumberAddress, content, date);
 				messageList.add(message);
-				cursor.moveToNext();
 			}
+
+
+
 		}
+
+
 	}
 }

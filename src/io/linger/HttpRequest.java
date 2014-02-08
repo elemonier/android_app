@@ -8,11 +8,12 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
-//import android.widget.ProgressBar;
+import android.view.View;
+import android.widget.ProgressBar;
 
 
 public class HttpRequest extends AsyncTask<String, Integer, Double>{
-
+	
 	/**
 	 * 
 	 * @param Json
@@ -25,18 +26,15 @@ public class HttpRequest extends AsyncTask<String, Integer, Double>{
 
 	@Override
 	protected Double doInBackground(String... params) {
-		//		pb.setVisibility(View.VISIBLE);
 		postData(params[0], params[1], params[2]);
 		return null;
 	}
 
-	protected void onPostExecute(Double result){
-		//		pb.setVisibility(View.GONE);
-	}
+//	protected void onPostExecute(Double result){
+//		pb.setVisibility(View.GONE);
+//	}
 
-	protected void onProgressUpdate(Integer... progress){
-		//		pb.setProgress(progress[0]);
-	}
+
 
 	public void postData(String Json, String url, String postHeader) {
 
