@@ -1,5 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <!-- Website -->
+    <item android:id="@+id/action_website"
+    	android:icon="@drawable/ic_action_web_site"
+        android:title="@string/action_web_site"
+        android:showAsAction="always"
+    />
+    
     <!-- About -->
     <item android:id="@+id/action_about"
     	android:icon="@drawable/ic_action_about"
