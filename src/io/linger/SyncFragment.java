@@ -31,24 +31,30 @@ public class SyncFragment extends Fragment
 
 		// set title text font to our custom imported font
 		TextView titleText = (TextView) rootView.findViewById(R.id.title_label);
-		TextView loginText = (TextView) rootView.findViewById(R.id.login_swipe_label);
-		TextView registrationText = (TextView) rootView.findViewById(R.id.register_swipe_label);
+		TextView loginSwipeLabel = (TextView) rootView.findViewById(R.id.login_swipe_label);
+		TextView registrationSwipeLabel = (TextView) rootView.findViewById(R.id.register_swipe_label);
 		Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),
 				"fonts/grandhotel_regular.ttf");
 		titleText.setTypeface(typeFace);
-		loginText.setTypeface(typeFace);
-		registrationText.setTypeface(typeFace);
+		loginSwipeLabel.setTypeface(typeFace);
+		registrationSwipeLabel.setTypeface(typeFace);
 		
-		// set listener for sync button
+		// create sync button
 		Button syncButton = (Button) rootView.findViewById(R.id.button_test);
 		
-//		// TODO disable button if user isn't logged in
+//		// disable button if user isn't logged in
 //		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
-//		if (db.getLoginRowCount() < 1)
-//			syncButton.setEnabled(false);
-		
-		syncButton.setOnClickListener(new OnClickListener() {
+//		if (db.getLoginRowCount() < 1) // if user is logged in
+//			syncButton.setVisibility(View.INVISIBLE);
+//		else // user is logged in
+//		{
+//			loginSwipeLabel.setVisibility(View.INVISIBLE);
+//			registrationSwipeLabel.setVisibility(View.INVISIBLE);
+//		}
 			
+		// set sync button listener
+		syncButton.setOnClickListener(new OnClickListener() 
+		{	
 			@Override
 			public void onClick(View v)
 			{
