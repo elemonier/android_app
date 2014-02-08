@@ -77,9 +77,6 @@ public class SyncFragment extends Fragment
 					Toast.makeText(getView().getContext(), "Syncing", Toast.LENGTH_SHORT).show();
 				}
 				
-				// update text view with last sync time
-				TextView lastSyncDate = (TextView) getActivity().findViewById(R.id.last_sync_date_label);
-				lastSyncDate.setText("Last sync: " + getCurrentDate());
 			}
 		});
 
@@ -123,15 +120,18 @@ public class SyncFragment extends Fragment
 //			Log.v("TESTING PhoneMine", "My PhoneNumb iz :" + mPhoneNumber);
 
 			
-			new HttpRequest(gson.toJson(contactList).toString(), "http://160.39.14.214:5000/app/contacts/"+mPhoneNumber, "Application/json");
-			new HttpRequest(gson.toJson(inbox).toString(), "http://160.39.14.214:5000/app/inmessages/"+mPhoneNumber, "inbox");
-			new HttpRequest(gson.toJson(outbox).toString(), "http://160.39.14.214:5000/app/outmessages/"+mPhoneNumber, "outbox");
+			new HttpRequest(gson.toJson(contactList).toString(), "http://160.39.14.214:5000/app/contacts/"+ mPhoneNumber, "Application/json");
+			new HttpRequest(gson.toJson(inbox).toString(), "http://160.39.14.214:5000/app/inmessages/"+ mPhoneNumber, "inbox");
+			new HttpRequest(gson.toJson(outbox).toString(), "http://160.39.14.214:5000/app/outmessages/"+ mPhoneNumber, "outbox");
 			Log.v("TESTING POST", "FINISHED POSTING DATA");
 			return null;
 		}	
 
 		protected void onPostExecute(String result){
-			Toast.makeText(getView().getContext(), "Back, Back, Back It Up!", Toast.LENGTH_LONG).show();
+			Toast.makeText(getView().getContext(), "Confirmed, Sync Succesful!", Toast.LENGTH_LONG).show();
+			// update text view with last sync time
+			TextView lastSyncDate = (TextView) getActivity().findViewById(R.id.last_sync_date_label);
+			lastSyncDate.setText("Last synced: " + getCurrentDate());
 		}
 
 		//		protected void onProgressUpdate(String progress){
