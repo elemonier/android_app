@@ -46,8 +46,6 @@ public class HttpRequest extends AsyncTask<String, Integer, Double>{
 			httppost.setEntity(new StringEntity(Json));
 			httppost.setHeader("Accept", "application/json");
 			httppost.setHeader("Content-type", "application/json");
-			//			ResponseHandler responseHandler = new BasicResponseHandler();
-			//			httpclient.execute(httppost, responseHandler);
 			new DefaultHttpClient().execute(httppost);
 
 		} catch (ClientProtocolException e) {
@@ -55,7 +53,6 @@ public class HttpRequest extends AsyncTask<String, Integer, Double>{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
-
 	}
 }
 

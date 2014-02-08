@@ -14,6 +14,15 @@
         android:layout_height="wrap_content"
         android:text="first" />
 
+   <!--    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" /> -->
+    
     <Button
         android:id="@+id/button_test"
         android:layout_width="wrap_content"

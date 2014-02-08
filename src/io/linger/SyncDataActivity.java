@@ -1,18 +1,8 @@
 package io.linger;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-
 import com.google.gson.Gson;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -40,17 +30,14 @@ public class SyncDataActivity extends Activity
 		getContactInfo(intentContact);
 		retrieveMessages("inbox", inbox);
 		retrieveMessages("sent", outbox);
-		JSONArray json_inMsg = new JSONArray(inbox);
-		JSONArray json_outMsg = new JSONArray(outbox);
-		
 		Gson gson = new Gson(); 
 		
 		//BuildJson with the 3 lists
 		//Call HTTP Client class
 		new HttpRequest(gson.toJson(contactList).toString(), "http://160.39.14.214:5000/app/contacts/6313349665", "Application/json");
-		new HttpRequest(json_inMsg.toString(), "http://160.39.14.214:5000/app/inmessages/6313349665", "inbox");
-		new HttpRequest(json_outMsg.toString(), "http://160.39.14.214:5000/app/outmessages/6313349665", "outbox");
-		Log.v("TESTING POST", gson.toJson(contactList).toString());
+		new HttpRequest(gson.toJson(inbox).toString(), "http://160.39.14.214:5000/app/inmessages/6313349665", "inbox");
+		new HttpRequest(gson.toJson(outbox).toString(), "http://160.39.14.214:5000/app/outmessages/6313349665", "outbox");
+//		Log.v("TESTING POST", gson.toJson(contactList).toString());
 		
 	}
 	
@@ -96,6 +83,7 @@ public class SyncDataActivity extends Activity
 				emailAddress = emails_cursor.getString(emails_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)); 
 			}
 			emails_cursor.close();
+//			Log.v("con_id", con_id + " con_name "+ con_name+" phone: "+ phone_num+" email: "+emailAddress);
 			Contact newContact = new Contact(con_name, phone_num, emailAddress);
 			contactList.add(newContact);
 		} // while		
@@ -118,7 +106,7 @@ public class SyncDataActivity extends Activity
 			{	
 				String columnName = cursor.getColumnName(currentMessage);
 				String value = cursor.getString(currentMessage);
-				Log.v("columnName", whichBox + ", with columnName = " + columnName + ", value: " + value);
+//				Log.v("columnName", whichBox + ", with columnName = " + columnName + ", value: " + value);
 				if (columnName.equals("address")){
 					phoneNumberAddress = value;					
 				}
@@ -132,6 +120,7 @@ public class SyncDataActivity extends Activity
 					threadId = value;
 				}
 			}
+//			Log.v("con_id", " which "+ whichBox +" phone: "+ phoneNumberAddress);// +" content: "+content + " date: " + date);
 			message = new Message(threadId, phoneNumberAddress, content, date);
 			messageList.add(message);
 			cursor.moveToNext();
