@@ -83,12 +83,12 @@ public class RegistrationFragment extends Fragment
 		 protected String doInBackground(String... inputs)
 		 {
 			 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
-			 params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_REGISTER));
+//			 params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_REGISTER));
 			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_NAME, inputs[0]));
 			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_EMAIL, inputs[1]));
 			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PHONE, inputs[2]));
 		     params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS, inputs[3]));
-		     JSONParser.getJSONFromUrl(params);
+//		     JSONParser.getJSONFromUrl(params);
 		     Gson gson = new Gson();
 		     Log.v("Testing", gson.toJson(params));
 		     return gson.toJson(params);

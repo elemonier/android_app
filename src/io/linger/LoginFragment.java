@@ -63,7 +63,7 @@ public class LoginFragment extends Fragment
 				   userPassword = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 					
-				   new LoginTask().execute(userPhoneNumber, userPassword);
+//				   new LoginTask().execute(userPhoneNumber, userPassword);
 			   }
 		});
 		
@@ -74,19 +74,19 @@ public class LoginFragment extends Fragment
 	 * AsyncTask to connect to database in order to check login information and
 	 * scheck user values in SQLite Database.
 	 */
-	private class LoginTask extends AsyncTask<String, Void, String>
-	{  
-		 protected String doInBackground(String... inputs)
-		 {
-			 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
-			 params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_LOGIN));
-			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
-		     params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS, inputs[1]));
-		     JSONParser.getJSONFromUrl(params);
-		     Gson gson = new Gson();
-		     Log.v("Testing", gson.toJson(params));
-		     return gson.toJson(params);
-		 }
+//	private class LoginTask extends AsyncTask<String, Void, String>
+//	{  
+//		 protected String doInBackground(String... inputs)
+//		 {
+//			 List<NameValuePair> params = new ArrayList<NameValuePair>(); 
+//			 params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_LOGIN));
+//			 params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
+//		     params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS, inputs[1]));
+//		     JSONParser.getJSONFromUrl(params);
+//		     Gson gson = new Gson();
+//		     Log.v("Testing", gson.toJson(params));
+//		     return gson.toJson(params);
+//		 }
 		
 //		protected String doInBackground(String ... params)
 //		{
@@ -99,5 +99,5 @@ public class LoginFragment extends Fragment
 ////	                jsonUser.getString(DatabaseHandler.KEY_CREATED_AT));  
 //            return null;
 //		}
-	}
+//	}
 }

@@ -2,6 +2,8 @@ package io.linger;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,11 +27,24 @@ public class SyncDataActivity extends Activity
 		inbox = new ArrayList<Message>();
 		outbox = new ArrayList<Message>();
 
+		
+		
+		
 		Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 		getContactInfo(intentContact);
 		retrieveMessages("inbox", inbox);
 		retrieveMessages("sent", outbox);
 
+		// build the json(s)
+		JSONArray json_con = new JSONArray(contactList);
+		JSONArray json_inMsg = new JSONArray(inbox);
+		JSONArray json_outMsg = new JSONArray(outbox);
+		
+		// debugging
+		Log.v("contact_json", json_con.toString());
+		Log.v("in_json", json_inMsg.toString());
+		Log.v("out_json", json_outMsg.toString());
+		
 		//BuildJson with the 3 lists
 		//Call HTTP Client class
 	}
@@ -77,7 +92,7 @@ public class SyncDataActivity extends Activity
 			emails_cursor.close();
 			Contact newContact = new Contact(con_name, phone_num, emailAddress);
 			contactList.add(newContact);
-		} // while
+		} // while		
 		contact_cursor.close();
 	} // end method
 
