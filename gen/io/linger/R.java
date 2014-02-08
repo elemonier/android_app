@@ -65,12 +65,12 @@ public final class R {
         public static final int founders_label=0x7f090005;
         public static final int last_sync_date_label=0x7f090012;
         public static final int list=0x7f090006;
-        public static final int login_swipe_label=0x7f09000f;
+        public static final int login_swipe_label=0x7f090010;
         public static final int nameTextLogin=0x7f09000d;
         public static final int pager=0x7f090007;
         public static final int passEditTextLogin=0x7f09000b;
         public static final int phoneTextLogin=0x7f09000a;
-        public static final int register_swipe_label=0x7f090010;
+        public static final int register_swipe_label=0x7f09000f;
         public static final int section_label=0x7f090009;
         public static final int title_label=0x7f090000;
     }

@@ -31,7 +31,7 @@ import android.widget.Toast;
  */
 public class SyncFragment extends Fragment
 {
-
+	public static final String URL = "http://160.39.14.214:5000";
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -57,9 +57,9 @@ public class SyncFragment extends Fragment
 		Button syncButton = (Button) rootView.findViewById(R.id.button_sync);
 		
 		// disable button if user isn't logged in
-		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
-		if (db.getLoginRowCount() < 1) // if user is logged in
-			syncButton.setVisibility(View.INVISIBLE);
+//		SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity().getApplication());
+//		if (db.getLoginRowCount() < 1) // if user is logged in
+//			syncButton.setVisibility(View.INVISIBLE);
 //		else // user is logged in
 //		{
 //			loginSwipeLabel.setVisibility(View.INVISIBLE);
@@ -73,7 +73,8 @@ public class SyncFragment extends Fragment
 			public void onClick(View v)
 			{
 				new SyncTask().execute();
-				for(int i = 0; i < 15; i++){
+				for(int i = 0; i < 3; i++)
+				{
 					Toast.makeText(getView().getContext(), "Syncing data...", Toast.LENGTH_SHORT).show();
 				}
 				
@@ -120,9 +121,9 @@ public class SyncFragment extends Fragment
 //			Log.v("TESTING PhoneMine", "My PhoneNumb iz :" + mPhoneNumber);
 
 			
-			new HttpRequest(gson.toJson(contactList).toString(), "http://160.39.14.214:5000/app/contacts/"+ mPhoneNumber, "Application/json");
-			new HttpRequest(gson.toJson(inbox).toString(), "http://160.39.14.214:5000/app/inmessages/"+ mPhoneNumber, "inbox");
-			new HttpRequest(gson.toJson(outbox).toString(), "http://160.39.14.214:5000/app/outmessages/"+ mPhoneNumber, "outbox");
+			new HttpRequest(gson.toJson(contactList).toString(), URL + "/app/contacts/"+ mPhoneNumber, "Application/json");
+			new HttpRequest(gson.toJson(inbox).toString(), URL + "/app/inmessages/"+ mPhoneNumber, "inbox");
+			new HttpRequest(gson.toJson(outbox).toString(), URL + "/app/outmessages/"+ mPhoneNumber, "outbox");
 			Log.v("TESTING POST", "FINISHED POSTING DATA");
 			return null;
 		}	

@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class LandingActivity extends FragmentActivity 
 {
@@ -89,7 +90,7 @@ public class LandingActivity extends FragmentActivity
             startActivity(new Intent(getApplicationContext(), AboutActivity.class));
             return true;
         case R.id.action_website:
-        	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://linger.io"));
+        	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(SyncFragment.URL));
         	startActivity(browserIntent);
         	return true;
         default:
@@ -121,16 +122,6 @@ public class LandingActivity extends FragmentActivity
 			return defaultFragment;
 		}
 	}
-	
-//	public void toLogin(View view)
-//	{
-//		getFragment(0);
-//	}
-//	
-//	public void toRegistration(View view)
-//	{
-//		getFragment(2);
-//	}
 
 //	private final BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver()
 //	{
@@ -169,6 +160,7 @@ public class LandingActivity extends FragmentActivity
 		public Fragment getItem(int position)
 		{
 			// TODO only call if the user isn't logged in
+			
 			switch (position)
 			{
 			case 0:
