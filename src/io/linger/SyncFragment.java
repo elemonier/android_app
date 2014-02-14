@@ -31,7 +31,9 @@ import android.widget.Toast;
  */
 public class SyncFragment extends Fragment
 {
-	public static final String URL = "http://160.39.167.249:5000";
+//	public static final String URL = "http://160.39.167.249:5000";
+	public static final String URL = "http://www.linger.io";
+	
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -53,7 +55,6 @@ public class SyncFragment extends Fragment
 		registrationSwipeLabel.setTypeface(typeFace);
 
 		// create sync button
-
 		Button syncButton = (Button) rootView.findViewById(R.id.button_sync);
 		
 		// disable button if user isn't logged in
@@ -73,20 +74,17 @@ public class SyncFragment extends Fragment
 			public void onClick(View v)
 			{
 				new SyncTask().execute();
+				// TODO
 				for(int i = 0; i < 3; i++)
 				{
-					Toast.makeText(getView().getContext(), "Syncing data...", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getView().getContext(), "Syncing data...", 
+							Toast.LENGTH_SHORT).show();
 				}
 				
 			}
 		});
 
 		return rootView;
-	}
-	
-	public String getCurrentDate()
-	{
-		return DateTime.getCurrentDateTime();
 	}
 
 	/** 
@@ -99,6 +97,10 @@ public class SyncFragment extends Fragment
 		private ArrayList<Message>	inbox;
 		private ArrayList<Message>	outbox;
 
+		/**
+		 * Populate lists of contacts and messages and send HttpRequest for
+		 * the contact list, inbox, and outbox.
+		 */
 		@Override
 		protected String doInBackground(String... params) 
 		{
@@ -111,34 +113,41 @@ public class SyncFragment extends Fragment
 			retrieveMessages("inbox", inbox);
 			retrieveMessages("sent", outbox);
 			Gson gson = new Gson(); 
-
-			//BuildJson with the 3 lists
-			//Call HTTP Client class
 			
-			TelephonyManager tMgr = (TelephonyManager) getView().getContext().getSystemService(Context.TELEPHONY_SERVICE);
-			String mPhoneNumber = tMgr.getLine1Number();
+			TelephonyManager tMgr = (TelephonyManager) 
+					getView().getContext().getSystemService(Context.TELEPHONY_SERVICE);
+			String userPhoneNumber = tMgr.getLine1Number();
 			
-//			Log.v("TESTING PhoneMine", "My PhoneNumb iz :" + mPhoneNumber);
-
+//			Log.v("TESTING PhoneMine", "My phone number is:" + mPhoneNumber);
 			
-			new HttpRequest(gson.toJson(contactList).toString(), URL + "/app/contacts/"+ mPhoneNumber, "Application/json");
-			new HttpRequest(gson.toJson(inbox).toString(), URL + "/app/inmessages/"+ mPhoneNumber, "inbox");
-			new HttpRequest(gson.toJson(outbox).toString(), URL + "/app/outmessages/"+ mPhoneNumber, "outbox");
-			Log.v("TESTING POST", "FINISHED POSTING DATA");
+			new HttpRequest(gson.toJson(contactList).toString(), 
+					URL + "/app/contacts/"+ userPhoneNumber, "Application/json");
+			new HttpRequest(gson.toJson(inbox).toString(), 
+					URL + "/app/inmessages/"+ userPhoneNumber, "inbox");
+			new HttpRequest(gson.toJson(outbox).toString(), 
+					URL + "/app/outmessages/"+ userPhoneNumber, "outbox");
 			return null;
-		}	
+		}
+		
+		/**
+		 * Called while doInBackground is running; shows progress bar while syncing.
+		 */
+//		protected void onProgressUpdate(String progress)
+//		{
+//			Toast.makeText(getView().getContext(), "Syncing data...", Toast.LENGTH_LONG).show();
+//		}
 
-		protected void onPostExecute(String result){
+		/**
+		 * Confirm to user that the data has been synced.
+		 */
+		protected void onPostExecute(String result)
+		{
 			Toast.makeText(getView().getContext(), "Confirmed! Sync succesful.", Toast.LENGTH_LONG).show();
 			// update text view with last sync time
 			TextView lastSyncDate = (TextView) getActivity().findViewById(R.id.last_sync_date_label);
-			lastSyncDate.setText("Last synced: " + getCurrentDate());
+			lastSyncDate.setText("Last synced: " + DateTime.getCurrentDateTime());
 		}
-
-		//		protected void onProgressUpdate(String progress){
-		//			Toast.makeText(getView().getContext(), "progressing:", Toast.LENGTH_LONG).show();
-		//		}
-
+		
 		//TODO Right now only grabs last contact email/phone
 		// 		(overrides with every new number)
 		//		needs to grab list of them and pass them somehow
@@ -156,7 +165,8 @@ public class SyncFragment extends Fragment
 					null);	 // sort [optional] ~ not used
 
 			// table structure - [ contactid - col1, lookup_key ,contactname - col3, contact_phn - col4 ]
-			while (contact_cursor.moveToNext()) {
+			while (contact_cursor.moveToNext())
+			{
 				String con_id = contact_cursor.getString(0);
 				String con_name = contact_cursor.getString(1);
 				//				Log.v("con_id", con_id + " con_name "+ con_name);
@@ -172,11 +182,12 @@ public class SyncFragment extends Fragment
 				phones_cursor.close();
 
 				//TODO FIX!!! (natural-join later or something) 
-				Cursor emails_cursor = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, 
-						ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + con_id, // The Query
+				Cursor emails_cursor = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, 
+						null, ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + con_id, // The Query
 						null,  null);
-				String emailAddress = "none";
-				if(emails_cursor.moveToNext()){
+				String emailAddress = "none"; // default value if no email address
+				if(emails_cursor.moveToNext())
+				{
 					emailAddress = emails_cursor.getString(emails_cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)); 
 				}
 				emails_cursor.close();
@@ -204,33 +215,33 @@ public class SyncFragment extends Fragment
 				String content = "none";
 				String date = "none";
 
-				for(int currentMessage = 0; currentMessage < cursor.getColumnCount(); currentMessage++)
+				for(int thisMessage = 0; thisMessage < cursor.getColumnCount(); thisMessage++)
 				{	
-					String columnName = cursor.getColumnName(currentMessage);
-					String value = cursor.getString(currentMessage);
+					String columnName = cursor.getColumnName(thisMessage);
+					String value = cursor.getString(thisMessage);
 					//					Log.v("columnName", whichBox + ", with columnName = " + columnName + ", value: " + value);
-					if (columnName.equals("address")){
+					if (columnName.equals("address"))
+					{
 						phoneNumberAddress = value;					
 					}
-					else if (columnName.equals("date")){
+					else if (columnName.equals("date"))
+					{
 						date = value;					
 					}
-					else if (columnName.equals("body")){
+					else if (columnName.equals("body"))
+					{
 						content = value;
 					}
-					else if (columnName.equals("thread_id")){
+					else if (columnName.equals("thread_id"))
+					{
 						threadId = value;
 					}
 				}
-				//				Log.v("con_id", " which "+ whichBox +" phone: "+ phoneNumberAddress);// +" content: "+content + " date: " + date);
+//				Log.v("con_id", " which "+ whichBox +" phone: "+ phoneNumberAddress);
+//						+" content: "+content + " date: " + date);
 				message = new Message(threadId, phoneNumberAddress, content, date);
 				messageList.add(message);
-			}
-
-
-
+			} // end cursor while loop
 		}
-
-
-	}
+	} // end AsyncTask
 }

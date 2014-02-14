@@ -1,13 +1,6 @@
 package io.linger;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -58,12 +51,16 @@ public class LoginFragment extends Fragment
 				   userPassword = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 					
+				   String[] userData = { userPhoneNumber, userPassword }; 
+				   Gson gson = new Gson();
+				   HttpRequest request = new HttpRequest(gson.toJson(userData), TAG_LOGIN, "application/json");	   
+				   
 				   SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
 				   db.addUser(Integer.toString((int) (Math.random() * (100))), userPhoneNumber, userPassword, DateTime.getCurrentDateTime());
 				   
+				   // TODO if logged in
 				   Toast.makeText(getView().getContext(), 
 							"Login complete. Welcome!", Toast.LENGTH_LONG).show();
-//				   new LoginTask().execute(userPhoneNumber, userPassword);
 			   }
 		});
 		
@@ -94,7 +91,6 @@ public class LoginFragment extends Fragment
 //		     return null;
 //		 }
 //		
-//		 //TODO
 //		/**
 //		 * Get values back from server to put into SQLiteDatabase and log in.
 //		 */

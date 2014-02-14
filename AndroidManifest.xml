@@ -30,17 +30,6 @@
             </intent-filter>
             
         </activity>
-        <activity
-            android:name="io.linger.SyncDataActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
-        </activity>
-
-        <receiver android:name="io.linger.BatteryLevelReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_BATTERY_LOW" />
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name="io.linger.AboutActivity"
