@@ -1,6 +1,13 @@
 package io.linger;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -51,6 +58,21 @@ public class LoginFragment extends Fragment
 				   userPassword = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 					
+				   byte[] salt = Passwords.getNextSalt();
+				   byte[] encryptedPass = Passwords.hash(userPassword.toCharArray(), salt);
+				   
+				   // testing
+				   // salt
+				   String saltString = "";
+				   for (byte each : salt)
+					   saltString += each;
+				   Log.v("Testing", "salt: " + saltString);
+				   // password
+				   String encryptedPassString = "";
+				   for (byte each : encryptedPass)
+					   encryptedPassString += Byte.toString(each);
+				   Log.v("Testing", "encrypted pass: " + encryptedPassString);
+				   
 				   String[] userData = { userPhoneNumber, userPassword }; 
 				   Gson gson = new Gson();
 				   HttpRequest request = new HttpRequest(gson.toJson(userData), TAG_LOGIN, "application/json");	   
@@ -67,6 +89,54 @@ public class LoginFragment extends Fragment
 		return rootView;
 	}
 	
+//	 /** Source: https://www.owasp.org/index.php/Hashing_Java */
+//	 public byte[] getHash(String password, byte[] salt) throws NoSuchAlgorithmException {
+//	       MessageDigest digest = MessageDigest.getInstance("SHA-256");
+//	       digest.reset();
+//	       digest.update(salt);
+//	       try {
+//			return digest.digest(password.getBytes("UTF-8"));
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	 }
+//	
+//	/** Source: http://stackoverflow.com/questions/18142745/how-do-i-generate-a-salt-in-java-for-salted-hash*/
+//	 public byte[] generateSalt() {
+//	        SecureRandom random = new SecureRandom();
+//	        byte bytes[] = new byte[20];
+//	        random.nextBytes(bytes);
+//	        return bytes;
+//	    }
+//
+//	public String bytetoString(byte[] input)
+//	{
+//		return org.apache.commons.codec.binary.Base64.encodeBase64String(input);
+//	}
+//
+//	public byte[] getHashWithSalt(String input, HashingTechnique technique, byte[] salt) 
+//			throws NoSuchAlgorithmException 
+//	{
+//		MessageDigest digest = MessageDigest.getInstance(technique.value);
+//		digest.reset();
+//		digest.update(salt);
+//		byte[] hashedBytes = digest.digest(stringToByte(input));
+//		return hashedBytes;
+//	}
+//	
+//	public byte[] stringToByte(String input)
+//	{
+//		if (Base64.isBase64(input))
+//		{
+//			return Base64.decodeBase64(input);
+//	    }
+//		else
+//		{
+//			return Base64.encodeBase64(input.getBytes());
+//	    }
+//	}
+	 
 //	/** 
 //	 * AsyncTask to connect to database in order to check login information and
 //	 * scheck user values in SQLite Database.
@@ -75,16 +145,16 @@ public class LoginFragment extends Fragment
 //	{  
 //		 protected Void doInBackground(String... inputs)
 //		 {
-////			 List<NameValuePair> params = new ArrayList<NameValuePair>();
-////			 params.add(new BasicNameValuePair(
-////					 SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
-////		     params.add(new BasicNameValuePair(
-////		    		 SQLiteDatabaseHandler.USER_PASS, inputs[1]));
-////		     // convert params to Json
-////		     Gson gson = new Gson(); 
-////		     Log.v("Testing", gson.toJson(params));
-////		     // send HTTP post request
-////		     return new HttpRequest ("http://160.39.167.249:5000/app/login", 
+//			 List<NameValuePair> params = new ArrayList<NameValuePair>();
+//			 params.add(new BasicNameValuePair(
+//					 SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
+//		     params.add(new BasicNameValuePair(
+//		    		 SQLiteDatabaseHandler.USER_PASS, inputs[1]));
+//		     // convert params to Json
+//		     Gson gson = new Gson(); 
+//		     Log.v("Testing", gson.toJson(params));
+//		     // send HTTP post request
+////		     return new HttpRequest("http://160.39.167.249:5000/app/login", 
 ////		    		 gson.toJson(params), "POST");
 //		     SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
 //		     db.addUser("1", inputs[0], inputs[1], DateTime.getCurrentDateTime());
