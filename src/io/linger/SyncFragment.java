@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,10 +29,7 @@ import android.widget.Toast;
  * logged in; allows syncing with the database if the user is logged in.
  */
 public class SyncFragment extends Fragment
-{
-//	public static final String URL = "http://160.39.167.249:5000";
-	public static final String URL = "http://www.linger.io";
-	
+{	
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -121,11 +117,11 @@ public class SyncFragment extends Fragment
 //			Log.v("TESTING PhoneMine", "My phone number is:" + mPhoneNumber);
 			
 			new HttpRequest(gson.toJson(contactList).toString(), 
-					URL + "/app/contacts/"+ userPhoneNumber, "Application/json");
+					HttpRequest.URL + "/app/contacts/"+ userPhoneNumber, "Application/json");
 			new HttpRequest(gson.toJson(inbox).toString(), 
-					URL + "/app/inmessages/"+ userPhoneNumber, "inbox");
+					HttpRequest.URL + "/app/inmessages/"+ userPhoneNumber, "inbox");
 			new HttpRequest(gson.toJson(outbox).toString(), 
-					URL + "/app/outmessages/"+ userPhoneNumber, "outbox");
+					HttpRequest.URL + "/app/outmessages/"+ userPhoneNumber, "outbox");
 			return null;
 		}
 		

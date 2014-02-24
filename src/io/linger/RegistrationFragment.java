@@ -2,8 +2,10 @@ package io.linger;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+
 import com.google.gson.Gson;
 
 import android.graphics.Typeface;
@@ -24,7 +26,8 @@ public class RegistrationFragment extends Fragment
 	private String userName;
 	private String userEmail;
 	private String userPhoneNumber;
-	private String userPassword;
+	private String userEncryptedPassword;
+	private String userSalt;
 	
 	public static final String TAG_REGISTER = "user_register";
 
@@ -54,10 +57,19 @@ public class RegistrationFragment extends Fragment
 						   rootView.findViewById(R.id.emailTextLogin)).getText().toString();
 				   userPhoneNumber = ((EditText) 
 						   rootView.findViewById(R.id.phoneTextLogin)).getText().toString();
-				   userPassword = ((EditText) 
+				   String userUnencryptedPassword = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 					
-//				   new RegistrationTask().execute(userName, userEmail, userPhoneNumber, userPassword);
+				   byte[] salt = Passwords.getNextSalt();
+				   byte[] bytesEncryptedPass = Passwords.hash(userUnencryptedPassword.toCharArray(), 
+						   salt);
+				   
+				   // encryption
+				   userSalt = Passwords.bytesArrayToString(salt);
+				   userEncryptedPassword = Passwords.bytesArrayToString(bytesEncryptedPass);
+				   
+				   new RegistrationTask().execute(userName, userEmail, userPhoneNumber, 
+						   userEncryptedPassword, userSalt);
 			   }
 		});
 		return rootView;
@@ -85,6 +97,8 @@ public class RegistrationFragment extends Fragment
 					inputs[2]));
 			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS,
 					inputs[3]));
+			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_SALT,
+					inputs[4]));
 			// turn the params into Json
 		    Gson gson = new Gson();
 		    Log.v("Testing", gson.toJson(params));

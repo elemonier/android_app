@@ -12,11 +12,14 @@ import javax.crypto.spec.PBEKeySpec;
 
 
 /**
- * Source: assylias http://stackoverflow.com/questions/18142745/how-do-i-generate-a-salt-in-java-for-salted-hash
+ * Source: user 'assylias' http://stackoverflow.com/questions/18142745
  * 
- * A utility class to hash passwords and check passwords vs hashed values. It uses a combination of hashing and unique
- * salt. The algorithm used is PBKDF2WithHmacSHA1 which, although not the best for hashing password (vs. bcrypt) is
- * still considered robust and <a href="http://security.stackexchange.com/a/6415/12614"> recommended by NIST </a>.
+ * A utility class to hash passwords and check passwords vs hashed values.
+ * It uses a combination of hashing and unique salt. The algorithm used is 
+ * PBKDF2WithHmacSHA1 which, although not the best for hashing password 
+ * (vs. bcrypt) is still considered robust and 
+ * <a href="http://security.stackexchange.com/a/6415/12614"> recommended by 
+ * NIST </a>.
  * The hashed value has 256 bits.
  */
 public class Passwords
@@ -62,12 +65,36 @@ public class Passwords
         	throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
         }
     }
+    
+    /**
+     * Return UTF-8 encoded String form of password.
+     * @param password
+     * @param salt
+     * @return
+     */
+    public static String hashToString(char[] password, byte[] salt)
+    {
+    	return bytesArrayToString(hash(password, salt));
+    }
 
     private static char[] cloneArrayAndEraseOriginal(char[] password)
     {
         char[] pwd = password.clone();
         Arrays.fill(password, Character.MIN_VALUE);
         return pwd;
+    }
+    
+    /**
+     * Encode a bytes array into a String.
+     * @param bytes
+     * @return
+     */
+    public static String bytesArrayToString(byte[] bytes)
+    {
+    	String stringForm = "";
+    	for (byte each : bytes)
+    		stringForm += each;
+    	return stringForm;
     }
     
 //    /**

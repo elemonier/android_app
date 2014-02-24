@@ -1,5 +1,6 @@
 package io.linger;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class LoginFragment extends Fragment
 	public static final String TAG_LOGIN = "user_login";
 	
 	private String userPhoneNumber;
-	private String userPassword;
+	private String userUnencryptedPassword;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,30 +56,23 @@ public class LoginFragment extends Fragment
 				   Log.v("Testing", "Clicked submit button");
 				   userPhoneNumber = ((EditText) 
 						   rootView.findViewById(R.id.phoneTextLogin)).getText().toString();
-				   userPassword = ((EditText) 
+				   userUnencryptedPassword = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 					
 				   byte[] salt = Passwords.getNextSalt();
-				   byte[] encryptedPass = Passwords.hash(userPassword.toCharArray(), salt);
+				   byte[] bytesEncryptedPass = Passwords.hash(userUnencryptedPassword.toCharArray(), salt);
 				   
-				   // testing
-				   // salt
-				   String saltString = "";
-				   for (byte each : salt)
-					   saltString += each;
-				   Log.v("Testing", "salt: " + saltString);
-				   // password
-				   String encryptedPassString = "";
-				   for (byte each : encryptedPass)
-					   encryptedPassString += Byte.toString(each);
-				   Log.v("Testing", "encrypted pass: " + encryptedPassString);
+				   // encryption
+				   String userSalt = Passwords.bytesArrayToString(salt);
+				   String userEncryptedPass = Passwords.bytesArrayToString(bytesEncryptedPass);
 				   
-				   String[] userData = { userPhoneNumber, userPassword }; 
+				   String[] userData = { userPhoneNumber, userEncryptedPass, userSalt }; 
 				   Gson gson = new Gson();
-				   HttpRequest request = new HttpRequest(gson.toJson(userData), TAG_LOGIN, "application/json");	   
+				   Log.v("Testing", gson.toJson(userData));
+//				   HttpRequest request = new HttpRequest(gson.toJson(userData), TAG_LOGIN, "application/json");	   
 				   
-				   SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
-				   db.addUser(Integer.toString((int) (Math.random() * (100))), userPhoneNumber, userPassword, DateTime.getCurrentDateTime());
+//				   SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
+//				   db.addUser(Integer.toString((int) (Math.random() * (100))), userPhoneNumber, userUnencryptedPassword, DateTime.getCurrentDateTime());
 				   
 				   // TODO if logged in
 				   Toast.makeText(getView().getContext(), 
