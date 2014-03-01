@@ -10,6 +10,7 @@
     <string name="app_name">Linger</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_landing">Linger</string>
+    <string name="logo_description">The Linger Leaf</string>
 
     <!-- Landing fragment -->
 	<string name="sync">sync</string>

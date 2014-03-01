@@ -1,7 +1,7 @@
 package io.linger;
 
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.SecureRandom; 
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
@@ -24,7 +24,9 @@ import javax.crypto.spec.PBEKeySpec;
  */
 public class Passwords
 {
-    private static final Random random = new SecureRandom();
+    // important to use SecureRandom, not just random:
+	// https://crackstation.net/hashing-security.htm#attacks
+	private static final Random random = new SecureRandom();
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
     private static final int SALT_LENGTH = 16;

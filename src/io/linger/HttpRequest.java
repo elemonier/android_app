@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 public class HttpRequest extends AsyncTask<String, Integer, Double>
 {
 	public static final String URL = "http://www.linger.io";
-	
+	public static final String URL_REGISTRATION = URL + "app/register";
 	/**
 	 * 
 	 * @param json

@@ -1,6 +1,5 @@
 package io.linger;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class LoginFragment extends Fragment
 		// set title text font to our custom imported font
 		TextView titleText = (TextView) rootView.findViewById(R.id.section_label);
 		Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),
-				"fonts/grandhotel_regular.ttf");
+				"fonts/century_gothic.ttf");
 		titleText.setTypeface(typeFace);
 		
 		// set listener for button
@@ -131,37 +130,37 @@ public class LoginFragment extends Fragment
 //	    }
 //	}
 	 
-//	/** 
-//	 * AsyncTask to connect to database in order to check login information and
-//	 * scheck user values in SQLite Database.
-//	 */
-//	public class LoginTask extends AsyncTask<String, Void, Void>
-//	{  
-//		 protected Void doInBackground(String... inputs)
-//		 {
-//			 List<NameValuePair> params = new ArrayList<NameValuePair>();
-//			 params.add(new BasicNameValuePair(
-//					 SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
-//		     params.add(new BasicNameValuePair(
-//		    		 SQLiteDatabaseHandler.USER_PASS, inputs[1]));
-//		     // convert params to Json
-//		     Gson gson = new Gson(); 
-//		     Log.v("Testing", gson.toJson(params));
-//		     // send HTTP post request
-////		     return new HttpRequest("http://160.39.167.249:5000/app/login", 
-////		    		 gson.toJson(params), "POST");
-//		     SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
-//		     db.addUser("1", inputs[0], inputs[1], DateTime.getCurrentDateTime());
-//		     return null;
-//		 }
-//		
-//		/**
-//		 * Get values back from server to put into SQLiteDatabase and log in.
-//		 */
-//		protected void onPostExecute(String ... params)
-//		{
-//			Toast.makeText(getView().getContext(), 
-//					"Login complete. Welcome!", Toast.LENGTH_LONG).show();
-//		}
-//	}
+	/** 
+	 * AsyncTask to connect to database in order to check login information and
+	 * scheck user values in SQLite Database.
+	 */
+	public class LoginTask extends AsyncTask<String, Void, Void>
+	{  
+		 protected Void doInBackground(String... inputs)
+		 {
+			 List<NameValuePair> params = new ArrayList<NameValuePair>();
+			 params.add(new BasicNameValuePair(
+					 SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
+		     params.add(new BasicNameValuePair(
+		    		 SQLiteDatabaseHandler.USER_PASS, inputs[1]));
+		     // convert params to Json
+		     Gson gson = new Gson(); 
+		     Log.v("Testing", gson.toJson(params));
+		     // send HTTP post request
+//		     return new HttpRequest("http://160.39.167.249:5000/app/login", 
+//		    		 gson.toJson(params), "POST");
+		     SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
+		     db.addUser("1", inputs[0], inputs[1], DateTime.getCurrentDateTime());
+		     return null;
+		 }
+		
+		/**
+		 * Get values back from server to put into SQLiteDatabase and log in.
+		 */
+		protected void onPostExecute(String ... params)
+		{
+			Toast.makeText(getView().getContext(), 
+					"Login complete. Welcome!", Toast.LENGTH_LONG).show();
+		}
+	}
 }

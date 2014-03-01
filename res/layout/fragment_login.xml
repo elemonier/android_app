@@ -24,6 +24,7 @@
 	        style="@style/Headings"
 	        android:text="@string/login_prompt"
 	    />
+		
 		<!-- Input phone number field -->
 		<EditText
 		    android:id="@+id/phoneTextLogin"

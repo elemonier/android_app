@@ -7,7 +7,7 @@
       		<solid
           		android:color="@color/myDarkerBackground" />
 	      	<corners
-	      	    android:radius="6dp" />
+	      	    android:radius="0dp" />
 	      	<padding
 	       	   android:left="10dp"
 	       	   android:right="10dp"
@@ -19,13 +19,9 @@
   	<item>
     	<shape>
       		<solid
-          		android:color="@color/background"/>
-      		<stroke
-      		  	android:color="@color/secondary"  
-      		  	android:width="2dp"
-      		/>
+          		android:color="@color/myBlue"/>
       		<corners
-          		android:radius="6dp" />
+          		android:radius="0dp" />
       		<padding
           		android:left="10dp"
           		android:right="10dp"

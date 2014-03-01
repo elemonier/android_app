@@ -90,7 +90,7 @@ public class LandingActivity extends FragmentActivity
             startActivity(new Intent(getApplicationContext(), AboutActivity.class));
             return true;
         case R.id.action_website:
-        	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(SyncFragment.URL));
+        	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(HttpRequest.URL));
         	startActivity(browserIntent);
         	return true;
         default:

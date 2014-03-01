@@ -41,12 +41,12 @@ public class SyncFragment extends Fragment
 		View rootView = inflater.inflate(R.layout.fragment_sync, container, false);
 
 		// set title text font to our custom imported font
-		TextView titleText = (TextView) rootView.findViewById(R.id.title_label);
+//		TextView titleText = (TextView) rootView.findViewById(R.id.title_label);
 		TextView loginSwipeLabel = (TextView) rootView.findViewById(R.id.login_swipe_label);
 		TextView registrationSwipeLabel = (TextView) rootView.findViewById(R.id.register_swipe_label);
 		Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),
-				"fonts/grandhotel_regular.ttf");
-		titleText.setTypeface(typeFace);
+				"fonts/century_gothic.ttf");
+//		titleText.setTypeface(typeFace);
 		loginSwipeLabel.setTypeface(typeFace);
 		registrationSwipeLabel.setTypeface(typeFace);
 

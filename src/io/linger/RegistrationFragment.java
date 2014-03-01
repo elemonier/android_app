@@ -49,7 +49,7 @@ public class RegistrationFragment extends Fragment
 		{
 			   @Override
 			   public void onClick(View view)
-			   {
+			   {			   
 				   Log.v("Testing", "Clicked registration submit button");
 				   userName = ((EditText) 
 						   rootView.findViewById(R.id.nameTextLogin)).getText().toString();
@@ -57,24 +57,32 @@ public class RegistrationFragment extends Fragment
 						   rootView.findViewById(R.id.emailTextLogin)).getText().toString();
 				   userPhoneNumber = ((EditText) 
 						   rootView.findViewById(R.id.phoneTextLogin)).getText().toString();
-				   String userUnencryptedPassword = ((EditText) 
+				   String userUnencryptedPass = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
-					
-				   byte[] salt = Passwords.getNextSalt();
-				   byte[] bytesEncryptedPass = Passwords.hash(userUnencryptedPassword.toCharArray(), 
-						   salt);
 				   
-				   // encryption
-				   userSalt = Passwords.bytesArrayToString(salt);
-				   userEncryptedPassword = Passwords.bytesArrayToString(bytesEncryptedPass);
+				   if (userName == "" || userEmail == "" || userPhoneNumber ==
+						   "" || userUnencryptedPass == "")
+				   {
+					   // show error message
+				   }
+				   else
+				   {
+					   byte[] salt = Passwords.getNextSalt();
+					   byte[] bytesEncryptedPass = Passwords.hash(userUnencryptedPass.toCharArray(), 
+							   salt);
 				   
-				   new RegistrationTask().execute(userName, userEmail, userPhoneNumber, 
-						   userEncryptedPassword, userSalt);
+					   // encryption
+					   userSalt = Passwords.bytesArrayToString(salt);
+					   userEncryptedPassword = Passwords.bytesArrayToString(bytesEncryptedPass);
+				   
+					   new RegistrationTask().execute(userName, userEmail, userPhoneNumber, 
+							   userEncryptedPassword, userSalt);
+				   }
 			   }
 		});
 		return rootView;
 	}
-	
+
 
 	/** 
 	 * AsyncTask to connect to database in order to add a new row to the users table.
@@ -102,7 +110,7 @@ public class RegistrationFragment extends Fragment
 			// turn the params into Json
 		    Gson gson = new Gson();
 		    Log.v("Testing", gson.toJson(params));
-		    return new HttpRequest("http://160.39.167.249:5000/app/register", 
+		    return new HttpRequest(HttpRequest.URL_REGISTRATION, 
 		    		gson.toJson(params), "POST");
 		}
 		

@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:screenOrientation="portrait"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -29,34 +30,40 @@
 		android:text="@string/login_indicator"
 	/>
 
-	<TextView
-	    android:id="@+id/title_label"
-	    android:layout_width="wrap_content"
+	<LinearLayout
+	    android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		style="@style/Title"
-		android:layout_centerHorizontal="true"
+		android:paddingLeft="30dp"
+		android:paddingRight="30dp"
 		android:layout_centerVertical="true"
-	    android:text="@string/app_name"
-	/>
-		    
-	<Button
-		android:id="@+id/button_sync"
-		android:layout_marginTop="10dp"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true"
-		style="@style/BlueButton"
-		android:layout_alignParentBottom="true"
-		android:text="@string/sync"
-	/>
-	
-	<TextView
-	    android:id="@+id/last_sync_date_label"
-	    android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		style="@style/BodyText"
-		android:layout_above="@id/button_sync"
-		android:layout_centerHorizontal="true"
-	/>
+		android:orientation="vertical"
+	>
+		<ImageView
+		  	android:id="@+id/logo_image"
+		  	android:layout_width="match_parent"
+		  	android:layout_height="wrap_content"
+		  	android:adjustViewBounds="true"
+	       	android:contentDescription="@string/logo_description"
+	       	android:src="@drawable/large_logo_with_text" 
+		/>
+			    
+		<Button
+			android:id="@+id/button_sync"
+			android:layout_marginTop="10dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			style="@style/BlueButton"
+			android:text="@string/sync"
+		/>
+		
+		<TextView
+		    android:id="@+id/last_sync_date_label"
+		    android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			style="@style/BodyText"
+		/>
+		
+		
+	</LinearLayout>
 	
 </RelativeLayout>
