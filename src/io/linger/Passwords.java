@@ -27,9 +27,11 @@ public class Passwords
     // important to use SecureRandom, not just random:
 	// https://crackstation.net/hashing-security.htm#attacks
 	private static final Random random = new SecureRandom();
-    private static final int ITERATIONS = 10000;
+	//http://pythonhosted.org/passlib/lib/passlib.hash.sha256_crypt.html#format-algorithm
+	public final static String HASH_IDENTIFIER = "5";
+    public static final int ROUNDS = 11000; // same as iterations
     private static final int KEY_LENGTH = 256;
-    private static final int SALT_LENGTH = 16;
+    public static final int SALT_LENGTH = 16;
 
     /**
      * Returns a random salt to be used to hash a password.
@@ -52,10 +54,10 @@ public class Passwords
     public static byte[] hash(char[] password, byte[] salt)
     {
         char[] pwd = cloneArrayAndEraseOriginal(password);
-        KeySpec spec = new PBEKeySpec(pwd, salt, ITERATIONS, KEY_LENGTH);
+        KeySpec spec = new PBEKeySpec(pwd, salt, ROUNDS, KEY_LENGTH);
         try
         {
-            SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
             return f.generateSecret(spec).getEncoded();
         }
         catch (NoSuchAlgorithmException e)
@@ -87,7 +89,7 @@ public class Passwords
     }
     
     /**
-     * Encode a bytes array into a String.
+     * Encode a bytes array into a String and removes all hyphens.
      * @param bytes
      * @return
      */
@@ -96,7 +98,7 @@ public class Passwords
     	String stringForm = "";
     	for (byte each : bytes)
     		stringForm += each;
-    	return stringForm;
+    	return stringForm.replace("-", "");
     }
     
 //    /**

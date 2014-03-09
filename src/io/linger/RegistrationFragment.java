@@ -1,12 +1,6 @@
 package io.linger;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import com.google.gson.Gson;
+import java.util.HashMap;
 
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -15,11 +9,14 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class RegistrationFragment extends Fragment
 {
@@ -63,20 +60,17 @@ public class RegistrationFragment extends Fragment
 				   if (userName == "" || userEmail == "" || userPhoneNumber ==
 						   "" || userUnencryptedPass == "")
 				   {
+					   // TODO
 					   // show error message
 				   }
 				   else
 				   {
-					   byte[] salt = Passwords.getNextSalt();
-					   byte[] bytesEncryptedPass = Passwords.hash(userUnencryptedPass.toCharArray(), 
-							   salt);
-				   
 					   // encryption
-					   userSalt = Passwords.bytesArrayToString(salt);
-					   userEncryptedPassword = Passwords.bytesArrayToString(bytesEncryptedPass);
+						userSalt = Sha256Crypt.generateSalt();
+						userEncryptedPassword = Sha256Crypt.Sha256_crypt(userUnencryptedPass, userSalt);
 				   
 					   new RegistrationTask().execute(userName, userEmail, userPhoneNumber, 
-							   userEncryptedPassword, userSalt);
+							   userEncryptedPassword);
 				   }
 			   }
 		});
@@ -96,19 +90,14 @@ public class RegistrationFragment extends Fragment
 		 */
 		protected HttpRequest doInBackground(String... inputs)
 	    {
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_NAME,
-					inputs[0]));
-			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_EMAIL,
-					inputs[1]));
-			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PHONE,
-					inputs[2]));
-			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_PASS,
-					inputs[3]));
-			params.add(new BasicNameValuePair(SQLiteDatabaseHandler.USER_SALT,
-					inputs[4]));
+			// using Gson Builder http://www.mkyong.com/java/how-to-enable-pretty-print-json-output-gson/
 			// turn the params into Json
-		    Gson gson = new Gson();
+		    Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		    HashMap<String, String> params = new HashMap<String, String>();
+			params.put(SQLiteDatabaseHandler.USER_NAME, inputs[0]);
+			params.put(SQLiteDatabaseHandler.USER_EMAIL, inputs[1]);
+			params.put(SQLiteDatabaseHandler.USER_PHONE, inputs[2]);
+			params.put(SQLiteDatabaseHandler.USER_PASS, inputs[3]);
 		    Log.v("Testing", gson.toJson(params));
 		    return new HttpRequest(HttpRequest.URL_REGISTRATION, 
 		    		gson.toJson(params), "POST");

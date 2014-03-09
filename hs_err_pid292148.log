@@ -1,0 +1,119 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (javaClasses.cpp:129), pid=292148, tid=292184
+#  fatal error: Invalid layout of preloaded class
+#
+# JRE version: 7.0_17-b02
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.7-b01 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000005ae000):  JavaThread "Unknown thread" [_thread_in_vm, id=292184, stack(0x0000000001dc0000,0x0000000001ec0000)]
+
+Stack: [0x0000000001dc0000,0x0000000001ec0000]
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00000000005ae000 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=292184, stack(0x0000000001dc0000,0x0000000001ec0000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.014 loading class 0x0000000001f084f0 done
+Event: 0.014 loading class 0x0000000001f08220 done
+Event: 0.014 loading class 0x0000000001f08760
+Event: 0.014 loading class 0x0000000001f103b0
+Event: 0.014 loading class 0x0000000001f103b0 done
+Event: 0.014 loading class 0x0000000001f103f0
+Event: 0.014 loading class 0x0000000001f103f0 done
+Event: 0.014 loading class 0x000000000ad6e140
+Event: 0.014 loading class 0x000000000ad6e140 done
+Event: 0.014 loading class 0x0000000001f08760 done
+
+
+Dynamic libraries:
+0x00007ff760f60000 - 0x00007ff760f93000 	C:\Program Files\Java\jre7\bin\javaw.exe
+0x00007ff9afe00000 - 0x00007ff9affa9000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ff9ad910000 - 0x00007ff9ada49000 	C:\WINDOWS\system32\KERNEL32.DLL
+0x00007ff9ad530000 - 0x00007ff9ad63e000 	C:\WINDOWS\system32\KERNELBASE.dll
+0x00007ff9abdb0000 - 0x00007ff9abe3b000 	C:\WINDOWS\system32\apphelp.dll
+0x00007ff9aa720000 - 0x00007ff9aa76f000 	C:\WINDOWS\AppPatch\AppPatch64\AcGenral.DLL
+0x00007ff9af6d0000 - 0x00007ff9af777000 	C:\WINDOWS\system32\msvcrt.dll
+0x00007ff9ad030000 - 0x00007ff9ad05b000 	C:\WINDOWS\SYSTEM32\SspiCli.dll
+0x00007ff9af9c0000 - 0x00007ff9afa11000 	C:\WINDOWS\system32\SHLWAPI.dll
+0x00007ff9ad6f0000 - 0x00007ff9ad861000 	C:\WINDOWS\system32\USER32.dll
+0x00007ff9af830000 - 0x00007ff9af9a6000 	C:\WINDOWS\system32\ole32.dll
+0x00007ff9ada50000 - 0x00007ff9aee5f000 	C:\WINDOWS\system32\SHELL32.dll
+0x00007ff9aca20000 - 0x00007ff9aca3f000 	C:\WINDOWS\SYSTEM32\USERENV.dll
+0x00007ff9af4e0000 - 0x00007ff9af585000 	C:\WINDOWS\system32\ADVAPI32.dll
+0x00007ff9aaa10000 - 0x00007ff9aaa2b000 	C:\WINDOWS\SYSTEM32\MPR.dll
+0x00007ff9af590000 - 0x00007ff9af6c6000 	C:\WINDOWS\system32\RPCRT4.dll
+0x00007ff9ad690000 - 0x00007ff9ad6e7000 	C:\WINDOWS\SYSTEM32\sechost.dll
+0x00007ff9af0e0000 - 0x00007ff9af2b7000 	C:\WINDOWS\SYSTEM32\combase.dll
+0x00007ff9aef90000 - 0x00007ff9af0d5000 	C:\WINDOWS\system32\GDI32.dll
+0x00007ff9ad180000 - 0x00007ff9ad194000 	C:\WINDOWS\SYSTEM32\profapi.dll
+0x00007ff9ab630000 - 0x00007ff9ab6d1000 	C:\WINDOWS\SYSTEM32\SHCORE.dll
+0x00007ff9aeef0000 - 0x00007ff9aef24000 	C:\WINDOWS\system32\IMM32.DLL
+0x00007ff9afae0000 - 0x00007ff9afc18000 	C:\WINDOWS\system32\MSCTF.dll
+0x00007ff9aaa90000 - 0x00007ff9aacea000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.9600.16384_none_62475f7becb72503\COMCTL32.dll
+0x000000006c0c0000 - 0x000000006c191000 	C:\Program Files\Java\jre7\bin\msvcr100.dll
+0x000000006b9a0000 - 0x000000006c0bf000 	C:\Program Files\Java\jre7\bin\server\jvm.dll
+0x00007ff9ab340000 - 0x00007ff9ab349000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ff99d370000 - 0x00007ff99d38f000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ff9af2c0000 - 0x00007ff9af2c7000 	C:\WINDOWS\system32\PSAPI.DLL
+0x00007ff9af2d0000 - 0x00007ff9af328000 	C:\WINDOWS\system32\WS2_32.dll
+0x00007ff99d280000 - 0x00007ff99d2aa000 	C:\WINDOWS\SYSTEM32\WINMMBASE.dll
+0x00007ff9aeee0000 - 0x00007ff9aeee9000 	C:\WINDOWS\system32\NSI.dll
+0x00007ff9ad4e0000 - 0x00007ff9ad52a000 	C:\WINDOWS\SYSTEM32\cfgmgr32.dll
+0x00007ff9ac000000 - 0x00007ff9ac026000 	C:\WINDOWS\SYSTEM32\DEVOBJ.dll
+0x000000006c480000 - 0x000000006c48f000 	C:\Program Files\Java\jre7\bin\verify.dll
+0x000000006c450000 - 0x000000006c478000 	C:\Program Files\Java\jre7\bin\java.dll
+0x000000006c430000 - 0x000000006c445000 	C:\Program Files\Java\jre7\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=Cp1252 -Xbootclasspath:C:\Users\Emily Pakulski\Downloads\adt-bundle-windows-x86_64-20130917\adt-bundle-windows-x86_64-20130917\sdk\platforms\android-19\android.jar 
+java_command: io.linger.Sha256Crypt
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x64;C:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\git\cmd;C:\HashiCorp\Vagrant\bin;C:\Users\Emily Pakulski\Downloads\adt-bundle-windows-x86_64-20130917\adt-bundle-windows-x86_64-20130917\sdk\platform-tools;C:\Program Files\nodejs\;C:\Program Files (x86)\Subversion\bin;C:\Users\Emily Pakulski\AppData\Roaming\npm
+USERNAME=Emily Pakulski
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 8 , 64 bit Build 9200 
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 58 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, ht, tsc, tscinvbit, tscinv
+
+Memory: 4k page, physical 8264980k(4467600k free), swap 15867156k(9525248k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (23.7-b01) for windows-amd64 JRE (1.7.0_17-b02), built on Mar  1 2013 03:38:30 by "java_re" with unknown MS VC++:1600
+
+time: Sat Mar 08 20:17:28 2014
+elapsed time: 0 seconds
+
