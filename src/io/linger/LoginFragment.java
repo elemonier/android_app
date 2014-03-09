@@ -57,13 +57,10 @@ public class LoginFragment extends Fragment
 						   rootView.findViewById(R.id.phoneTextLogin)).getText().toString();
 				   userUnencryptedPassword = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
-					
-				   byte[] salt = Passwords.getNextSalt();
-				   byte[] bytesEncryptedPass = Passwords.hash(userUnencryptedPassword.toCharArray(), salt);
-				   
+
 				   // encryption
-				   String userSalt = Passwords.bytesArrayToString(salt);
-				   String userEncryptedPass = Passwords.bytesArrayToString(bytesEncryptedPass);
+				   String userSalt = Sha256Crypt.generateSalt();
+				   String userEncryptedPass = Sha256Crypt.Sha256_crypt(userUnencryptedPassword, userSalt);
 				   
 				   String[] userData = { userPhoneNumber, userEncryptedPass, userSalt }; 
 				   Gson gson = new Gson();
@@ -81,54 +78,7 @@ public class LoginFragment extends Fragment
 		
 		return rootView;
 	}
-	
-//	 /** Source: https://www.owasp.org/index.php/Hashing_Java */
-//	 public byte[] getHash(String password, byte[] salt) throws NoSuchAlgorithmException {
-//	       MessageDigest digest = MessageDigest.getInstance("SHA-256");
-//	       digest.reset();
-//	       digest.update(salt);
-//	       try {
-//			return digest.digest(password.getBytes("UTF-8"));
-//		} catch (UnsupportedEncodingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	 }
-//	
-//	/** Source: http://stackoverflow.com/questions/18142745/how-do-i-generate-a-salt-in-java-for-salted-hash*/
-//	 public byte[] generateSalt() {
-//	        SecureRandom random = new SecureRandom();
-//	        byte bytes[] = new byte[20];
-//	        random.nextBytes(bytes);
-//	        return bytes;
-//	    }
-//
-//	public String bytetoString(byte[] input)
-//	{
-//		return org.apache.commons.codec.binary.Base64.encodeBase64String(input);
-//	}
-//
-//	public byte[] getHashWithSalt(String input, HashingTechnique technique, byte[] salt) 
-//			throws NoSuchAlgorithmException 
-//	{
-//		MessageDigest digest = MessageDigest.getInstance(technique.value);
-//		digest.reset();
-//		digest.update(salt);
-//		byte[] hashedBytes = digest.digest(stringToByte(input));
-//		return hashedBytes;
-//	}
-//	
-//	public byte[] stringToByte(String input)
-//	{
-//		if (Base64.isBase64(input))
-//		{
-//			return Base64.decodeBase64(input);
-//	    }
-//		else
-//		{
-//			return Base64.encodeBase64(input.getBytes());
-//	    }
-//	}
+
 	 
 	/** 
 	 * AsyncTask to connect to database in order to check login information and

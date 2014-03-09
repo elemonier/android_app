@@ -51,10 +51,9 @@ public final class Sha256Crypt
 	static private final String sha256_rounds_prefix = "rounds=";
 	static private final int ROUNDS_DEFAULT = 110000;
 	static private final int SALT_LENGTH = 16;
-	static private final String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-	
-	// TODO fix "ab" at the beginning from removing ./ and prevent ArrayIndexOutOfBounds on line 268
-	static private final String itoa64 = "ab0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	static private final String itoa64 = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	static private final String SALTCHARS = itoa64;
+//	static private final String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 	
 	static private MessageDigest getSHA256()
 	{
