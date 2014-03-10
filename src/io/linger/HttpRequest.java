@@ -16,6 +16,9 @@ public class HttpRequest extends AsyncTask<String, Integer, Void>
 	public static final String URL = "http://www.linger.io";
 	public static final String URL_REGISTRATION = URL + "/app/register";
 	public static final String URL_LOGIN = URL + "/app/login";
+	public static final String SYNC_CONTACTS = URL + "/app/contacts/";
+	public static final String SYNC_INBOX = URL + "/app/inmessages";
+	public static final String SYNC_OUTBOX = URL + "/app/outmessages";
 	
 	/**
 	 * 
@@ -26,7 +29,7 @@ public class HttpRequest extends AsyncTask<String, Integer, Void>
 	public HttpRequest(String json, String url, String postHeader)
 	{
 		execute(json, url, postHeader);
-		Log.v("Testing", json);
+//		Log.v("Testing", json);
 	}
 	
 	public HttpRequest(String json, String postHeader)

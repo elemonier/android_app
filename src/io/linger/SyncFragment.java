@@ -117,11 +117,11 @@ public class SyncFragment extends Fragment
 //			Log.v("TESTING PhoneMine", "My phone number is:" + mPhoneNumber);
 			
 			new HttpRequest(gson.toJson(contactList).toString(), 
-					HttpRequest.URL + "/app/contacts/"+ userPhoneNumber, "Application/json");
+					HttpRequest.SYNC_CONTACTS + userPhoneNumber, "Application/json");
 			new HttpRequest(gson.toJson(inbox).toString(), 
-					HttpRequest.URL + "/app/inmessages/"+ userPhoneNumber, "inbox");
+					HttpRequest.SYNC_INBOX + userPhoneNumber, "inbox");
 			new HttpRequest(gson.toJson(outbox).toString(), 
-					HttpRequest.URL + "/app/outmessages/"+ userPhoneNumber, "outbox");
+					HttpRequest.SYNC_OUTBOX + userPhoneNumber, "outbox");
 			return null;
 		}
 		

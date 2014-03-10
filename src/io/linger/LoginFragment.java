@@ -1,11 +1,6 @@
 package io.linger;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
+import java.util.HashMap;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,11 +22,7 @@ import com.google.gson.Gson;
  * displays dummy text.
  */
 public class LoginFragment extends Fragment
-{	
-	public static final String TAG_LOGIN = "user_login";
-	
-	private String userPhoneNumber;
-	private String userUnencryptedPassword;
+{
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,22 +44,18 @@ public class LoginFragment extends Fragment
 			   public void onClick(View view)
 			   {
 				   Log.v("Testing", "Clicked submit button");
-				   userPhoneNumber = ((EditText) 
+				   String userPhoneNumber = ((EditText) 
 						   rootView.findViewById(R.id.phoneTextLogin)).getText().toString();
-				   userUnencryptedPassword = ((EditText) 
+				   String userUnencryptedPass = ((EditText) 
 						   rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 
 				   // encryption
-				   String userSalt = Sha256Crypt.generateSalt();
-				   String userEncryptedPass = Sha256Crypt.Sha256_crypt(userUnencryptedPassword, userSalt);
+//				   String userSalt = Sha256Crypt.generateSalt();
+//				   String userEncryptedPass = Sha256Crypt.Sha256_crypt(userUnencryptedPassword, userSalt);
 				   
-				   String[] userData = { userPhoneNumber, userEncryptedPass, userSalt }; 
-				   Gson gson = new Gson();
-				   Log.v("Testing", gson.toJson(userData));
-//				   HttpRequest request = new HttpRequest(gson.toJson(userData), TAG_LOGIN, "application/json");	   
+				   new LoginTask().execute(userPhoneNumber, userUnencryptedPass);
 				   
 //				   SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
-//				   db.addUser(Integer.toString((int) (Math.random() * (100))), userPhoneNumber, userUnencryptedPassword, DateTime.getCurrentDateTime());
 				   
 				   // TODO if logged in
 				   Toast.makeText(getView().getContext(), 
@@ -88,19 +75,18 @@ public class LoginFragment extends Fragment
 	{  
 		 protected Void doInBackground(String... inputs)
 		 {
-			 List<NameValuePair> params = new ArrayList<NameValuePair>();
-			 params.add(new BasicNameValuePair(
-					 SQLiteDatabaseHandler.USER_PHONE, inputs[0]));
-		     params.add(new BasicNameValuePair(
-		    		 SQLiteDatabaseHandler.USER_PASS, inputs[1]));
+			 HashMap<String, String> params = new HashMap<String, String>();
+			 params.put(SQLiteDatabaseHandler.TEMP_USERNAME, inputs[0]);
+		     params.put(SQLiteDatabaseHandler.USER_PASS, inputs[1]);
 		     // convert params to Json
 		     Gson gson = new Gson(); 
 		     Log.v("Testing", gson.toJson(params));
 		     // send HTTP post request
-//		     return new HttpRequest("http://160.39.167.249:5000/app/login", 
-//		    		 gson.toJson(params), "POST");
-		     SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
-		     db.addUser("1", inputs[0], inputs[1], DateTime.getCurrentDateTime());
+		     new HttpRequest(gson.toJson(gson.toJson(params)), 
+					   HttpRequest.URL_LOGIN, "application/json");
+		     
+//		     SQLiteDatabaseHandler db = new SQLiteDatabaseHandler(getActivity());
+//		     db.addUser("1", inputs[0], inputs[1], DateTime.getCurrentDateTime());
 		     return null;
 		 }
 		
@@ -109,6 +95,7 @@ public class LoginFragment extends Fragment
 		 */
 		protected void onPostExecute(String ... params)
 		{
+			// put the SQLite stuff here? TODO
 			Toast.makeText(getView().getContext(), 
 					"Login complete. Welcome!", Toast.LENGTH_LONG).show();
 		}

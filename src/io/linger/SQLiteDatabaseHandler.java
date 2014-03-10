@@ -46,6 +46,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper
 	public static final String USER_CREATED_AT = "user_created_at";
 	public static final String USER_UPDATED_AT = "user_updated_at";
 	
+	public static final String TEMP_USERNAME = "username";
+	
     /** Constructor. */
     public SQLiteDatabaseHandler(Context context)
     {
