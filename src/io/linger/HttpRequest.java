@@ -10,16 +10,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
 
-
 public class HttpRequest extends AsyncTask<String, Integer, Void>
 {
 	public static final String URL = "http://www.linger.io";
 	public static final String URL_REGISTRATION = URL + "/app/register";
 	public static final String URL_LOGIN = URL + "/app/login";
 	public static final String SYNC_CONTACTS = URL + "/app/contacts/";
-	public static final String SYNC_INBOX = URL + "/app/inmessages";
-	public static final String SYNC_OUTBOX = URL + "/app/outmessages";
-	
+	public static final String SYNC_INBOX = URL + "/app/inmessages/";
+	public static final String SYNC_OUTBOX = URL + "/app/outmessages/";
+
 	/**
 	 * 
 	 * @param json
@@ -31,7 +30,7 @@ public class HttpRequest extends AsyncTask<String, Integer, Void>
 		execute(json, url, postHeader);
 		Log.v("Testing", json);
 	}
-	
+
 	public HttpRequest(String json, String postHeader)
 	{
 		this(json, URL, postHeader);
@@ -46,10 +45,8 @@ public class HttpRequest extends AsyncTask<String, Integer, Void>
 
 	public void postData(String jsonStr, String urlString, String postHeader)
 	{
-
 		HttpPost httppost = new HttpPost(urlString);
 		Log.v("Testing", urlString);
-
 		try
 		{
 			httppost.setEntity(new StringEntity(jsonStr));
