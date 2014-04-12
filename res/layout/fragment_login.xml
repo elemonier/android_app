@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LandingActivity$DummySectionFragment" >
+    >
 
 	<LinearLayout
 	    android:id="@+id/button_layout"
@@ -17,12 +17,31 @@
 		android:layout_centerVertical="true"
 	>
 	
+		<ImageView
+		 	android:id="@+id/logo_image"
+		  	android:layout_width="100dp"
+		  	android:layout_height="wrap_content"
+		  	android:adjustViewBounds="true"
+		   	android:contentDescription="@string/logo_description"
+		   	android:src="@drawable/logo" 
+		/>
+		
+		<!-- Linger title text -->
+		<TextView
+	        android:id="@+id/title_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        style="@style/title_text"
+	        android:text="@string/app_name"
+	    />
+	
+		
 		<TextView
 	        android:id="@+id/section_label"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        style="@style/Headings"
-	        android:text="@string/login_prompt"
+	        style="@style/title_text"
+	        android:text="@string/elevator_speech"
 	    />
 		
 		<!-- Input phone number field -->
@@ -32,7 +51,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="phone" 
-		    style="@style/Hint"
+		    style="@style/hint"
 	        android:hint="@string/phone_number_field"
 	    >
 		<requestFocus />
@@ -45,7 +64,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="textPassword" 
-		    style="@style/Hint"
+		    style="@style/hint"
 		    android:hint="@string/password_field"
 		/>
 	</LinearLayout>

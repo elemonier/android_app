@@ -2,23 +2,19 @@ package io.linger;
 
 import java.util.HashMap;
 
-import android.graphics.Typeface;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class RegistrationFragment extends Fragment
+public class RegistrationActivity extends Activity
 {
 	private String userName;
 	private String userEmail;
@@ -29,16 +25,13 @@ public class RegistrationFragment extends Fragment
 	public static final String TAG_REGISTER = "user_register";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState)
+	protected void onCreate(Bundle savedInstanceState)
 	{
-		final View rootView = inflater.inflate(R.layout.fragment_registration, container, false);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_registration);
 		
-		// set title text font
-		TextView titleText = (TextView) rootView.findViewById(R.id.section_label);
-		Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),
-				"fonts/grandhotel_regular.ttf");
-		titleText.setTypeface(typeFace);
+		/*
+		final View rootView = findViewById(android.R.id.content);
 		
 		// set listener for button
 		Button submitButton = (Button) rootView.findViewById(R.id.button_submit_login);
@@ -74,7 +67,14 @@ public class RegistrationFragment extends Fragment
 				   }
 			   }
 		});
-		return rootView;
+		*/
+	}
+	
+	/** Called on clicking the login text. Simply closes this activity to 
+	 * return to the previous one. */
+	public void toLogin(View view)
+	{
+		finish();
 	}
 
 

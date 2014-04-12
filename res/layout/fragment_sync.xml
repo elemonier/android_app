@@ -14,7 +14,6 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentRight="true"
-		style="@style/SwipeIndicators"
 		android:background="@android:color/transparent"
 		android:text="@string/registration_indicator"
 	/> 
@@ -25,7 +24,6 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentLeft="true"
 		android:layout_marginLeft="0dp"
-		style="@style/SwipeIndicators"
 		android:background="@android:color/transparent"
 		android:text="@string/login_indicator"
 	/>
@@ -60,7 +58,7 @@
 		    android:id="@+id/last_sync_date_label"
 		    android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			style="@style/BodyText"
+			style="@style/body_text"
 		/>
 		
 		

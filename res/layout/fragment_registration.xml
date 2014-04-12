@@ -23,7 +23,7 @@
 	        android:id="@+id/section_label"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        style="@style/Headings"
+	        style="@style/title_text"
 	        android:text="@string/registration_prompt"
 	    />
 		
@@ -34,7 +34,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="textCapCharacters" 
-		    style="@style/Hint"
+		    style="@style/hint"
 	        android:hint="@string/name_field"
 	    >
 		<requestFocus />
@@ -47,7 +47,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="phone" 
-		    style="@style/Hint"
+		    style="@style/hint"
 	        android:hint="@string/phone_number_field"
 	    >
 		<requestFocus />
@@ -60,7 +60,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="textEmailAddress" 
-		    style="@style/Hint"
+		    style="@style/hint"
 	        android:hint="@string/email_field"
 	    >
 		<requestFocus />
@@ -73,7 +73,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:inputType="textPassword" 
-		    style="@style/Hint"
+		    style="@style/hint"
 		    android:hint="@string/password_field"
 		>
 		<requestFocus />

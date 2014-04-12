@@ -15,41 +15,43 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="android:windowBackground">@color/background</item>
+        <item name="android:typeface">sans</item>
     </style>
 
     <style name="BlueButton">
         <item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:layout_gravity">center</item>
-		<item name="android:textColor">@color/dark_gray</item>
+		<item name="android:textColor">@color/white</item>
 		<item name="android:background">@drawable/standard_button</item>
 	</style>
-	
-   	<style name="Title" parent="@android:style/TextAppearance.Medium">
+    
+   	<style name="title_text" parent="@android:style/TextAppearance.Medium">
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/light_green</item>
-        <item name="android:textSize">60sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">80sp</item>
     </style>
     
-   	<style name="Headings" parent="@android:style/TextAppearance.Medium">
+   	<style name="body_text" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/body_text_color</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/dark_gray</item>
-        <item name="android:textSize">35sp</item>
     </style>
     
-   	<style name="SwipeIndicators" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/dark_gray</item>
-        <item name="android:textSize">22sp</item>
-    </style>
-    
-   	<style name="BodyText" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/myWhite</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-    
-   	<style name="Hint">
+   	<style name="hint">
    	    <item name="android:textColorHint">@color/lightGray</item>
    	    <item name="android:background">@drawable/edittext_background</item>
    	    <item name="android:textCursorDrawable">@drawable/cursor</item>
+   	</style>
+   	
+   	<style name="footer">
+   	    <item name="android:clickable">true</item>
+   	    <item name="android:textColor">@color/body_text_color</item>
+   	    <item name="android:textSize">18sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+	    <item name="android:layout_centerHorizontal">true</item>
    	</style>
 </resources>
