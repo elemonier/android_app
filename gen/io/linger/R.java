@@ -41,41 +41,35 @@ public final class R {
         public static final int edittext_background=0x7f020001;
         public static final int ic_action_about=0x7f020002;
         public static final int ic_action_help=0x7f020003;
-        public static final int ic_action_settings=0x7f020004;
-        public static final int ic_action_web_site=0x7f020005;
-        public static final int large_logo_with_text=0x7f020006;
-        public static final int left_facing_arrows=0x7f020007;
+        public static final int ic_action_send_now=0x7f020004;
+        public static final int ic_action_settings=0x7f020005;
+        public static final int ic_action_web_site=0x7f020006;
+        public static final int large_logo_with_text=0x7f020007;
         public static final int logo=0x7f020008;
-        public static final int right_facing_arrows=0x7f020009;
-        public static final int standard_button=0x7f02000a;
-        public static final int tinted_background=0x7f02000b;
-        public static final int white_background=0x7f02000c;
+        public static final int standard_button=0x7f020009;
+        public static final int tinted_background=0x7f02000a;
+        public static final int white_background=0x7f02000b;
     }
     public static final class id {
-        public static final int action_about=0x7f09001a;
-        public static final int action_settings=0x7f090018;
-        public static final int action_website=0x7f090019;
-        public static final int button_layout=0x7f090010;
-        public static final int button_submit_login=0x7f090011;
-        public static final int button_sync=0x7f090016;
+        public static final int action_settings=0x7f090014;
+        public static final int action_submit=0x7f090015;
+        public static final int button_sync=0x7f090012;
         public static final int description_label_a=0x7f090001;
         public static final int description_label_b=0x7f090002;
         public static final int description_label_c=0x7f090003;
         public static final int description_label_d=0x7f090004;
-        public static final int emailTextLogin=0x7f090013;
         public static final int emailTextRegistration=0x7f09000e;
         public static final int founders_label=0x7f090005;
-        public static final int last_sync_date_label=0x7f090017;
+        public static final int last_sync_date_label=0x7f090013;
         public static final int list=0x7f090006;
         public static final int login_link=0x7f09000f;
-        public static final int login_swipe_label=0x7f090015;
+        public static final int login_swipe_label=0x7f090011;
         public static final int logo_image=0x7f090007;
-        public static final int nameTextLogin=0x7f090012;
         public static final int nameTextRegistration=0x7f09000d;
         public static final int passEditTextLogin=0x7f09000b;
         public static final int phoneTextLogin=0x7f09000a;
         public static final int register_link=0x7f09000c;
-        public static final int register_swipe_label=0x7f090014;
+        public static final int register_swipe_label=0x7f090010;
         public static final int section_label=0x7f090009;
         public static final int title_label=0x7f090000;
         public static final int title_text=0x7f090008;
@@ -85,53 +79,51 @@ public final class R {
         public static final int activity_contact_list=0x7f030001;
         public static final int activity_landing=0x7f030002;
         public static final int activity_registration=0x7f030003;
-        public static final int fragment_login=0x7f030004;
-        public static final int fragment_registration=0x7f030005;
-        public static final int fragment_sync=0x7f030006;
+        public static final int fragment_sync=0x7f030004;
     }
     public static final class menu {
         public static final int about=0x7f080000;
         public static final int home=0x7f080001;
         public static final int landing=0x7f080002;
-        public static final int login=0x7f080003;
-        public static final int registration=0x7f080004;
-        public static final int second=0x7f080005;
+        public static final int registration=0x7f080003;
+        public static final int second=0x7f080004;
     }
     public static final class string {
-        public static final int about_a=0x7f060011;
-        public static final int about_b=0x7f060012;
-        public static final int about_c=0x7f060013;
-        public static final int about_d=0x7f060014;
+        public static final int about_a=0x7f060012;
+        public static final int about_b=0x7f060013;
+        public static final int about_c=0x7f060014;
+        public static final int about_d=0x7f060015;
         public static final int action_about=0x7f060001;
+        public static final int action_send=0x7f060003;
         /**  Action Bar 
          */
         public static final int action_settings=0x7f060000;
         public static final int action_web_site=0x7f060002;
         /**  General 
          */
-        public static final int app_name=0x7f060003;
+        public static final int app_name=0x7f060004;
         /**  Login/landing activity 
          */
-        public static final int elevator_speech=0x7f060007;
-        public static final int email_field=0x7f06000b;
-        public static final int founders=0x7f060015;
-        public static final int login_indicator=0x7f060008;
-        public static final int logo_description=0x7f060005;
-        public static final int name_field=0x7f06000a;
-        public static final int password_field=0x7f06000d;
-        public static final int phone_number_field=0x7f06000c;
-        public static final int registration_indicator=0x7f060009;
+        public static final int elevator_speech=0x7f060008;
+        public static final int email_field=0x7f06000c;
+        public static final int founders=0x7f060016;
+        public static final int login_indicator=0x7f060009;
+        public static final int logo_description=0x7f060006;
+        public static final int name_field=0x7f06000b;
+        public static final int password_field=0x7f06000e;
+        public static final int phone_number_field=0x7f06000d;
+        public static final int registration_indicator=0x7f06000a;
         /**  Registration fragment 
          */
-        public static final int registration_prompt=0x7f06000f;
-        public static final int submit_fields=0x7f06000e;
+        public static final int registration_prompt=0x7f060010;
+        public static final int submit_fields=0x7f06000f;
         /**  Landing fragment 
          */
-        public static final int sync=0x7f060006;
+        public static final int sync=0x7f060007;
         /**  About page 
          */
-        public static final int title_activity_about=0x7f060010;
-        public static final int title_activity_landing=0x7f060004;
+        public static final int title_activity_about=0x7f060011;
+        public static final int title_activity_landing=0x7f060005;
     }
     public static final class style {
         /** 

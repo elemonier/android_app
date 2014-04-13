@@ -3,8 +3,10 @@ package io.linger;
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
@@ -19,6 +21,8 @@ public class HttpRequest extends AsyncTask<String, Integer, Void>
 	public static final String SYNC_INBOX = URL + "/app/inmessages/";
 	public static final String SYNC_OUTBOX = URL + "/app/outmessages/";
 
+	private String response;
+	
 	/**
 	 * 
 	 * @param json
@@ -52,7 +56,9 @@ public class HttpRequest extends AsyncTask<String, Integer, Void>
 			httppost.setEntity(new StringEntity(jsonStr));
 			httppost.setHeader("Accept", "application/json");
 			httppost.setHeader("Content-type", "application/json");
-			new DefaultHttpClient().execute(httppost);
+			
+			ResponseHandler<String> responseHandler = new BasicResponseHandler();
+			response = new DefaultHttpClient().execute(httppost, responseHandler);
 		}
 		catch (ClientProtocolException e)
 		{
@@ -62,6 +68,13 @@ public class HttpRequest extends AsyncTask<String, Integer, Void>
 		{
 			e.printStackTrace();
 		}	
+	}
+	
+	/** Returns whatever response this HttpRequest got. */
+	public String getResponse()
+	{
+		Log.v("Testing", response);
+		return response;
 	}
 }
 

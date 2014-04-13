@@ -12,18 +12,11 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Database handler that deals with the temporary login table, which allows
  * the app to keep track of whether a user is logged in, and who that user is.
  * 
- * Explanation of implementation:
- * The SQLite table in this class starts empty. When a user logs in, the
- * user's information (name, email, network, etc.) are pushed onto that row.
- * When the application is running, data about the user can be 
- * 
- * @author Emily Pakulski, modified Tamada's code
- * @author Ravi Tamada, original code from tutorial on AndroidHive.info
  */
 
 public class SQLiteDatabaseHandler extends SQLiteOpenHelper
 {
-    // All Static variables
+    // All static variables
     private static final int DATABASE_VERSION = 1;
  
     private static final String DATABASE_NAME = "linger_db";
@@ -39,14 +32,11 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper
 	public static final String USER_ID = "user_id";
 	public static final String USER_NAME = "user_name";
 	public static final String USER_PHONE = "user_phone";
-	public static final String USER_ENCRYPTED_PASS = "user_encrypted_pass";
-	public static final String USER_PASS = "password";
+	public static final String USER_HASH = "hash";
+	public static final String USER_UNENCRYPTED_PASS = "user_unencrypted_pass";
 	public static final String USER_SALT = "user_salt";
 	public static final String USER_EMAIL = "user_email";
-	public static final String USER_CREATED_AT = "user_created_at";
-	public static final String USER_UPDATED_AT = "user_updated_at";
-	
-	public static final String TEMP_USERNAME = "username";
+	public static final String USER_ACCESS_TOKEN = "secret_key";
 	
     /** Constructor. */
     public SQLiteDatabaseHandler(Context context)
@@ -62,27 +52,22 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_LOGIN + "("
-                + USER_ID + " INTEGER PRIMARY KEY,"
-                + USER_NAME + " TEXT,"
                 + USER_PHONE + " TEXT UNIQUE,"
-                + USER_CREATED_AT + " TEXT" + ");";
+                + USER_ACCESS_TOKEN + "TEXT" + ");";
         db.execSQL(CREATE_LOGIN_TABLE);
     }
     
     /**
      * Storing user details in database (called when user logs in).
      * */
-    public void addUser(String userId, String userName, String userPhone,
-    		String userCreatedAt)
+    public void addUser(String userPhone, String userAccessToken)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         // creating row containing user data
         ContentValues values = new ContentValues();
 
-        values.put(USER_ID, userId); 
-        values.put(USER_NAME, userName);
         values.put(USER_PHONE, userPhone);
-        values.put(USER_CREATED_AT, userCreatedAt);
+        values.put(USER_ACCESS_TOKEN, userAccessToken);
         
         db.insert(TABLE_LOGIN, null, values); // insert row
         db.close(); // Closing database connection
@@ -104,10 +89,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper
         // fill hashmap "user"
         if(cursor.getCount() > 0)
         {
-            user.put(USER_ID, cursor.getString(1));
-            user.put(USER_NAME, cursor.getString(2));
-            user.put(USER_PHONE, cursor.getString(3)); 
-            user.put(USER_CREATED_AT, cursor.getString(4));
+            user.put(USER_PHONE, cursor.getString(1));
+            user.put(USER_ACCESS_TOKEN, cursor.getString(2));
         }
         cursor.close();
         db.close();
