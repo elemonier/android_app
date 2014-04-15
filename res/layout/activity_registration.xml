@@ -5,41 +5,36 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    >
+    >	
 
-    <!-- leaf logo -->
-	<ImageView
-	 	android:id="@+id/logo_image"
-	  	android:layout_width="110dp"
-	  	android:layout_height="wrap_content"
-	  	android:adjustViewBounds="true"
-	  	android:layout_centerHorizontal="true"
-	  	android:layout_marginBottom="-20dp"
-	   	android:contentDescription="@string/logo_description"
-	   	android:src="@drawable/logo" 
-	/>
-	
-	<!-- Linger title text -->
-	<TextView
-		android:id="@+id/title_text"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    style="@style/title_text"
-	    android:text="@string/app_name"
-	    android:layout_below="@id/logo_image"
-	/>
-		
-	<!-- description of what Linger does -->
-	<TextView
-		android:id="@+id/section_label"
-		android:layout_width="wrap_content"
+    <!-- text field for registration functionality: name -->
+	<EditText
+		android:layout_marginTop="50dp"
+		android:id="@+id/nameTextRegistration"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		style="@style/body_text"
-		android:text="@string/elevator_speech"
-		android:layout_below="@id/title_text"
-	/>
-		
-	<!-- text field for login functionality: phone number -->
+		android:inputType="phone" 
+		style="@style/hint"
+	    android:hint="@string/name_field"
+	>
+	<requestFocus />
+	</EditText>
+	
+	<!-- text field for registration functionality: email -->
+	<EditText
+		android:id="@+id/emailTextRegistration"
+		android:layout_marginTop="10dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:inputType="phone"
+		style="@style/hint"
+	    android:hint="@string/email_field"
+	    android:layout_below="@id/nameTextRegistration"
+	>
+	<requestFocus />
+	</EditText>
+    		
+	<!-- text field for registration functionality: phone number -->
 	<EditText
 		android:id="@+id/phoneTextLogin"
 		android:layout_marginTop="10dp"
@@ -48,12 +43,12 @@
 		android:inputType="phone" 
 		style="@style/hint"
 	    android:hint="@string/phone_number_field"
-	    android:layout_below="@id/section_label"
+	    android:layout_below="@id/emailTextRegistration"
 	>
 	<requestFocus />
 	</EditText>
 	
-	<!-- text field for login functionality: password -->
+	<!-- text field for registration functionality: password -->
 	<EditText
 		android:id="@+id/passEditTextLogin"
 		android:layout_marginTop="10dp"
@@ -66,11 +61,11 @@
 	/>
     
 	<TextView
-	    android:id="@+id/register_link"
+	    android:id="@+id/login_link"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    style="@style/footer"
-	    android:text="@string/registration_indicator"
-	    android:onClick="toRegistration"
+	    android:text="@string/login_indicator"
+	    android:onClick="toLogin"
 	/>
 </RelativeLayout>

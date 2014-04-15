@@ -12,7 +12,7 @@
 	    android:id="@+id/title_label"
 	    android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		style="@style/Title"
+		style="@style/title_text"
 		android:layout_centerHorizontal="true"
 	    android:text="@string/app_name"
 	/>
@@ -23,7 +23,6 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/title_label"
 		android:layout_marginTop="10dp"
-		style="@style/SwipeIndicators"
 	    android:text="@string/about_a"
 	/>
 
@@ -33,7 +32,6 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/description_label_a"
 		android:layout_marginTop="10dp"
-		style="@style/SwipeIndicators"
 	    android:text="@string/about_b"
 	/>
 	
@@ -43,7 +41,6 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/description_label_b"
 		android:layout_marginTop="10dp"
-		style="@style/SwipeIndicators"
 	    android:text="@string/about_c"
 	/>
 	
@@ -53,7 +50,6 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/description_label_c"
 		android:layout_marginTop="10dp"
-		style="@style/SwipeIndicators"
 	    android:text="@string/about_d"
 	/>
 	
@@ -63,7 +59,6 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/description_label_d"
 		android:layout_marginTop="10dp"
-		style="@style/SwipeIndicators"
 	    android:text="@string/founders"
 	/>
 </RelativeLayout>

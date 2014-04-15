@@ -1,26 +1,37 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!-- Website -->
+    <!-- Website 
     <item android:id="@+id/action_website"
     	android:icon="@drawable/ic_action_web_site"
         android:title="@string/action_web_site"
         android:showAsAction="always"
     />
+    -->
     
-    <!-- About -->
+    <!-- About
     <item android:id="@+id/action_about"
     	android:icon="@drawable/ic_action_about"
         android:title="@string/action_about"
         android:showAsAction="ifRoom"
     />
-    
-    <!-- Settings -->
+     -->
+     
+    <!-- 
+    // settings
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:icon="@drawable/ic_action_settings"
         android:showAsAction="ifRoom"
         android:title="@string/action_settings"
+    />
+    --> 
+    
+    <!-- Submit -->
+    <item android:id="@+id/action_submit"
+    	android:icon="@drawable/ic_action_send_now"
+        android:title="@string/action_send"
+        android:showAsAction="always"
     />
 
 </menu>
