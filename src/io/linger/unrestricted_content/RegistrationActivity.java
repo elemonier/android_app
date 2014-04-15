@@ -13,13 +13,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 public class RegistrationActivity extends ParentActivity_LoginRegister
 {
-	private String userSalt;
-	
 	public static final String TAG_REGISTER = "user_register";
 
 	private String phoneNumber;
@@ -110,9 +109,9 @@ public class RegistrationActivity extends ParentActivity_LoginRegister
 					Sha256Crypt.Sha256_crypt(unencryptedPass, Sha256Crypt.generateSalt());
 			
 			HashMap<String, String> params = new HashMap<String, String>();
-			params.put(SQLiteDatabaseHandler.USER_PHONE, phoneNumber);
-			params.put(SQLiteDatabaseHandler.USER_EMAIL, userEmail);
 			params.put(SQLiteDatabaseHandler.USER_NAME, userName);
+			params.put(SQLiteDatabaseHandler.USER_EMAIL, userEmail);
+			params.put(SQLiteDatabaseHandler.USER_PHONE, phoneNumber);
 		    params.put(SQLiteDatabaseHandler.USER_HASH, encryptedPass);
 		    
 		    // convert params to Json
@@ -120,27 +119,28 @@ public class RegistrationActivity extends ParentActivity_LoginRegister
 		    Log.v("Testing", gson.toJson(params));
 		    
 		    // send HTTP post request
-//		    HttpRequest accessTokenRequest = new HttpRequest(gson.toJson(gson.toJson(params)), 
-//		    		HttpRequest.URL_LOGIN, "application/json");
-//		    // return the access token
-//		    return accessTokenRequest.getResponse();
-		    return ""; // TEMP FIX WHILE WORKING ON HTTPREQUEST CLASS
+		    String accessTokenRequest = HttpRequest.postData(gson.toJson(gson.toJson(params)), 
+		    		HttpRequest.URL_REGISTRATION, "application/json");
+		    // return the access token
+		    return accessTokenRequest;
 		}
 		
 		/**
 		 * Get value, the access token, back from the server to login by
 		 * putting info into the SQLiteDatabase, creating persistent login.
 		 */
-		protected void onPostExecute(String ... params)
+		@Override
+		protected void onPostExecute(String param)
 		{
-//			UserFunctions.loginUser(getApplicationContext(), phoneNumber, params[0]);
-//			
+			Log.v("Testing", "Registration access token: " + param);
+			UserFunctions.loginUser(getApplicationContext(), phoneNumber, param);
+			
 			Log.v("Testing", 
 					"Registered. Is user logged in? " +
 							UserFunctions.isUserLoggedIn(getApplicationContext()));
-//			
-//			Toast.makeText(rootView.getContext(), 
-//					"Login complete. Welcome!", Toast.LENGTH_SHORT).show();
+			
+			Toast.makeText(rootView.getContext(), 
+					"Registered. Confirm your email and login.", Toast.LENGTH_SHORT).show();
 		}
 	}
 }

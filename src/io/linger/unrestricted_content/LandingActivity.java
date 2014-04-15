@@ -17,24 +17,15 @@ import io.linger.R;
 import io.linger.SQLiteDatabaseHandler;
 import io.linger.Sha256Crypt;
 import io.linger.UserFunctions;
-import io.linger.R.id;
-import io.linger.R.layout;
-import io.linger.R.menu;
 
 import java.util.HashMap;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -94,9 +85,7 @@ public class LandingActivity extends ParentActivity_LoginRegister
 	 * check user values in SQLite Database.
 	 */
 	public class GetSaltTask extends AsyncTask<String, Void, String>
-	{  		
-		private HttpRequest saltRequest;
-		
+	{
 		@Override
 		protected String doInBackground(String... inputs)
 		{
@@ -134,7 +123,6 @@ public class LandingActivity extends ParentActivity_LoginRegister
 	public class GetAccessToken extends AsyncTask<String, Void, String>
 	{
 		private String encryptedPass;
-		private String accessTokenRequest;
 		
 		protected String doInBackground(String... inputs)
 		{
