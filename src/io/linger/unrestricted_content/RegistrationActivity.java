@@ -1,26 +1,22 @@
-package io.linger;
+package io.linger.unrestricted_content;
 
-import io.linger.LandingActivity.GetSaltTask;
+import io.linger.HttpRequest;
+import io.linger.R;
+import io.linger.SQLiteDatabaseHandler;
+import io.linger.Sha256Crypt;
+import io.linger.UserFunctions;
 
 import java.util.HashMap;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-public class RegistrationActivity extends Activity
+public class RegistrationActivity extends ParentActivity_LoginRegister
 {
 	private String userSalt;
 	
@@ -31,7 +27,6 @@ public class RegistrationActivity extends Activity
 	private String userName;
 	private String userEmail;
 	
-	private View rootView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -39,47 +34,13 @@ public class RegistrationActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
 		
-		rootView = findViewById(android.R.id.content);
-		
+		setRootView(android.R.id.content);
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.registration, menu);
-		return true;
-	}
-	
-	/** 
-	 * Calls certain methods depending on what action bar button is pressed.
-	 * developer.android.com/training/basics/actionbar/adding-buttons.html
-	 */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-	    // Handle presses on the action bar items
-	    switch (item.getItemId())
-	    {
-	        case (R.id.action_submit):
-	            submitFields();
-	            return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
-	}
-	
-	/** Show the user the message string parameter passed. */
-	public void showToast(String message)
-	{
-		Toast toast = Toast.makeText(rootView.getContext(), message, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-		toast.show();
-	}
-	
+
 	/** Called when user clicks the send button in the action bar. */
 	public void submitFields()
 	{
+		/* get values from text fields */
 		userName = ((EditText)
 				rootView.findViewById(R.id.nameTextRegistration)).getText().toString();
 		userEmail = ((EditText)
@@ -89,18 +50,39 @@ public class RegistrationActivity extends Activity
 		 unencryptedPass = ((EditText) 
 				rootView.findViewById(R.id.passEditTextLogin)).getText().toString();
 
-		// check if fields are filled in
+		/* check if fields are filled in. Notify user if there is an error. */
+		// check username
 		if(userName.length() < 2 || userName.length() > 15)
 			showToast("Enter your 2-15 letter name.");
-	
-		if (phoneNumber.length() != LandingActivity.PHONE_NUM_LEN)
+		// check email address
+		else if(!isValidEmailAddress(userEmail))
+			showToast("Enter a valid email address.");
+		// check phone number
+		else if (phoneNumber.length() != LandingActivity.PHONE_NUM_LEN)
 			showToast("Enter your 10-digit phone number.");
+		// check password
 		else if (unencryptedPass.length() < LandingActivity.MIN_PASS_LEN || 
 				unencryptedPass.length() > LandingActivity.MAX_PASS_LEN)
 			showToast("Passwords must be " + LandingActivity.MIN_PASS_LEN + "-" 
 				+ LandingActivity.MAX_PASS_LEN + " characters.");
 		else // if they are filled in, try to log in
 			new RegistrationTask().execute();
+	}
+	
+	/**
+	 * Returns true if valid email, false if not.
+	 * @param email
+	 */
+	public boolean isValidEmailAddress(String email) 
+	{
+	    // email addresses are a max of 256 chars long
+		if (email.length() > 256) 
+	    	return false;
+		if (!email.contains("@"))
+			return false;
+		java.util.regex.Pattern p = java.util.regex.Pattern.compile(".+@.+\\.[a-z]+");
+	       java.util.regex.Matcher m = p.matcher(email);
+	       return m.matches();
 	}
 	
 	/** Called on clicking the login text. Simply closes this activity to 
@@ -138,10 +120,11 @@ public class RegistrationActivity extends Activity
 		    Log.v("Testing", gson.toJson(params));
 		    
 		    // send HTTP post request
-		    HttpRequest accessTokenRequest = new HttpRequest(gson.toJson(gson.toJson(params)), 
-		    		HttpRequest.URL_LOGIN, "application/json");
-		    // return the access token
-		    return accessTokenRequest.getResponse();
+//		    HttpRequest accessTokenRequest = new HttpRequest(gson.toJson(gson.toJson(params)), 
+//		    		HttpRequest.URL_LOGIN, "application/json");
+//		    // return the access token
+//		    return accessTokenRequest.getResponse();
+		    return ""; // TEMP FIX WHILE WORKING ON HTTPREQUEST CLASS
 		}
 		
 		/**

@@ -116,12 +116,12 @@ public class SyncFragment extends Fragment
 			
 //			Log.v("TESTING PhoneMine", "My phone number is:" + mPhoneNumber);
 			
-			new HttpRequest(gson.toJson(contactList).toString(), 
-					HttpRequest.SYNC_CONTACTS + userPhoneNumber, "Application/json");
-			new HttpRequest(gson.toJson(inbox).toString(), 
-					HttpRequest.SYNC_INBOX + userPhoneNumber, "inbox");
-			new HttpRequest(gson.toJson(outbox).toString(), 
-					HttpRequest.SYNC_OUTBOX + userPhoneNumber, "outbox");
+//			new HttpRequest(gson.toJson(contactList).toString(), 
+//					HttpRequest.SYNC_CONTACTS + userPhoneNumber, "Application/json");
+//			new HttpRequest(gson.toJson(inbox).toString(), 
+//					HttpRequest.SYNC_INBOX + userPhoneNumber, "inbox");
+//			new HttpRequest(gson.toJson(outbox).toString(), 
+//					HttpRequest.SYNC_OUTBOX + userPhoneNumber, "outbox");
 			return null;
 		}
 		

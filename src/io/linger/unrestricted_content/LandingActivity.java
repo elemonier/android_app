@@ -1,4 +1,4 @@
-package io.linger;
+package io.linger.unrestricted_content;
 
 /**
  * Activity that opens when you turn on the app.
@@ -11,6 +11,15 @@ package io.linger;
 //import android.content.Context;
 //import android.content.Intent;
 //import android.content.IntentFilter;
+
+import io.linger.HttpRequest;
+import io.linger.R;
+import io.linger.SQLiteDatabaseHandler;
+import io.linger.Sha256Crypt;
+import io.linger.UserFunctions;
+import io.linger.R.id;
+import io.linger.R.layout;
+import io.linger.R.menu;
 
 import java.util.HashMap;
 
@@ -30,13 +39,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-public class LandingActivity extends Activity 
+public class LandingActivity extends ParentActivity_LoginRegister 
 {
 	public static final int PHONE_NUM_LEN = 10;
 	public static final int MIN_PASS_LEN = 5;
 	public static final int MAX_PASS_LEN = 20;
 	
-	private View rootView;
 	private String phoneNumber;
 	private String unencryptedPass;
 	
@@ -47,46 +55,15 @@ public class LandingActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_landing);
 
-		rootView = findViewById(android.R.id.content);
+		setRootView(android.R.id.content);
 		
 		// set title text font to our custom imported font
-		TextView titleText = (TextView) rootView.findViewById(R.id.title_text);
-		Typeface typeFace = Typeface.createFromAsset(this.getAssets(), 
-				"fonts/century_gothic_bold.ttf");
-		titleText.setTypeface(typeFace);
+		setFont(R.id.title_text);
 		
 		// set up checking for battery changes for when to upload
 //	    registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.landing, menu);
-		return true;
-	}
-	
-	/** 
-	 * Calls certain methods depending on what action bar button is pressed.
-	 * developer.android.com/training/basics/actionbar/adding-buttons.html
-	 */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-	    // Handle presses on the action bar items
-	    switch (item.getItemId())
-	    {
-	        case (R.id.action_submit):
-	            submitFields();
-	            return true;
-	        case (R.id.action_settings):
-	            // openSettings();
-	            return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
-	}
 	
 	/** Called when user clicks the send button in the action bar. */
 	public void submitFields()
@@ -105,14 +82,6 @@ public class LandingActivity extends Activity
 			new GetSaltTask().execute();
 	}
 	
-	/** Show the user the message string parameter passed. */
-	public void showToast(String message)
-	{
-		Toast toast = Toast.makeText(rootView.getContext(), message, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-		toast.show();
-	}
-	
 	/** Called on clicking the registration text. */
 	public void toRegistration(View view) 
 	{
@@ -126,25 +95,33 @@ public class LandingActivity extends Activity
 	 */
 	public class GetSaltTask extends AsyncTask<String, Void, String>
 	{  		
+		private HttpRequest saltRequest;
+		
+		@Override
 		protected String doInBackground(String... inputs)
 		{
 			HashMap<String, String> params = new HashMap<String, String>();
 			params.put(SQLiteDatabaseHandler.USER_PHONE, phoneNumber);
-		    // convert params to Json
+		    
+			// convert params to Json using Gson
 		    Gson gson = new Gson(); 
-		    Log.v("Testing", gson.toJson(params));
+
 		    // send HTTP post request
-		    HttpRequest saltRequest = new HttpRequest(gson.toJson(gson.toJson(params)), 
+		    String saltReturn = HttpRequest.postData(gson.toJson(gson.toJson(params)), 
 		    		HttpRequest.URL_LOGIN, "application/json");
-		    return saltRequest.getResponse();
+		    Log.v("Testing", "GetSaltTask doInBackground");
+		    Log.v("Testing", "Salt? " + saltReturn);
+		    return saltReturn;
 		}
 		
 		/**
 		 * Get values back from server to put into SQLiteDatabase and log in.
 		 */
-		protected void onPostExecute(String ... params)
+		@Override
+		protected void onPostExecute(String param)
 		{
-			new GetAccessToken().execute(params[0]);
+			Log.v("Testing", "2234 Check salt: " + param);
+			new GetAccessToken().execute(param);
 		}
 	}
 	
@@ -157,9 +134,11 @@ public class LandingActivity extends Activity
 	public class GetAccessToken extends AsyncTask<String, Void, String>
 	{
 		private String encryptedPass;
+		private String accessTokenRequest;
 		
 		protected String doInBackground(String... inputs)
 		{
+			Log.v("Testing", "Getting access token, hopefully.");
 			encryptedPass = 
 					Sha256Crypt.Sha256_crypt(unencryptedPass, inputs[0]);
 			
@@ -172,19 +151,21 @@ public class LandingActivity extends Activity
 		    Log.v("Testing", gson.toJson(params));
 		    
 		    // send HTTP post request
-		    HttpRequest accessTokenRequest = new HttpRequest(gson.toJson(gson.toJson(params)), 
+		    String accessTokenRequest = HttpRequest.postData(gson.toJson(gson.toJson(params)), 
 		    		HttpRequest.URL_LOGIN, "application/json");
 		    // return the access token
-		    return accessTokenRequest.getResponse();
+		    return accessTokenRequest;
 		}
 		
 		/**
 		 * Get value, the access token, back from the server to login by
 		 * putting info into the SQLiteDatabase, creating persistent login.
 		 */
-		protected void onPostExecute(String ... params)
+		@Override
+		protected void onPostExecute(String param)
 		{
-			UserFunctions.loginUser(getApplicationContext(), phoneNumber, params[0]);
+			Log.v("Testing", "access token: " + param);
+			UserFunctions.loginUser(getApplicationContext(), phoneNumber, param);
 			
 			Log.v("Testing", 
 					"Is user logged in? " + UserFunctions.isUserLoggedIn(getApplicationContext()));
